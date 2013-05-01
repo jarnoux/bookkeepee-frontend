@@ -1,0 +1,7 @@
+{
+    "name": "hb-adapter",
+    "main": "hb-adapter.js",
+    "dependencies": {
+        "handlebars": "1.x"
+    }
+}
