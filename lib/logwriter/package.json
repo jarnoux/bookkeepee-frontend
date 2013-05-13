@@ -1,0 +1,6 @@
+{
+    "name": "logwriter",
+    "main": "logwriter.js",
+    "dependencies": {
+    }
+}

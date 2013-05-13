@@ -1,0 +1,6 @@
+{
+    "name": "config",
+    "main": "config.js",
+    "dependencies": {
+    }
+}

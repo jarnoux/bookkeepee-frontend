@@ -1,7 +1,0 @@
-{
-    "name": "perf",
-    "main": "perf.js",
-    "dependencies": {
-        "microtime": "0.x"
-    }
-}

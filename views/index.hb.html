@@ -1,1 +1,22 @@
-hello {{world}}!!
+<html>
+    <header>
+        <title>bookkeepee.com</title>
+    </header>
+    <body>
+        <span>hello {{username}}!!</span>{{#if username}} - <a href="/logout">logout</a>{{/if}}
+        {{#unless username}}
+        <form action="/login" method="post">
+            <input type="text" name="email" id="email" placeholder="email"><br>
+            <input type="password" name="password" placeholder="password"><br>
+            <input type="submit" value="Login">
+        </form>
+        <form action="/register" method="post">
+            <input type="text" name="email" placeholder="email"><br>
+            <input type="text" name="username" id="username" placeholder="username"><br>
+            <input type="password" name="password" placeholder="password"><br>
+            <input type="submit" value="Register">
+        </form>
+        {{/unless}}
+    </body>
+</html>
+
