@@ -20,9 +20,6 @@ try {
 authModule.register = function (options) {
     return function register(req, res, next) {
         var newUser;
-        if (req.method !== 'POST') {
-            return res.redirect('/');
-        }
         if (!validateRegisterData(req.body)) {
             return next(new Error('Invalid input for registration: ' + JSON.stringify(req.body)));
         }
@@ -43,7 +40,7 @@ authModule.register = function (options) {
 };
 authModule.login = function (options) {
     return function login(req, res, next) {
-        if (!req.session.user && req.method === 'POST') {
+        if (!req.session.user) {
             User.findOne({
                 email: req.body.email,
                 password: req.body.password
