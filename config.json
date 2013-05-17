@@ -1,7 +1,9 @@
 {
-    "middleware": {
+    "express": {
         "logger": {
             "format": "{\"date\": \":date\", \"msec\": \":response-time\", \"addr\": \":remote-addr\", \"usag\": \":user-agent\", \"refr\": \":referrer\", \"req\": \":method :url\", \"resp\": \":status :res[content-length]\" }"
-        }
+        },
+        "static": "static/",
+        "cookieParser": "secret"
     }
 }
