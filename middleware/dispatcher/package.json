@@ -1,0 +1,6 @@
+{
+    "name": "dispatcher",
+    "main": "dispatcher.js",
+    "dependencies": {
+    }
+}

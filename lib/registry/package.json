@@ -1,0 +1,6 @@
+{
+    "name": "registry",
+    "main": "registry.js",
+    "dependencies": {
+    }
+}
