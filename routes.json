@@ -1,8 +1,19 @@
 {
-    "/": 
-        ["static", "logger"]
-    ,
+    "": [
+        "express.static", "express.logger", "express.query",
+        "express.bodyParser", "express.cookieParser", "express.session",
+        "app.router", "express.errorHandler"
+    ],
+    "/": {
+        "get": ["dispatcher"]
+    },
     "/register": {
-
+        "post": ["auth.register"]
+    },
+    "/login": {
+        "post": ["auth.login"]
+    },
+    "/logout": {
+        "all": ["auth.logout"]
     }
 }
