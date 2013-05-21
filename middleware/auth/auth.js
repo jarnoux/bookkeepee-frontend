@@ -11,11 +11,7 @@ var mongoose             = require('mongoose'),
     },
     authModule           = {};
 
-try {
     mongoose = mongoose.connect('mongodb://localhost/bookkeepee');
-} catch (err) {
-
-}
 
 authModule.register = function (options) {
     return function register(req, res, next) {

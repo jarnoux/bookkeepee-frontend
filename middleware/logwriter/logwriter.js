@@ -1,6 +1,6 @@
-var fs = require('fs'),
-    colors = require('colors');
-colors.setTheme({
+var fs = require('fs');
+
+require('colors').setTheme({
     debug  : 'grey',
     info   : 'green',
     warning: 'yellow',
