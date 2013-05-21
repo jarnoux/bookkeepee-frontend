@@ -1,6 +1,6 @@
 {
     "": [
-        "express.static", "express.logger", "express.query",
+        "contextualizer", "express.static", "express.logger", "logwriter", "express.query",
         "express.bodyParser", "express.cookieParser", "express.session",
         "app.router", "express.errorHandler"
     ],
@@ -8,10 +8,12 @@
         "get": ["dispatcher"]
     },
     "/register": {
-        "post": ["auth.register"]
+        "post": ["auth.register"],
+        "get": ["dispatcher"]
     },
     "/login": {
-        "post": ["auth.login"]
+        "post": ["auth.login"],
+        "get": ["dispatcher"]
     },
     "/logout": {
         "all": ["auth.logout"]

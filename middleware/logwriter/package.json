@@ -1,6 +1,8 @@
 {
     "name": "logwriter",
+    "version": "0.1.0",
     "main": "logwriter.js",
     "dependencies": {
+        "colors": "0.6.x"
     }
 }
