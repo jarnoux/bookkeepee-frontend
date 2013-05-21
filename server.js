@@ -1,5 +1,6 @@
 var path              = require('path'),
     auth              = require('./middleware/auth'),
+    dispatcher        = require('./middleware/dispatcher'),
     Config            = require('./lib/config'),
     config            = new Config('config.json'),
     Registry          = require('./lib/registry'),
@@ -25,6 +26,7 @@ registry.register({
     'auth.login'          : auth.login,
     'auth.register'       : auth.register,
     'auth.logout'         : auth.logout,
+    'dispatcher'          : dispatcher.bind(this, {registry: registry}),
     'express.errorHandler': express.errorHandler
 });
 

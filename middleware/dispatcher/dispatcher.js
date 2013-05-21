@@ -1,8 +1,11 @@
 
-module.exports = function () {
+module.exports = function (options) {
+    var registry = options && options.registry;
     return function (req, res, next) {
-        var action = req.path.substr(1);
-        var user = req.session.user;
+        if (!registry) return next(new Error('Dispatcher needs runtime Registry'));
+
+        var action = req.path.substr(1),
+            user = req.session.user;
         res.render('index.hb.html', {
             username: (user ? user.username : null)
         },
