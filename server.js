@@ -1,5 +1,6 @@
 /*jslint nomen: true, sloppy: true */
 
+
 var path              = require('path'),
     auth              = require('./middleware/auth'),
     dispatcher        = require('./middleware/dispatcher'),
