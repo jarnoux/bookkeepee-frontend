@@ -7,31 +7,32 @@ require('colors').setTheme({
     error  : 'red'
 });
 module.exports = function (options) {
+    'use strict';
     var out      = (options.out && fs.createWriteStream(options.out)) || process.stdout,
         logLevel = options.logLevel || 'error',
         write    = function (caller, prefix, message) {
             var line = [new Date().toISOString(), prefix, message, '\n'].join(' ');
             switch (caller) {
-                case 'debug':
-                    if (logLevel === 'debug') {
-                        out.write(line.debug);
-                    }
-                    break;
-                case 'info':
-                    if (logLevel === 'debug' || logLevel === 'info') {
-                        out.write(line.info);
-                    }
-                    break;
-                case 'warning':
-                    if (logLevel !== 'error') {
-                        out.write(line.warning);
-                    }
-                    break;
-                case 'error':
-                    out.write(line.error);
-                    break;
-                default:
-                    break;
+            case 'debug':
+                if (logLevel === 'debug') {
+                    out.write(line.debug);
+                }
+                break;
+            case 'info':
+                if (logLevel === 'debug' || logLevel === 'info') {
+                    out.write(line.info);
+                }
+                break;
+            case 'warning':
+                if (logLevel !== 'error') {
+                    out.write(line.warning);
+                }
+                break;
+            case 'error':
+                out.write(line.error);
+                break;
+            default:
+                break;
             }
         };
     return function (req, res, next) {

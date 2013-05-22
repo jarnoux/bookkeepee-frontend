@@ -7,13 +7,15 @@ var mongoose             = require('mongoose'),
     }),
     User                 = mongoose.model('User', userSchema),
     validateRegisterData = function (options) {
+        'use strict';
         return options.username && options.email && options.password;
     },
     authModule           = {};
 
-    mongoose = mongoose.connect('mongodb://localhost/bookkeepee');
+mongoose = mongoose.connect('mongodb://localhost/bookkeepee');
 
 authModule.register = function (options) {
+    'use strict';
     return function register(req, res, next) {
         var newUser;
         if (!validateRegisterData(req.body)) {
@@ -26,29 +28,35 @@ authModule.register = function (options) {
             password: req.body.password
         });
         newUser.save(function (err) {
-            if (err) return next(err);
-            else {
-                req.session.user = newUser;
-                return res.redirect('/');
+            if (err) {
+                return next(err);
             }
+            req.session.user = newUser;
+            return res.redirect('/');
         });
     };
 };
 authModule.login = function (options) {
+    'use strict';
     return function login(req, res, next) {
         if (!req.session.user) {
             User.findOne({
                 email: req.body.email,
                 password: req.body.password
             }, function (err, user) {
-                if (err) next(err);
+                if (err) {
+                    return next(err);
+                }
                 req.session.user = user;
                 return res.redirect('/');
             });
-        } else next();
+        } else {
+            next();
+        }
     };
 };
 authModule.logout = function (options) {
+    'use strict';
     return function logout(req, res, next) {
         delete req.session.user;
         return res.redirect('/');

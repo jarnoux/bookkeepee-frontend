@@ -1,16 +1,16 @@
 
-module.exports = function (options) {
-    var registry = options && options.registry;
+module.exports = function (registry) {
+    'use strict';
     return function (req, res, next) {
-        if (!registry) return next(new Error('Dispatcher needs runtime Registry'));
+        if (!registry) {
+            return next(new Error('Dispatcher needs runtime Registry'));
+        }
 
         var action = req.path.substr(1),
             user = req.session.user;
         res.render('index.hb.html', {
             username: (user ? user.username : null)
-        },
-
-        function (err, html) {
+        }, function (err, html) {
             if (err) {
                 next(err);
             } else {

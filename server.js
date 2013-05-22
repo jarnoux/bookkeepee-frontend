@@ -1,3 +1,5 @@
+/*jslint nomen: true, sloppy: true */
+
 var path              = require('path'),
     auth              = require('./middleware/auth'),
     dispatcher        = require('./middleware/dispatcher'),
@@ -22,11 +24,11 @@ registry.register({
     'express.bodyParser'  : express.bodyParser,
     'express.cookieParser': express.cookieParser,
     'express.session'     : express.session,
-    'app.router'          : function() {return app.router;},
+    'app.router'          : function () {return app.router; },
     'auth.login'          : auth.login,
     'auth.register'       : auth.register,
     'auth.logout'         : auth.logout,
-    'dispatcher'          : dispatcher.bind(this, {registry: registry}),
+    'dispatcher'          : dispatcher.bind(this, registry),
     'express.errorHandler': express.errorHandler
 });
 
