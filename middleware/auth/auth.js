@@ -14,7 +14,7 @@ var mongoose             = require('mongoose'),
 
 mongoose = mongoose.connect('mongodb://localhost/bookkeepee');
 
-authModule.register = function (options) {
+authModule.register = function () {
     'use strict';
     return function register(req, res, next) {
         var newUser;
@@ -36,9 +36,9 @@ authModule.register = function (options) {
         });
     };
 };
-authModule.login = function (options) {
+authModule.enticate = function () {
     'use strict';
-    return function login(req, res, next) {
+    return function enticate(req, res, next) {
         if (!req.session.user) {
             User.findOne({
                 email: req.body.email,
@@ -46,6 +46,9 @@ authModule.login = function (options) {
             }, function (err, user) {
                 if (err) {
                     return next(err);
+                }
+                if (!user) {
+                    return next(new Error('Invalid Credentials'));
                 }
                 req.session.user = user;
                 return res.redirect('/');
@@ -55,7 +58,7 @@ authModule.login = function (options) {
         }
     };
 };
-authModule.logout = function (options) {
+authModule.logout = function () {
     'use strict';
     return function logout(req, res, next) {
         delete req.session.user;

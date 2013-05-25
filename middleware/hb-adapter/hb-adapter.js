@@ -2,9 +2,9 @@ var handlebars = require('handlebars'),
     fs         = require('fs'),
     cache;
 
-module.exports = function (options) {
+module.exports = function () {
     'use strict';
-    return function (path, templateData, callback) {
+    return function hb_adapter(path, templateData, callback) {
         if (!cache) {
             cache = {};
         }

@@ -34,9 +34,8 @@ module.exports = function (options) {
             default:
                 break;
             }
-        };
-    return function (req, res, next) {
-        res.log = {
+        },
+        logger = {
             debug   : function (message) {
                 write('debug', '[Debug]', message);
             },
@@ -50,6 +49,8 @@ module.exports = function (options) {
                 write('error', '[Error]', message);
             }
         };
+    return function logwriter(req, res, next) {
+        res.log = logger;
         next();
     };
 };

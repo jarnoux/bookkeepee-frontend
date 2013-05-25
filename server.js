@@ -16,25 +16,22 @@ var path              = require('path'),
     app               = express();
 
 registry.register(path.join(__dirname, 'middleware'));
+registry.register(path.join(__dirname, 'controllers'));
 registry.register({
-    'hb-adapter'          : path.join(__dirname, 'lib/hb-adapter'),
-    'express.static'      : express.static,
-    'express.logger'      : express.logger,
-    'express.query'       : express.query,
-    'express.bodyParser'  : express.bodyParser,
-    'express.cookieParser': express.cookieParser,
-    'express.session'     : express.session,
-    'app.router'          : function () {return app.router; },
-    'auth.login'          : auth.login,
-    'auth.register'       : auth.register,
-    'auth.logout'         : auth.logout,
-    'dispatcher'          : dispatcher.bind(this, registry),
-    'express.errorHandler': express.errorHandler
+    'app.router'              : function () {return app.router; },
+    'express.static'          : express.static.bind(this, __dirname + '/static'),
+    'express.logger'          : express.logger,
+    'express.query'           : express.query,
+    'express.bodyParser'      : express.bodyParser,
+    'express.cookieParser'    : express.cookieParser,
+    'express.session'         : express.session,
+    'express.errorHandler'    : express.errorHandler,
+    'middleware.dispatcher'   : dispatcher.bind(this, registry)
 });
 
 router.map(app);
 
-app.engine('.html', registry['hb-adapter']);
+app.engine('.html', registry['middleware.hb-adapter']);
 
 app.listen(3000);
 console.log('app listening on port', 3000);

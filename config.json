@@ -5,12 +5,26 @@
             "format": "dev"
         },
         "static": "static/",
-        "cookieParser": "secret"
+        "cookieParser": "secret",
+        "bodyParser": null,
+        "session": null,
+        "query": null
     },
-    "contextualizer": {
-        "environment": "dev"    
-    },
-    "logwriter": {
-        "logLevel": "debug"
+    "middleware": {
+        "contextualizer": {
+            "environment": "dev"
+        },
+        "logwriter": {
+            "logLevel": "debug"
+        },
+        "dispatcher": {
+            "routes": {
+                "/": {
+                    "get": "index"
+                }
+            },
+            "plans": {
+            }
+        }
     }
 }

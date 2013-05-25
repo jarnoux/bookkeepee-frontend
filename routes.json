@@ -1,21 +1,21 @@
 {
     "": [
-        "contextualizer", "express.static", "express.logger", "logwriter", "express.query",
-        "express.bodyParser", "express.cookieParser", "express.session",
-        "app.router", "express.errorHandler"
+        "middleware.contextualizer", "express.static", "express.logger", "middleware.logwriter",
+        "express.query", "express.bodyParser", "express.cookieParser",
+        "express.session", "app.router", "express.errorHandler"
     ],
     "/": {
-        "get": ["dispatcher"]
+        "get": ["middleware.dispatcher"]
     },
     "/register": {
-        "post": ["auth.register"],
-        "get": ["dispatcher"]
+        "post": ["middleware.auth.register"],
+        "get": ["middleware.dispatcher"]
     },
     "/login": {
-        "post": ["auth.login"],
-        "get": ["dispatcher"]
+        "post": ["middleware.auth.enticate"],
+        "get": ["middleware.dispatcher"]
     },
     "/logout": {
-        "all": ["auth.logout"]
+        "all": ["middleware.auth.logout"]
     }
 }
