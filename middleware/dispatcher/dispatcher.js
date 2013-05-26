@@ -1,37 +1,53 @@
+/*jslint forin: true */
+
 var async = require('async');
 
 module.exports = function (registry, options) {
     'use strict';
     var config = registry.getConfig('middleware.dispatcher'),
-        dispatch = function (path, plan, req, res, callback) {
-            var controller;
+        dispatchPlan = function (plan, req, res, planDone) {
+            var controller,
+                remainingPlans,
+                retentionRoom = {};
             if (typeof plan === 'string') {
-                controller = config.plans[plan];
-                try {
-                    controller = controller || registry.get('controllers.' + plan);
-                } catch (e) {
-                    callback(new Error('No plan nor registered controller for route: ' + req.route.path));
+                controller = registry.get('controllers.' + plan);
+                if (!controller) {
+                    return planDone(new Error('No plan nor any registered controller for route: ' + req.route.path));
                 }
-                res.render(plan + '.html', controller(req), callback);
+                return controller(req, function (err, html) {
+                    if (err) {
+                        return planDone(err);
+                    }
+                    return res.render(plan + '.html', html, planDone);
+                });
+            }
+            if (plan instanceof Array) {
+                remainingPlans = plan.concat();
+                return async.each(plan, function (subplan, subplanDone) {
+                    dispatchPlan(subplan, req, res, function schedule(err, html) {
+                        if (err) {
+                            return subplanDone(err);
+                        }
+                        retentionRoom[subplan] = html;
+                        while (retentionRoom.hasOwnProperty(remainingPlans[0])) {
+                            res.write(retentionRoom[remainingPlans.shift()] || '');
+                        }
+                        return subplanDone();
+                    });
+                }, planDone);
             }
         };
     return function dispatcher(req, res, next) {
-        if (!registry) {
-            return next(new Error('Dispatcher needs runtime Registry'));
-        }
-        res.log.info('Route matched: ' + req.route.path);
-
-        // debugger;
-        var plan = config.routes[req.route.path] &&
+        req.plan = config.routes[req.route.path] &&
             (config.routes[req.route.path][req.route.method] || config.routes[req.route.path].all);
-        if (!plan) {
+        if (!req.plan) {
             return next(new Error('No plan for route ' + req.route.path));
         }
-
-        dispatch(req.route.path, plan, req, res, function (err, result) {
-            res.write(result);
-            res.end();
+        return dispatchPlan(req.plan, req, res, function done(err, result) {
+            if (err) {
+                return next(err);
+            }
+            return res.end(result);
         });
-
     };
 };

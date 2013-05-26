@@ -20,10 +20,20 @@
         "dispatcher": {
             "routes": {
                 "/": {
-                    "get": "index"
+                    "get": ["header", ["body.top", "body.middle", "body.bottom"], "footer"]
                 }
             },
             "plans": {
+                "howToBeMasterOfTheWorld": [
+                    "wakeUp", "takeOverTheWorld", "party"
+                ],
+                "takeOverTheWorld": {
+                    "part1": "takeOverAmerica",
+                    "part2": "takeOverEurope",
+                    "part3": "takeOverAfrica",
+                    "part4": "takeOverAsia",
+                    "part5": "takeOverOceania"
+                }
             }
         }
     }
