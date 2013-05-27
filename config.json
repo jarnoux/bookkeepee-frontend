@@ -20,19 +20,15 @@
         "dispatcher": {
             "routes": {
                 "/": {
-                    "get": ["header", ["body.top", "body.middle", "body.bottom"], "footer"]
+                    "get": ["header", "body", "composedBody", "footer"]
                 }
             },
             "plans": {
-                "howToBeMasterOfTheWorld": [
-                    "wakeUp", "takeOverTheWorld", "party"
-                ],
-                "takeOverTheWorld": {
-                    "part1": "takeOverAmerica",
-                    "part2": "takeOverEurope",
-                    "part3": "takeOverAfrica",
-                    "part4": "takeOverAsia",
-                    "part5": "takeOverOceania"
+                "body": ["body.top", "body.middle", "body.bottom"],
+                "composedBody": {
+                    "top": "body.top",
+                    "middle": "body.middle",
+                    "bottom": "body.bottom"
                 }
             }
         }

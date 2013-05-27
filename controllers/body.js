@@ -2,7 +2,8 @@ module.exports = {
     top: function () {
         'use strict';
         return function (req, done) {
-            var timeout = 0; //Math.floor(5000 * Math.random());
+            debugger;
+            var timeout = Math.floor(5000 * Math.random());
             setTimeout(function () {
                 done(null, {
                     text: 'Hello Top World!',
@@ -14,7 +15,7 @@ module.exports = {
     middle: function () {
         'use strict';
         return function (req, done) {
-            var timeout = 0; //Math.floor(5000 * Math.random());
+            var timeout = Math.floor(5000 * Math.random());
             setTimeout(function () {
                 done(null, {
                     text: 'Hello Middle World!',
@@ -26,7 +27,7 @@ module.exports = {
     bottom: function () {
         'use strict';
         return function (req, done) {
-            var timeout = 0; //Math.floor(5000 * Math.random());
+            var timeout = Math.floor(5000 * Math.random());
             setTimeout(function () {
                 done(null, {
                     text: 'Hello Bottom World!',
