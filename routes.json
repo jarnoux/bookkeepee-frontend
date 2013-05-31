@@ -12,10 +12,12 @@
         "get": ["middleware.dispatcher"]
     },
     "/login": {
-        "post": ["middleware.auth.enticate"],
-        "get": ["middleware.dispatcher"]
+        "post": ["middleware.auth.enticate"]
     },
     "/logout": {
         "all": ["middleware.auth.logout"]
+    },
+    "/test": {
+        "get": ["middleware.dispatcher"]
     }
 }

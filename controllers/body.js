@@ -2,7 +2,6 @@ module.exports = {
     top: function () {
         'use strict';
         return function (req, done) {
-            debugger;
             var timeout = Math.floor(5000 * Math.random());
             setTimeout(function () {
                 done(null, {

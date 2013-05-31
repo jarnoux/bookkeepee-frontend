@@ -16,18 +16,21 @@ var path              = require('path'),
     app               = express();
 
 registry.register(path.join(__dirname, 'middleware'));
+registry.register(path.join(__dirname, 'models'));
 registry.register(path.join(__dirname, 'controllers'));
 registry.register({
-    'app.router'              : function () {return app.router; },
-    'express.static'          : express.static.bind(this, __dirname + '/static'),
-    'express.logger'          : express.logger,
-    'express.query'           : express.query,
-    'express.bodyParser'      : express.bodyParser,
-    'express.cookieParser'    : express.cookieParser,
-    'express.session'         : express.session,
-    'express.errorHandler'    : express.errorHandler,
-    'middleware.dispatcher'   : dispatcher.bind(this, registry)
+    'app.router'           : function () {return app.router; },
+    'express.static'       : express.static.bind(null, __dirname + '/static'),
+    'express.logger'       : express.logger,
+    'express.query'        : express.query,
+    'express.bodyParser'   : express.bodyParser,
+    'express.cookieParser' : express.cookieParser,
+    'express.session'      : express.session,
+    'express.errorHandler' : express.errorHandler,
+    'middleware.dispatcher': dispatcher.bind(null, registry),
+    'middleware.auth'      : auth.bind(null, registry)
 });
+
 
 router.map(app);
 

@@ -20,6 +20,9 @@
         "dispatcher": {
             "routes": {
                 "/": {
+                    "get": ["header", "index", "footer"]
+                },
+                "/test": {
                     "get": ["header", "body", "composedBody", "footer"]
                 }
             },
@@ -31,6 +34,11 @@
                     "bottom": "body.bottom"
                 }
             }
+        }
+    },
+    "models": {
+        "user": {
+            "dbUrl": "mongodb://localhost/bookkeepee"
         }
     }
 }
