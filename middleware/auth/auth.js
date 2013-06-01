@@ -1,5 +1,4 @@
 var authModule = function (registry) {
-    
     var User = registry.get('models.user');
     return {
         register: function () {
