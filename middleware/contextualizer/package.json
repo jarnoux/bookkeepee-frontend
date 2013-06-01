@@ -1,5 +1,6 @@
 {
     "name": "contextualizer",
+    "version": "0.0.1",
     "main": "contextualizer.js",
     "dependencies": {
     }
