@@ -1,6 +1,6 @@
 {
-  "name": "front end",
-  "description": "front end",
+  "name": "frontend",
+  "description": "frontend",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
