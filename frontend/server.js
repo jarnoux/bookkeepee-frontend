@@ -36,4 +36,4 @@ router.map(app);
 app.engine('.html', registry['middleware.hb-adapter']);
 
 app.listen(3000);
-console.log('app listening on port', 3000);
+console.log('front end app listening on port', 3000);

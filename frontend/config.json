@@ -38,7 +38,7 @@
     },
     "models": {
         "user": {
-            "dbUrl": "mongodb://localhost/bookkeepee"
+            "backendUrl": "localhost:3030/user"
         }
     }
 }

@@ -1,22 +1,12 @@
 {
     "": [
-        "middleware.contextualizer", "express.static", "express.logger", "middleware.logwriter",
+        "middleware.contextualizer", "express.logger", "middleware.logwriter",
         "express.query", "express.bodyParser", "app.router", "express.errorHandler"
     ],
     "/": {
-        "get": ["middleware.dispatcher"]
+        "get": []
     },
-    "/register": {
-        "post": ["middleware.auth.register"],
-        "get": ["middleware.dispatcher"]
-    },
-    "/login": {
-        "post": ["middleware.auth.enticate"]
-    },
-    "/logout": {
-        "all": ["middleware.auth.logout"]
-    },
-    "/test": {
+    "/user": {
         "get": ["middleware.dispatcher"]
     }
 }
