@@ -15,6 +15,7 @@ var path              = require('path'),
 
 registry.register(path.resolve(__dirname, '../middleware'));
 registry.register(path.resolve(__dirname, 'models'));
+registry.register(path.resolve(__dirname, 'controllers'));
 registry.register({
     'app.router'           : function () {return app.router; },
     'express.logger'       : express.logger,

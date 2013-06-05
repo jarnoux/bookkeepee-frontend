@@ -28,7 +28,7 @@ module.exports = function (registry, options) {
                     for (key in expandedPlan) {
                         retentionPool[key] = dispatchPlan.bind(null, expandedPlan[key], req, res);
                     }
-                    retentionPool[plan] = controller.bind(null, req);
+                    retentionPool[plan] = controller.bind(null, req, res);
                     return async.parallel(retentionPool, function (err, preRenderedBits) {
                         var key;
                         for (key in preRenderedBits[plan]) {
@@ -38,7 +38,7 @@ module.exports = function (registry, options) {
                     });
                 }
 
-                return controller(req, function renderResult(err, result) {
+                return controller(req, res, function renderResult(err, result) {
                     if (err) {
                         return planDone(err);
                     }

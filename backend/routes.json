@@ -6,7 +6,13 @@
     "/": {
         "get": []
     },
-    "/user": {
-        "get": ["middleware.dispatcher"]
+    "/login": {
+        "post": ["user.login"]
+    },
+    "/logout": {
+        "post": ["user.logout"]
+    },
+    "/register": {
+        "post": ["user.register"]
     }
 }
