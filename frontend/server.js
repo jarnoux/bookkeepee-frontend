@@ -5,7 +5,7 @@ var path              = require('path'),
     dispatcher        = require('../middleware/dispatcher'),
     Config            = require('../lib/config'),
     config            = new Config('config.json'),
-    Registry          = require('../lib/registry'),
+    Registry          = require('../middleware/registry'),
     registry          = new Registry(config),
     Router            = require('../lib/router'),
     router            = new Router({
@@ -15,6 +15,7 @@ var path              = require('path'),
     express           = require('express'),
     app               = express();
 
+debugger;
 registry.register(path.resolve(__dirname, '../middleware'));
 registry.register(path.resolve(__dirname, 'models'));
 registry.register(path.resolve(__dirname, 'controllers'));
@@ -27,8 +28,9 @@ registry.register({
     'express.cookieParser' : express.cookieParser,
     'express.session'      : express.session,
     'express.errorHandler' : express.errorHandler,
-    'middleware.dispatcher': dispatcher.bind(null, registry),
-    'middleware.auth'      : auth.bind(null, registry)
+    'middleware.registry'  : registry.middleware.bind(registry),
+    'middleware.dispatcher': dispatcher,
+    'middleware.auth'      : auth
 });
 
 router.map(app);

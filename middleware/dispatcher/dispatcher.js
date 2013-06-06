@@ -2,15 +2,16 @@
 
 var async = require('async');
 
-module.exports = function (registry, options) {
+module.exports = function (options) {
     'use strict';
-    var config = registry.getConfig('middleware.dispatcher'),
+    var config,
+        registry,
         dispatchPlan = function (plan, req, res, planDone) {
             var controller,
                 key,
                 toFlushInOrder,
-                retentionPool = {},
-                expandedPlan;
+                expandedPlan,
+                retentionPool = {};
 
             if (typeof plan === 'string') {
                 expandedPlan = config.plans[plan];
@@ -64,6 +65,8 @@ module.exports = function (registry, options) {
             }
         };
     return function dispatcher(req, res, next) {
+        registry = registry || req.registry;
+        config   = config   || registry.getConfig('middleware.dispatcher');
         // read the plan from the config given the matched route and method
         req.plan = config.routes[req.route.path] &&
             (config.routes[req.route.path][req.route.method] || config.routes[req.route.path].all);

@@ -25,9 +25,7 @@ Registry.prototype.register = function (name, resource) {
             break;
         case 'string':
             return fs.readdirSync(name).forEach(function (file) {
-                if (file !== 'registry') {
-                    registry._registerASingleResource(path.basename(name) + '.' + file, path.join(name, file));
-                }
+                registry._registerASingleResource(path.basename(name) + '.' + file, path.join(name, file));
             });
         default:
             throw new Error('expected an object or a string, but got ' + name + ' instead.');
@@ -85,6 +83,13 @@ Registry.prototype._registerASingleResource = function (name, resource) {
 Registry.prototype.getConfig = function (name) {
     'use strict';
     return this.__config__.get(name);
+};
+Registry.prototype.middleware = function registry() {
+    var registry = this;
+    return function (req, res, next) {
+        req.registry = registry;
+        next();
+    };
 };
 
 module.exports = Registry;
