@@ -28,9 +28,7 @@ registry.register({
     'express.cookieParser' : express.cookieParser,
     'express.session'      : express.session,
     'express.errorHandler' : express.errorHandler,
-    'middleware.registry'  : registry.middleware.bind(registry),
-    'middleware.dispatcher': dispatcher,
-    'middleware.auth'      : auth
+    'middleware.registry'  : registry.middleware.bind(registry)
 });
 
 router.map(app);

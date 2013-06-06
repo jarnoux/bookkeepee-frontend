@@ -1,6 +1,6 @@
 {
     "": [
-        "middleware.contextualizer", "express.logger", "middleware.logwriter",
+        "middleware.registry", "middleware.contextualizer", "express.logger", "middleware.logwriter",
         "express.query", "express.bodyParser", "app.router", "express.errorHandler"
     ],
     "/": {

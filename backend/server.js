@@ -21,7 +21,8 @@ registry.register({
     'express.logger'       : express.logger,
     'express.query'        : express.query,
     'express.bodyParser'   : express.bodyParser,
-    'express.errorHandler' : express.errorHandler
+    'express.errorHandler' : express.errorHandler,
+    'middleware.registry'  : registry.middleware.bind(registry)
 });
 
 router.map(app);
