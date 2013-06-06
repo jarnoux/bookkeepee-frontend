@@ -26,6 +26,7 @@ registry.register({
     'express.bodyParser'   : express.bodyParser,
     'express.cookieParser' : express.cookieParser,
     'express.session'      : express.session,
+    'express.csrf'         : express.csrf,
     'express.errorHandler' : express.errorHandler,
     'middleware.registry'  : registry.middleware.bind(registry)
 });

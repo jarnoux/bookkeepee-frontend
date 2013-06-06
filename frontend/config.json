@@ -8,7 +8,8 @@
         "cookieParser": "secret",
         "bodyParser": null,
         "session": null,
-        "query": null
+        "query": null,
+        "csrf": null
     },
     "middleware": {
         "contextualizer": {

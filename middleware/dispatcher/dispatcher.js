@@ -43,6 +43,8 @@ module.exports = function (options) {
                     if (err) {
                         return planDone(err);
                     }
+                    result = result || {};
+                    result._csrf = req.session._csrf;
                     return res.render(plan + '.html', result, planDone);
                 });
             }

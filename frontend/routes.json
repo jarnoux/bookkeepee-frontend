@@ -2,7 +2,7 @@
     "": [
         "middleware.registry", "middleware.contextualizer", "express.static", "express.logger", 
         "middleware.logwriter", "express.query", "express.bodyParser", "express.cookieParser",
-        "express.session", "app.router", "express.errorHandler"
+        "express.session", "express.csrf", "app.router", "express.errorHandler"
     ],
     "/": {
         "get": ["middleware.dispatcher"]

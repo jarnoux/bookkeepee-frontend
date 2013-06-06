@@ -5,12 +5,12 @@
     <body>
         <span>hello {{username}}!!</span>{{#if username}} ({{email}}) - <a href="/logout">logout</a>{{/if}}
         {{#unless username}}
-        <form action="/login" method="post">
+        <form action="/login?_csrf={{_csrf}}" method="post">
             <input type="text" name="username" id="username" placeholder="username"><br>
             <input type="password" name="password" placeholder="password"><br>
             <input type="submit" value="Login">
         </form>
-        <form action="/register" method="post">
+        <form action="/register?_csrf={{_csrf}}" method="post">
             <input type="text" name="email" placeholder="email"><br>
             <input type="text" name="username" id="username" placeholder="username"><br>
             <input type="password" name="password" placeholder="password"><br>
