@@ -1,15 +1,18 @@
+/*jslint forin: true */
+
 var e_validator = require('express-validator'),
     ValidationError = function (errors) {
-        this._errors = errors;
+        'use strict';
+        this.name = 'ValidationError';
+        this.params = errors;
+        this.message = JSON.stringify(errors, null, 4);
     };
 
 ValidationError.prototype = new Error();
 ValidationError.prototype.constructor = ValidationError;
-ValidationError.prototype.toString = function() {
-    JSON.stringify(this._errors);
-};
 
 module.exports = function (options) {
+    'use strict';
     var myValidator = function (req, res, next) {
         var error,
             nextParam,
@@ -36,11 +39,7 @@ module.exports = function (options) {
         }
 
         error = req.validationErrors(true);
-        if (error) {
-            next(new ValidationError(error));
-        } else {
-            next();
-        }
+        next(error && new ValidationError(error));
     };
 
     return function validator(req, res, next) {
