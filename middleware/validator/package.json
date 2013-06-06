@@ -1,0 +1,8 @@
+{
+    "name": "validator",
+    "version": "0.0.1",
+    "main": "validator.js",
+    "dependencies": {
+        "express-validator": "0.3.x"
+    }
+}

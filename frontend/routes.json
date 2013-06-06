@@ -8,11 +8,11 @@
         "get": ["middleware.dispatcher"]
     },
     "/register": {
-        "post": ["middleware.auth.register"],
+        "post": ["middleware.validator", "middleware.auth.register"],
         "get": ["middleware.dispatcher"]
     },
     "/login": {
-        "post": ["middleware.auth.enticate"]
+        "post": ["middleware.validator", "middleware.auth.enticate"]
     },
     "/logout": {
         "all": ["middleware.auth.logout"]

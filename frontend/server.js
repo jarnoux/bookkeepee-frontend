@@ -1,8 +1,6 @@
 /*jslint nomen: true, sloppy: true */
 
 var path              = require('path'),
-    auth              = require('../middleware/auth'),
-    dispatcher        = require('../middleware/dispatcher'),
     Config            = require('../lib/config'),
     config            = new Config('config.json'),
     Registry          = require('../middleware/registry'),

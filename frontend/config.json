@@ -35,6 +35,22 @@
                     "bottom": "body.bottom"
                 }
             }
+        },
+        "validator": {
+            "/register": {
+                "email": {
+                    "assert": {
+                        "isEmail": null
+                    },
+                    "sanitize": {
+                        "trim": null
+                    },
+                    "errorMessage": "Invalid Email"
+                }
+            },
+            "/login": {
+
+            } 
         }
     },
     "models": {
