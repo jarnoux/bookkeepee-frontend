@@ -1,7 +1,7 @@
 module.exports = {
     top: function () {
         'use strict';
-        return function (req, done) {
+        return function (req, res, done) {
             var timeout = Math.floor(5000 * Math.random());
             setTimeout(function () {
                 done(null, {
@@ -13,7 +13,7 @@ module.exports = {
     },
     middle: function () {
         'use strict';
-        return function (req, done) {
+        return function (req, res, done) {
             var timeout = Math.floor(5000 * Math.random());
             setTimeout(function () {
                 done(null, {
@@ -25,7 +25,7 @@ module.exports = {
     },
     bottom: function () {
         'use strict';
-        return function (req, done) {
+        return function (req, res, done) {
             var timeout = Math.floor(5000 * Math.random());
             setTimeout(function () {
                 done(null, {

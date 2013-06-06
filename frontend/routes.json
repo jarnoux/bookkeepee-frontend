@@ -1,7 +1,7 @@
 {
     "": [
-        "middleware.contextualizer", "express.static", "express.logger", "middleware.logwriter",
-        "express.query", "express.bodyParser", "express.cookieParser",
+        "middleware.registry", "middleware.contextualizer", "express.static", "express.logger", 
+        "middleware.logwriter", "express.query", "express.bodyParser", "express.cookieParser",
         "express.session", "app.router", "express.errorHandler"
     ],
     "/": {

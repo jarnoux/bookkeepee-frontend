@@ -1,0 +1,18 @@
+{
+    "": [
+        "middleware.contextualizer", "express.logger", "middleware.logwriter",
+        "express.query", "express.bodyParser", "app.router", "express.errorHandler"
+    ],
+    "/": {
+        "get": []
+    },
+    "/login": {
+        "post": ["user.login"]
+    },
+    "/logout": {
+        "post": ["user.logout"]
+    },
+    "/register": {
+        "post": ["user.register"]
+    }
+}

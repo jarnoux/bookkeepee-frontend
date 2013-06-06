@@ -2,15 +2,16 @@
 
 var async = require('async');
 
-module.exports = function (registry, options) {
+module.exports = function (options) {
     'use strict';
-    var config = registry.getConfig('middleware.dispatcher'),
+    var config,
+        registry,
         dispatchPlan = function (plan, req, res, planDone) {
             var controller,
                 key,
                 toFlushInOrder,
-                retentionPool = {},
-                expandedPlan;
+                expandedPlan,
+                retentionPool = {};
 
             if (typeof plan === 'string') {
                 expandedPlan = config.plans[plan];
@@ -28,7 +29,7 @@ module.exports = function (registry, options) {
                     for (key in expandedPlan) {
                         retentionPool[key] = dispatchPlan.bind(null, expandedPlan[key], req, res);
                     }
-                    retentionPool[plan] = controller.bind(null, req);
+                    retentionPool[plan] = controller.bind(null, req, res);
                     return async.parallel(retentionPool, function (err, preRenderedBits) {
                         var key;
                         for (key in preRenderedBits[plan]) {
@@ -38,7 +39,7 @@ module.exports = function (registry, options) {
                     });
                 }
 
-                return controller(req, function renderResult(err, result) {
+                return controller(req, res, function renderResult(err, result) {
                     if (err) {
                         return planDone(err);
                     }
@@ -64,6 +65,8 @@ module.exports = function (registry, options) {
             }
         };
     return function dispatcher(req, res, next) {
+        registry = registry || req.registry;
+        config   = config   || registry.getConfig('middleware.dispatcher');
         // read the plan from the config given the matched route and method
         req.plan = config.routes[req.route.path] &&
             (config.routes[req.route.path][req.route.method] || config.routes[req.route.path].all);

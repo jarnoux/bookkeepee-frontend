@@ -1,7 +1,8 @@
 {
-    "name": "router",
+    "name": "backend",
     "version": "0.0.1",
     "main": "router.js",
     "dependencies": {
+        "express": "3.x"
     }
 }

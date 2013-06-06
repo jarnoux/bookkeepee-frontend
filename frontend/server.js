@@ -1,13 +1,13 @@
 /*jslint nomen: true, sloppy: true */
 
 var path              = require('path'),
-    auth              = require('./middleware/auth'),
-    dispatcher        = require('./middleware/dispatcher'),
-    Config            = require('./lib/config'),
+    auth              = require('../middleware/auth'),
+    dispatcher        = require('../middleware/dispatcher'),
+    Config            = require('../lib/config'),
     config            = new Config('config.json'),
-    Registry          = require('./lib/registry'),
+    Registry          = require('../middleware/registry'),
     registry          = new Registry(config),
-    Router            = require('./lib/router'),
+    Router            = require('../lib/router'),
     router            = new Router({
         registry: registry,
         routes: 'routes.json'
@@ -15,9 +15,10 @@ var path              = require('path'),
     express           = require('express'),
     app               = express();
 
-registry.register(path.join(__dirname, 'middleware'));
-registry.register(path.join(__dirname, 'models'));
-registry.register(path.join(__dirname, 'controllers'));
+debugger;
+registry.register(path.resolve(__dirname, '../middleware'));
+registry.register(path.resolve(__dirname, 'models'));
+registry.register(path.resolve(__dirname, 'controllers'));
 registry.register({
     'app.router'           : function () {return app.router; },
     'express.static'       : express.static.bind(null, __dirname + '/static'),
@@ -27,14 +28,14 @@ registry.register({
     'express.cookieParser' : express.cookieParser,
     'express.session'      : express.session,
     'express.errorHandler' : express.errorHandler,
-    'middleware.dispatcher': dispatcher.bind(null, registry),
-    'middleware.auth'      : auth.bind(null, registry)
+    'middleware.registry'  : registry.middleware.bind(registry),
+    'middleware.dispatcher': dispatcher,
+    'middleware.auth'      : auth
 });
-
 
 router.map(app);
 
 app.engine('.html', registry['middleware.hb-adapter']);
 
 app.listen(3000);
-console.log('app listening on port', 3000);
+console.log('front end app listening on port', 3000);
