@@ -25,16 +25,17 @@ module.exports = function (options) {
             routeValidation = options[req.route.path];
 
         for (nextParam in routeValidation) {
-            nextAssertion       = req.assert(nextParam, routeValidation[nextParam].errorMessage);
-            nextAssertMethods   = routeValidation[nextParam].assert;
-            for (nextAssertMethod in nextAssertMethods) {
-                nextAssertion[nextAssertMethod].call(nextAssertion, nextAssertMethods[nextAssertMethod]);
-            }
 
             nextSanitization    = req.sanitize(nextParam);
             nextSanitizeMethods = routeValidation[nextParam].sanitize;
             for (nextSanitizeMethod in nextSanitizeMethods) {
                 nextSanitization[nextSanitizeMethod].call(nextSanitization, nextSanitizeMethods[nextSanitizeMethod]);
+            }
+
+            nextAssertion       = req.assert(nextParam, routeValidation[nextParam].errorMessage);
+            nextAssertMethods   = routeValidation[nextParam].assert;
+            for (nextAssertMethod in nextAssertMethods) {
+                nextAssertion[nextAssertMethod].call(nextAssertion, nextAssertMethods[nextAssertMethod]);
             }
         }
 
