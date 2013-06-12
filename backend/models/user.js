@@ -6,7 +6,7 @@ var mongoose             = require('mongoose'),
     LOCK_TIME            = 2 * 60 * 60 * 1000,
     userSchema           = new Schema({
         username     : { type: String, unique: true, required: true },
-        email        : { type: String, unique: true , required: true},
+        email        : { type: String, unique: true, required: true},
         password     : { type: String, required: true },
         loginAttempts: { type: Number, required: true, 'default': 0 },
         lockUntil    : { type: Number }
@@ -17,11 +17,11 @@ var mongoose             = require('mongoose'),
         MAX_ATTEMPTS: 2
     };
 
-userSchema.methods.comparePassword = function(candidatePassword, callback) {
+userSchema.methods.comparePassword = function (candidatePassword, callback) {
     'use strict';
     bcrypt.compare(candidatePassword, this.password, callback);
 };
-userSchema.methods.incLoginAttempts = function(callback) {
+userSchema.methods.incLoginAttempts = function (callback) {
     'use strict';
     var updates;
     // if we have a previous lock that has expired, restart at 1
@@ -41,10 +41,12 @@ userSchema.methods.incLoginAttempts = function(callback) {
     return this.update(updates, callback);
 };
 
-userSchema.statics.getAuthenticated = function(username, password, callback) {
+userSchema.statics.getAuthenticated = function (username, password, callback) {
     'use strict';
-    this.findOne({ username: username }, function(err, user) {
-        if (err) return callback(err);
+    this.findOne({ username: username }, function (err, user) {
+        if (err) {
+            return callback(err);
+        }
 
         // make sure the user exists
         if (!user) {
@@ -54,34 +56,44 @@ userSchema.statics.getAuthenticated = function(username, password, callback) {
         // check if the account is currently locked
         if (user.isLocked) {
             // just increment login attempts if account is already locked
-            return user.incLoginAttempts(function(err) {
-                if (err) return callback(err);
+            return user.incLoginAttempts(function (err) {
+                if (err) {
+                    return callback(err);
+                }
                 return callback(null, null, reasons.MAX_ATTEMPTS);
             });
         }
 
         // test for a matching password
-        user.comparePassword(password, function(err, isMatch) {
-            if (err) return callback(err);
+        user.comparePassword(password, function (err, isMatch) {
+            if (err) {
+                return callback(err);
+            }
 
             // check if the password was a match
             if (isMatch) {
                 // if there's no lock or failed attempts, just return the user
-                if (!user.loginAttempts && !user.lockUntil) return callback(null, user);
+                if (!user.loginAttempts && !user.lockUntil) {
+                    return callback(null, user);
+                }
                 // reset attempts and lock info
                 var updates = {
                     $set: { loginAttempts: 0 },
                     $unset: { lockUntil: 1 }
                 };
 
-                user.update(updates, function(err) {
-                    if (err) return callback(err);
+                user.update(updates, function (err) {
+                    if (err) {
+                        return callback(err);
+                    }
                     return callback(null, user);
                 });
             } else {
                 // password is incorrect, so increment login attempts before responding
-                user.incLoginAttempts(function(err) {
-                    if (err) return callback(err);
+                user.incLoginAttempts(function (err) {
+                    if (err) {
+                        return callback(err);
+                    }
                     return callback(null, null, reasons.PASSWORD_INCORRECT);
                 });
             }
@@ -90,12 +102,12 @@ userSchema.statics.getAuthenticated = function(username, password, callback) {
     });
 };
 
-userSchema.virtual('isLocked').get(function() {
+userSchema.virtual('isLocked').get(function () {
     'use strict';
     return !!(this.lockUntil && this.lockUntil > Date.now());
 });
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     'use strict';
     var user = this;
 
@@ -105,13 +117,13 @@ userSchema.pre('save', function(next) {
     }
 
     // generate a salt
-    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
         if (err) {
             return next(err);
         }
 
         // hash the password along with our new salt
-        bcrypt.hash(user.password, salt, function(err, hash) {
+        bcrypt.hash(user.password, salt, function (err, hash) {
             if (err) {
                 return next(err);
             }
@@ -124,6 +136,7 @@ userSchema.pre('save', function(next) {
 });
 
 module.exports = function (options) {
+    'use strict';
     mongoose = mongoose.connect(options.dbUrl);
     return mongoose.model('User', userSchema);
 };

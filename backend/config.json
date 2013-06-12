@@ -15,6 +15,9 @@
             "logLevel": "debug"
         }
     },
+    "controllers": {
+        "auth": null
+    },
     "models": {
         "user": {
             "dbUrl": "mongodb://localhost/bookkeepee"

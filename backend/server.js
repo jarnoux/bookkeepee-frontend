@@ -1,11 +1,11 @@
 /*jslint nomen: true, sloppy: true */
 
 var path        = require('path'),
-    Config      = require('./lib/config'),
+    Config      = require('../lib/config'),
     config      = new Config('config.json'),
-    Registry    = require('./lib/registry'),
+    Registry    = require('../middleware/registry'),
     registry    = new Registry(config),
-    Router      = require('./lib/router'),
+    Router      = require('../lib/router'),
     router      = new Router({
         registry: registry,
         routes  : 'routes.json'

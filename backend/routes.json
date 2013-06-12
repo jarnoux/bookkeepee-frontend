@@ -3,16 +3,13 @@
         "middleware.registry", "middleware.contextualizer", "express.logger", "middleware.logwriter",
         "express.query", "express.bodyParser", "app.router", "express.errorHandler"
     ],
-    "/": {
-        "get": []
-    },
     "/login": {
-        "post": ["user.login"]
+        "post": ["controllers.auth.login"]
     },
     "/logout": {
-        "post": ["user.logout"]
+        "post": ["controllers.auth.logout"]
     },
     "/register": {
-        "post": ["user.register"]
+        "post": ["controllers.auth.register"]
     }
 }

@@ -1,6 +1,6 @@
 {
     "": [
-        "middleware.registry", "middleware.contextualizer", "express.static", "express.logger", 
+        "middleware.registry", "middleware.contextualizer", "express.static", "express.logger",
         "middleware.logwriter", "express.query", "express.bodyParser", "express.cookieParser",
         "express.session", "express.csrf", "app.router", "express.errorHandler"
     ],
@@ -12,7 +12,7 @@
         "get": ["middleware.dispatcher"]
     },
     "/login": {
-        "post": ["middleware.validator", "middleware.auth.enticate"]
+        "post": ["middleware.validator", "middleware.auth.login"]
     },
     "/logout": {
         "all": ["middleware.auth.logout"]

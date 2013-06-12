@@ -1,8 +1,8 @@
 var authModule = function () {
+    'use strict';
     var User;
     return {
         register: function () {
-            'use strict';
             return function register(req, res, next) {
                 User = User || req.registry.get('models.user');
                 var newUser = new User({
@@ -19,8 +19,7 @@ var authModule = function () {
                 });
             };
         },
-        enticate: function () {
-            'use strict';
+        login: function () {
             return function enticate(req, res, next) {
                 User = User || req.registry.get('models.user');
                 if (!req.session.user) {
@@ -37,16 +36,15 @@ var authModule = function () {
                             // TODO: log the fail reason
                             req.session.user = user;
                             return res.redirect('/');
-                        });
+                        }
+                    );
                 } else {
                     next();
                 }
             };
         },
         logout: function () {
-            'use strict';
             return function logout(req, res, next) {
-                User = User || req.registry.get('models.user');
                 delete req.session.user;
                 return res.redirect('/');
             };
