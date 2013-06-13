@@ -3,8 +3,8 @@
 var e_validator = require('express-validator'),
     ValidationError = function (errors) {
         'use strict';
-        this.name = 'ValidationError';
-        this.params = errors;
+        this.name    = 'ValidationError';
+        this.params  = errors;
         this.message = JSON.stringify(errors, null, 4);
     };
 

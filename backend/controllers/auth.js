@@ -1,4 +1,12 @@
-var User;
+var User,
+    InvalidCredentialsError = function (message) {
+        'use strict';
+        this.name    = 'InvalidCredentialsError';
+        this.message = message;
+    };
+
+InvalidCredentialsError.prototype = new Error();
+InvalidCredentialsError.prototype.constructor = InvalidCredentialsError;
 
 module.exports = {
     register: function (options) {
@@ -39,7 +47,7 @@ module.exports = {
                         return next(err);
                     }
                     if (!user) {
-                        return next(new Error('Invalid Credentials'));
+                        return next(new InvalidCredentialsError('Invalid Credentials, please try again.'));
                     }
                     // TODO: log the fail reason
                     res.end(JSON.stringify(user));
