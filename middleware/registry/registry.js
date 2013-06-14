@@ -60,9 +60,12 @@ Registry.prototype._registerASingleResource = function (name, resource) {
         try {
             configuredResource = this.__config__.ure(resource, name);
         } catch (e) {
-            console.warn(e.message);
-            console.warn(name + ' registration skipped');
-            return;
+            if (e instanceof this.__config__.ConfigurationError) {
+                console.warn(e.message);
+                console.warn(name + ' registration skipped');
+                return;
+            }
+            // else it's probably a constructor trying to set an undefined "this"
         }
     }
     // here we have either resource is an object and configuredResource is undefined
