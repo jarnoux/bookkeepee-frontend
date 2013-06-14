@@ -13,6 +13,11 @@
         },
         "logwriter": {
             "logLevel": "debug"
+        },
+        "tojson-errorhandler": {
+            "statuses": {
+                "MongoError": 409
+            }
         }
     },
     "controllers": {

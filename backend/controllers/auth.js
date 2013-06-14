@@ -18,6 +18,7 @@ module.exports = {
                 email: req.body.email,
                 password: req.body.password
             });
+
             newUser.save(function (err) {
                 if (err) {
                     return next(err);
