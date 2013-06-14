@@ -11,7 +11,7 @@ InvalidCredentialsError.prototype.constructor = InvalidCredentialsError;
 module.exports = {
     register: function (options) {
         'use strict';
-        return function login(req, res, next) {
+        return function register(req, res, next) {
             User = User || req.registry.get('models.user');
             var newUser = new User({
                 username: req.body.username,
@@ -37,7 +37,7 @@ module.exports = {
     },
     login: function (options) {
         'use strict';
-        return function register(req, res, next) {
+        return function login(req, res, next) {
             User = User || req.registry.get('models.user');
             User.getAuthenticated(
                 req.body.username,
