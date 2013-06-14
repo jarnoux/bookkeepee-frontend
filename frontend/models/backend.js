@@ -1,9 +1,20 @@
+/*jslint nomen: true, forin: true */
+
 var http = require('http'),
     Backend = function (options) {
+        'use strict';
         this._options = options;
+    },
+    APIError = function (err) {
+        'use strict';
+        this.message = err.message;
     };
 
+APIError.prototype = new Error();
+APIError.prototype.constructor = APIError;
+
 Backend.prototype.call = function call(moreOptions, body, callback) {
+    'use strict';
     var reqOptions,
         nextOptionKey,
         backendRequest;
