@@ -8,6 +8,7 @@ var fs = require('fs'),
     Registry = function (config) {
         'use strict';
         this.__config__ = config;
+        this.__resourceStore__ = {};
     };
 
 Registry.prototype.register = function (name, resource) {
@@ -37,7 +38,7 @@ Registry.prototype.register = function (name, resource) {
 
 Registry.prototype.get = function (name) {
     'use strict';
-    return this[name];
+    return this.__resourceStore__[name];
 };
 
 Registry.prototype._registerASingleResource = function (name, resource) {
@@ -54,7 +55,7 @@ Registry.prototype._registerASingleResource = function (name, resource) {
         }
         resource = require(resource);
     }
-    // now if the resource is configurable, try to do it
+    // NOW if the resource is configurable, try to do it
     if (typeof resource === 'function') {
         try {
             configuredResource = this.__config__.ure(resource, name);
@@ -63,21 +64,30 @@ Registry.prototype._registerASingleResource = function (name, resource) {
             console.warn(name + ' registration skipped');
             return;
         }
-        // if the configuration returned nothing, try to call it as a constructor instead
-        resource = configuredResource || new resource(this.__config__.get(name));
     }
-    // now if it's an object, register each of its function member recursively
-    if (typeof resource === 'object') {
-        for (nextKey in resource) {
-            nestedResource = resource[nextKey];
-            // if the member is a function, bind it's context to its parent object
-            if (typeof nestedResource === 'function') {
-                nestedResource = nestedResource.bind(resource);
+    // here we have either resource is an object and configuredResource is undefined
+    // or resource resource is a function and configuredResource is anything or undefined
+    // so then if configuredResource is undefined, try to call resource as a constructor instead
+    if (typeof resource === 'function' && !configuredResource) {
+        this.__resourceStore__[name] =  new resource(this.__config__.get(name));
+    } else {
+        // else either configuredResource is something and we want it, or we want resource
+        resource = configuredResource || resource;
+        // if resource is an object, register each of its function member recursively
+        if (typeof resource === 'object') {
+            for (nextKey in resource) {
+                nestedResource = resource[nextKey];
+                // if the member is a function, bind it's context to its parent object
+                if (typeof nestedResource === 'function') {
+                    nestedResource = nestedResource.bind(resource);
+                }
+
+                this._registerASingleResource(name + '.' + nextKey, nestedResource);
             }
-            this._registerASingleResource(name + '.' + nextKey, nestedResource);
+        } else {
+            this.__resourceStore__[name] = resource;
         }
     }
-    this[name] = resource;
 };
 
 Registry.prototype.getConfig = function (name) {
@@ -85,9 +95,10 @@ Registry.prototype.getConfig = function (name) {
     return this.__config__.get(name);
 };
 Registry.prototype.middleware = function registry() {
-    var registry = this;
+    'use strict';
+    var self = this;
     return function (req, res, next) {
-        req.registry = registry;
+        req.registry = self;
         next();
     };
 };
