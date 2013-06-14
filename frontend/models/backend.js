@@ -8,6 +8,8 @@ var http = require('http'),
     APIError = function (err) {
         'use strict';
         this.message = err.message;
+        this.type = err.type;
+        this.statusCode = err.statusCode;
     };
 
 APIError.prototype = new Error();
@@ -45,4 +47,7 @@ Backend.prototype.call = function call(moreOptions, body, callback) {
 
     return backendRequest;
 };
+
+Backend.prototype.APIError = APIError;
+
 module.exports = Backend;
