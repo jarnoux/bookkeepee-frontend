@@ -11,10 +11,11 @@
             <input type="hidden" name="_csrf" value="{{_csrf}}">
             <input type="submit" value="Login">
         </form>
-        <form action="/register?_csrf={{_csrf}}" method="post">
+        <form action="/register" method="post">
             <input type="text" name="email" placeholder="email"><br>
             <input type="text" name="username" id="username" placeholder="username"><br>
             <input type="password" name="password" placeholder="password"><br>
+            <input type="hidden" name="_csrf" value="{{_csrf}}">
             <input type="submit" value="Register">
         </form>
         {{/unless}}<br>

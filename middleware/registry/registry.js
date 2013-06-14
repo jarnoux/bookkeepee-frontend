@@ -15,6 +15,7 @@ Registry.prototype.register = function (name, resource) {
     'use strict';
     var registry = this,
         nextName;
+
     // if only one argument and it's an object, load in batch
     // if it's a string, assume path and load each in the directory
     if (!resource) {

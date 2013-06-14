@@ -7,15 +7,16 @@ var http = require('http'),
     },
     APIError = function (err) {
         'use strict';
+        this.name = 'APIError';
         this.message = err.message;
         this.type = err.type;
-        this.statusCode = err.statusCode;
+        this.status = err.status;
     };
 
 APIError.prototype = new Error();
 APIError.prototype.constructor = APIError;
 
-Backend.prototype.call = function call(moreOptions, body, callback) {
+Backend.prototype.request = function (moreOptions, body, callback) {
     'use strict';
     var reqOptions,
         nextOptionKey,
@@ -32,7 +33,7 @@ Backend.prototype.call = function call(moreOptions, body, callback) {
                 result;
             try {
                 result = JSON.parse(res.read());
-                if (res.statusCode !== 200) {
+                if (res.statusCode >= 400) {
                     err = new APIError(result);
                 }
             } catch (e) {
