@@ -56,6 +56,15 @@
     "models": {
         "user": {
             "dbUrl": "mongodb://localhost/bookkeepee"
+        },
+        "backend": {
+            "post": {
+                "hostname": "localhost",
+                "port": 3030,
+                "headers": {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            }
         }
     }
 }
