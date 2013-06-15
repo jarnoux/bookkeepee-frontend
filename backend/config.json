@@ -16,7 +16,8 @@
         },
         "tojson-errorhandler": {
             "statuses": {
-                "MongoError": 409
+                "MongoError": 409,
+                "InvalidCredentialsError": 401
             }
         }
     },
