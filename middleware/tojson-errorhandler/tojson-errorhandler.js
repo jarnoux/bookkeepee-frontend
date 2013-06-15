@@ -6,10 +6,12 @@ module.exports = function (options) {
             status = options.statuses[type] || 500;
 
         res.writeHead(status);
-        res.end(JSON.stringify({
+        res.renderJSON({
             type: type,
             status: status,
             message: err.message
-        }));
+        }, function (err, string) {
+            res.end(err || string);
+        });
     };
 };

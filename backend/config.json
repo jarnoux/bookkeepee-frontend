@@ -20,7 +20,7 @@
                 "InvalidCredentialsError": 401
             }
         },
-        "jsonrenderer": [null, 4]
+        "jsonrenderer": [null, 0]
     },
     "controllers": {
         "auth": null
