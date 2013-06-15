@@ -19,7 +19,8 @@
                 "MongoError": 409,
                 "InvalidCredentialsError": 401
             }
-        }
+        },
+        "jsonrenderer": [null, 4]
     },
     "controllers": {
         "auth": null

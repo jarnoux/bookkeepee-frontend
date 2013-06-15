@@ -23,7 +23,8 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                res.end(JSON.stringify(newUser));
+                res.renderJSON(newUser, res.end.bind(res));
+                // res.end(JSON.stringify(newUser));
                 return next();
             });
         };
@@ -51,7 +52,12 @@ module.exports = {
                         return next(new InvalidCredentialsError('Invalid Credentials, please try again.'));
                     }
                     // TODO: log the fail reason
-                    res.end(JSON.stringify(user));
+                    res.renderJSON(user, function (err, string) {
+                        if (err) {
+                            next(err);
+                        }
+                        res.end(string);
+                    });
                 }
             );
         };
