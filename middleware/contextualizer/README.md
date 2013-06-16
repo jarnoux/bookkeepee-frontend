@@ -7,7 +7,7 @@ Adds a `context` member to the `req` object which will receive the values of the
 
 Configuration
 -------------
-```json
+```yaml
 {
   "<environment>": "<dev>",
   "<localTime>": "<EST>",
