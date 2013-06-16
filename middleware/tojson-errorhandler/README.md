@@ -16,4 +16,4 @@ Configuration
 
 Dependencies
 ------------
-* jsonrenderer
+* middleware.jsonrenderer
