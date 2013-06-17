@@ -1,4 +1,4 @@
-/*jslint forin: true */
+/*jslint forin: true, nomen: true */
 
 var async = require('async');
 
@@ -58,7 +58,7 @@ module.exports = function (options) {
                             return subplanDone(err);
                         }
                         retentionPool[subplan] = html;
-                        while (toFlushInOrder[0] in retentionPool) {
+                        while (retentionPool.hasOwnProperty(toFlushInOrder[0])) {
                             res.write(retentionPool[toFlushInOrder.shift()] || '');
                         }
                         return subplanDone();
@@ -66,6 +66,7 @@ module.exports = function (options) {
                 }, planDone);
             }
         };
+
     return function dispatcher(req, res, next) {
         registry = registry || req.registry;
         config   = config   || registry.getConfig('middleware.dispatcher');

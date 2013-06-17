@@ -1,24 +1,33 @@
-<html>
-    <header>
-        <title>bookkeepee.com</title>
-    </header>
-    <body>
-        <span>hello {{username}}!!</span>{{#if username}} ({{email}}) - <a href="/logout">logout</a>{{/if}}
-        {{#unless username}}
-        <form action="/login" method="post">
-            <input type="text" name="username" id="username" placeholder="username"><br>
-            <input type="password" name="password" placeholder="password"><br>
-            <input type="hidden" name="_csrf" value="{{_csrf}}">
-            <input type="submit" value="Login">
-        </form>
-        <form action="/register" method="post">
-            <input type="text" name="email" placeholder="email"><br>
-            <input type="text" name="username" id="username" placeholder="username"><br>
-            <input type="password" name="password" placeholder="password"><br>
-            <input type="hidden" name="_csrf" value="{{_csrf}}">
-            <input type="submit" value="Register">
-        </form>
-        {{/unless}}<br>
-        <a href="/test">test streaming</a>
-    </body>
-</html>
+        <div class="pure-g-r" id="layout">
+            <div class="pure-u" id="leftrail">
+                <div class="pure-menu pure-menu-open">
+                    <a href="/" class="pure-menu-heading"><h3>Bookkeepee</h3></a>
+                    <ul>
+                    {{#if username}}
+                        <li><a href="#">{{username}}</a></li>
+                    {{/if}}
+                        <li class="pure-menu-selected"><a href="#">Home</a></li>
+                        <li><a href="#" title="About Us">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pure-u" id="main">
+            {{#unless username}}
+                <h1 style="text-align: center">Hello</h1>
+                <form action="/login" method="post" class="pure-form login">
+                    <input type="text" name="username" id="username" placeholder="username">
+                    <input type="password" name="password" placeholder="password">
+                    <input type="hidden" name="_csrf" value="{{_csrf}}">
+                    <input type="submit" value="Login" class="pure-button">
+                </form>
+                <form action="/register" method="post" class="pure-form pure-form-stacked">
+                    <input type="text" name="email" placeholder="email"><br>
+                    <input type="text" name="username" id="username" placeholder="username"><br>
+                    <input type="password" name="password" placeholder="password"><br>
+                    <input type="hidden" name="_csrf" value="{{_csrf}}">
+                    <input type="submit" value="Register" class="pure-button pure-button-primary">
+                </form>
+            {{/unless}}
+            <a href="/test">test streaming</a>
+            </div>
+        </div>
