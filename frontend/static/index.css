@@ -1,0 +1,29 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    font-weight: 200;
+    font-size: 120%;
+}
+input[type=submit] {
+    margin: 5px 0;
+}
+
+#layout {
+    padding-left: 180px;
+}
+#leftrail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 180px;
+    width: 180px;
+    margin-left: -180px;
+    overflow: auto;
+}
+#leftrail .pure-menu-open {
+    background: transparent;;
+    border: 0;
+}
+
+#main {
+    width: 100%;
+}
