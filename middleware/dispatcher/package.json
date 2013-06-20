@@ -1,8 +1,0 @@
-{
-    "name": "dispatcher",
-    "version": "0.0.1",
-    "main": "dispatcher.js",
-    "dependencies": {
-        "async": "0.x.x"
-    }
-}

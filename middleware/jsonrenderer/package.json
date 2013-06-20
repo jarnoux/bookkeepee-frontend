@@ -1,8 +1,0 @@
-{
-    "name": "jsonrenderer",
-    "version": "0.0.1",
-    "main": "jsonrenderer.js",
-    "dependencies": {
-        "colors": "0.6.x"
-    }
-}

@@ -1,13 +1,11 @@
 {
-    "express": {
+    "middleware": {
         "logger": {
             "format-prod": "{\"date\":\":date\",\"msec\":\":response-time\",\"addr\":\":remote-addr\",\"usag\":\":user-agent\",\"refr\":\":referrer\",\"req\":\":method :url\",\"resp\":\":status :res[content-length]\"}",
             "format": "dev"
         },
         "bodyParser": null,
-        "query": null
-    },
-    "middleware": {
+        "query": null,
         "contextualizer": {
             "environment": "dev"
         },

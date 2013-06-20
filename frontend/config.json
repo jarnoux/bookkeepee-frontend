@@ -1,5 +1,5 @@
 {
-    "express": {
+    "middleware": {
         "logger": {
             "format-prod": "{\"date\":\":date\",\"msec\":\":response-time\",\"addr\":\":remote-addr\",\"usag\":\":user-agent\",\"refr\":\":referrer\",\"req\":\":method :url\",\"resp\":\":status :res[content-length]\"}",
             "format": "dev"
@@ -9,9 +9,7 @@
         "bodyParser": null,
         "session": null,
         "query": null,
-        "csrf": null
-    },
-    "middleware": {
+        "csrf": null,
         "contextualizer": {
             "environment": "dev"
         },

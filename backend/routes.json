@@ -1,7 +1,8 @@
 {
     "": [
-        "middleware.registry", "middleware.contextualizer", "express.logger", "middleware.logwriter",
-        "express.query", "express.bodyParser", "middleware.jsonrenderer", "app.router", "middleware.tojson-errorhandler", "express.errorHandler"
+        "middleware.registry", "middleware.contextualizer", "middleware.logger", "middleware.logwriter",
+        "middleware.query", "middleware.bodyParser", "middleware.jsonrenderer", "middleware.router",
+        "middleware.tojson-errorhandler", "middleware.errorHandler"
     ],
     "/login": {
         "post": ["controllers.auth.login"]

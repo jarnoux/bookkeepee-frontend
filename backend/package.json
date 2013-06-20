@@ -3,9 +3,8 @@
     "version": "0.0.1",
     "main": "router.js",
     "dependencies": {
-        "express": "3.x",
-        "mongodb": "1.3.x",
-        "mongoose": "3.6.x",
+        "rig": "git+ssh://git@github.com:jarnoux/rig.js.git",
+        "mongoose": "3.x",
         "bcrypt": "0.7.x"
     }
 }

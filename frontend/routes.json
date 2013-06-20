@@ -1,8 +1,8 @@
 {
     "": [
-        "middleware.registry", "middleware.contextualizer", "express.static", "express.logger",
-        "middleware.logwriter", "express.query", "express.bodyParser", "express.cookieParser",
-        "express.session", "express.csrf", "app.router", "express.errorHandler"
+        "middleware.registry", "middleware.contextualizer", "middleware.static", "middleware.logger",
+        "middleware.logwriter", "middleware.query", "middleware.bodyParser", "middleware.cookieParser",
+        "middleware.session", "middleware.csrf", "middleware.router", "middleware.errorHandler"
     ],
     "/": {
         "get": ["middleware.dispatcher"]
