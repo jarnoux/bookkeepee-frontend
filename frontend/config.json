@@ -6,10 +6,14 @@
         },
         "static": "static/",
         "cookieParser": "secret",
+        "errorHandler": null,
         "bodyParser": null,
+        "hb-adapter": null,
+        "router": null,
         "session": null,
         "query": null,
         "csrf": null,
+        "auth": null,
         "contextualizer": {
             "environment": "dev"
         },
@@ -50,9 +54,6 @@
         }
     },
     "models": {
-        "user": {
-            "dbUrl": "mongodb://localhost/bookkeepee"
-        },
         "backend": {
             "post": {
                 "hostname": "localhost",
@@ -62,5 +63,16 @@
                 }
             }
         }
+    },
+    "controllers": {
+        "body": {
+            "top": null,
+            "middle": null,
+            "bottom": null
+        },
+        "composedBody": null,
+        "footer": null,
+        "header": null,
+        "index": null
     }
 }

@@ -6,6 +6,8 @@
         },
         "bodyParser": null,
         "query": null,
+        "router": null,
+        "errorHandler": null,
         "contextualizer": {
             "environment": "dev"
         },
@@ -18,7 +20,9 @@
                 "InvalidCredentialsError": 401
             }
         },
-        "jsonrenderer": [null, 0]
+        "jsonrenderer": [null, 0],
+        "hb-adapter": null,
+        "registry": null
     },
     "controllers": {
         "auth": null

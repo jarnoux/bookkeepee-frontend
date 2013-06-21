@@ -51,4 +51,8 @@ Backend.prototype.request = function (moreOptions, body, callback) {
 
 Backend.prototype.APIError = APIError;
 
-module.exports = Backend;
+module.exports = function (options) {
+    'use strict';
+    return new Backend(options);
+};
+

@@ -137,6 +137,10 @@ userSchema.pre('save', function (next) {
 
 module.exports = function (options) {
     'use strict';
-    mongoose = mongoose.connect(options.dbUrl);
+    mongoose = mongoose.connect(options.dbUrl, function (err) {
+        if (err) {
+            throw new Error('When connecting to the database: ' + err);
+        }
+    });
     return mongoose.model('User', userSchema);
 };

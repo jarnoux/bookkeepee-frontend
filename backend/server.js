@@ -14,4 +14,4 @@ rig.register(path.resolve(__dirname, 'models'));
 rig.map();
 
 rig.app.listen(3030);
-console.log('front end app listening on port', 3030);
+console.log('back end app listening on port', 3030);
