@@ -22,18 +22,15 @@
         "dispatcher": {
             "routes": {
                 "/": {
-                    "get": ["header", "index", "footer"]
+                    "get": ["header", "leftMenu", "index", "footer"]
                 },
-                "/test": {
-                    "get": ["header", "body", "composedBody", "footer"]
+                "/about": {
+                    "get": ["header", "leftMenu", "about", "footer"]
                 }
             },
             "plans": {
-                "body": ["body.top", "body.middle", "body.bottom"],
-                "composedBody": {
-                    "top": "body.top",
-                    "middle": "body.middle",
-                    "bottom": "body.bottom"
+                "index": {
+                    "registerForm": "registerForm"
                 }
             }
         },
@@ -90,9 +87,13 @@
         "composedBody": null,
         "footer": null,
         "header": null,
-        "index": null
+        "index": null,
+        "leftMenu": null,
+        "registerForm": null
     },
     "lib": {
-        "hb-adapter": null
+        "hb-adapter": {
+            "minifyHtml": true
+        }
     }
 }

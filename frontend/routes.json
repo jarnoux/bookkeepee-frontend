@@ -17,7 +17,7 @@
     "/logout": {
         "all": ["middleware.auth.logout"]
     },
-    "/test": {
+    "/about": {
         "get": ["middleware.dispatcher"]
     }
 }
