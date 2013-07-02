@@ -13,5 +13,5 @@ rig.register('models');
 
 rig.route();
 
-rig.app.listen(3030);
+rig.listen(3030);
 console.log('back end app listening on port', 3030);

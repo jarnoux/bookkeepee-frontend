@@ -28,11 +28,15 @@ Backend.prototype.request = function (moreOptions, body, callback) {
     }
 
     backendRequest = http.request(reqOptions, function (res) {
-        res.on('readable', function () {
+        var buffer = '';
+        res.on('data', function (data) {
+            buffer += data;
+        });
+        res.on('end', function () {
             var err,
                 result;
             try {
-                result = JSON.parse(res.read());
+                result = JSON.parse(buffer);
                 if (res.statusCode >= 400) {
                     err = new APIError(result);
                 }
@@ -42,9 +46,7 @@ Backend.prototype.request = function (moreOptions, body, callback) {
             callback(err, result);
         });
     });
-    if (body) {
-        backendRequest.end(body);
-    }
+    backendRequest.end(body);
 
     return backendRequest;
 };

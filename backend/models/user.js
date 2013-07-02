@@ -5,7 +5,8 @@ var mongoose             = require('mongoose'),
     MAX_LOGIN_ATTEMPTS   = 5,
     LOCK_TIME            = 2 * 60 * 60 * 1000,
     userSchema           = new Schema({
-        username     : { type: String, unique: true, required: true },
+        firstName    : { type: String, required: true },
+        lastName     : { type: String, required: true },
         email        : { type: String, unique: true, required: true},
         password     : { type: String, required: true },
         loginAttempts: { type: Number, required: true, 'default': 0 },
@@ -41,9 +42,9 @@ userSchema.methods.incLoginAttempts = function (callback) {
     return this.update(updates, callback);
 };
 
-userSchema.statics.getAuthenticated = function (username, password, callback) {
+userSchema.statics.getAuthenticated = function (email, password, callback) {
     'use strict';
-    this.findOne({ username: username }, function (err, user) {
+    this.findOne({ email: email }, function (err, user) {
         if (err) {
             return callback(err);
         }
@@ -134,6 +135,11 @@ userSchema.pre('save', function (next) {
         });
     });
 });
+
+userSchema.index({
+    lastName : 1,
+    firstName: 1
+}, { unique: true });
 
 module.exports = function (options) {
     'use strict';

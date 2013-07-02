@@ -8,7 +8,6 @@
         "cookieParser": "secret",
         "errorHandler": null,
         "bodyParser": null,
-        "hb-adapter": null,
         "router": null,
         "session": null,
         "query": null,
@@ -42,12 +41,30 @@
             "/register": {
                 "email": {
                     "assert": {
-                        "isEmail": null
-                    },
-                    "sanitize": {
-                        "trim": null
+                        "isEmail": []
                     },
                     "errorMessage": "Invalid Email"
+                },
+                "firstName": {
+                    "assert": {
+                        "notEmpty": []
+                    },
+                    "sanitize": {
+                        "trim": []
+                    }
+                },
+                "lastName": {
+                    "assert": {
+                        "notEmpty": []
+                    },
+                    "sanitize": {
+                        "trim": []
+                    }
+                },
+                "password": {
+                    "assert": {
+                        "len": [8]
+                    }
                 }
             },
             "/login": {}
@@ -74,5 +91,8 @@
         "footer": null,
         "header": null,
         "index": null
+    },
+    "lib": {
+        "hb-adapter": null
     }
 }

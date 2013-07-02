@@ -12,5 +12,5 @@ rig.register('models');
 
 rig.route();
 
-rig.app.listen(3000);
+rig.listen(3000);
 console.log('front end app listening on port', 3000);

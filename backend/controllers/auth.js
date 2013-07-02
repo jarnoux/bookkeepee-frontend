@@ -14,7 +14,8 @@ module.exports = {
         return function register(req, res, next) {
             User = User || req.registry.get('models.user');
             var newUser = new User({
-                username: req.body.username,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 email: req.body.email,
                 password: req.body.password
             });
@@ -23,9 +24,12 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                res.renderJSON(newUser, res.end.bind(res));
-                // res.end(JSON.stringify(newUser));
-                return next();
+                req.renderJSON(newUser, function (err, result) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.end(result);
+                });
             });
         };
     },
@@ -42,7 +46,7 @@ module.exports = {
         return function login(req, res, next) {
             User = User || req.registry.get('models.user');
             User.getAuthenticated(
-                req.body.username,
+                req.body.email,
                 req.body.password,
                 function (err, user, failReason) {
                     if (err) {
@@ -52,7 +56,7 @@ module.exports = {
                         return next(new InvalidCredentialsError('Invalid Credentials, please try again.'));
                     }
                     // TODO: log the fail reason
-                    res.renderJSON(user, function (err, string) {
+                    req.renderJSON(user, function (err, string) {
                         if (err) {
                             next(err);
                         }
