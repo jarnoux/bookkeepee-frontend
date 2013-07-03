@@ -31,6 +31,7 @@
             "plans": {
                 "index": {
                     "pageTitle": "pageTitle",
+                    "home": "home",
                     "registerForm": "registerForm"
                 },
                 "about": {
@@ -97,7 +98,8 @@
         "pageTitle": {
             "/": "Home",
             "/about": "About Us"
-        }
+        },
+        "home": null
     },
     "lib": {
         "hb-adapter": {

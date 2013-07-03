@@ -10,7 +10,7 @@ input[type=submit] {
 #layout {
     padding-left: 180px;
 }
-#leftrail {
+#leftMenu {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -19,11 +19,11 @@ input[type=submit] {
     margin-left: -180px;
     overflow: auto;
 }
-#leftrail .pure-menu-open {
+#leftMenu .pure-menu-open {
     background: transparent;;
     border: 0;
 }
 
-#main {
+#index {
     width: 100%;
 }
