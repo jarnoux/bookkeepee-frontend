@@ -30,7 +30,11 @@
             },
             "plans": {
                 "index": {
+                    "pageTitle": "pageTitle",
                     "registerForm": "registerForm"
+                },
+                "about": {
+                    "pageTitle": "pageTitle"
                 }
             }
         },
@@ -89,7 +93,11 @@
         "header": null,
         "index": null,
         "leftMenu": null,
-        "registerForm": null
+        "registerForm": null,
+        "pageTitle": {
+            "/": "Home",
+            "/about": "About Us"
+        }
     },
     "lib": {
         "hb-adapter": {

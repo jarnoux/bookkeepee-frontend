@@ -1,14 +1,14 @@
-<div class="pure-u" id="leftrail">
-    <div class="pure-menu pure-menu-open">
-        <a href="/" class="pure-menu-heading"><h3>Bookkeepee</h3></a>
-        <ul>
-        {{#if user}}
-            <li{{#if route.index}} class="pure-menu-selected"{{/if}}><a href="/">{{user.firstName}}</a></li>
-            <li><a href="/logout">Logout</a></li>
-        {{else}}
-            <li{{#if route.index}} class="pure-menu-selected"{{/if}}><a href="/">Home</a></li>
-        {{/if}}
-            <li{{#if route.about}} class="pure-menu-selected"{{/if}}><a href="/about" title="About Us">About Us</a></li>
-        </ul>
-    </div>
-</div>
+            <div class="pure-u" id="leftrail">
+                <div class="pure-menu pure-menu-open">
+                    <a href="/" class="pure-menu-heading"><h3>Bookkeepee</h3></a>
+                    <ul>
+                    {{#if user}}
+                        <li{{#if route.index}} class="pure-menu-selected"{{/if}}><a href="/">{{user.firstName}}</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    {{else}}
+                        <li{{#if route.index}} class="pure-menu-selected"{{/if}}><a href="/">Home</a></li>
+                    {{/if}}
+                        <li{{#if route.about}} class="pure-menu-selected"{{/if}}><a href="/about" title="About Us">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
