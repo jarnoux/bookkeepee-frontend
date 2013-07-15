@@ -8,8 +8,9 @@
         "cookieParser": "secret",
         "errorHandler": null,
         "bodyParser": null,
-        "router": null,
+        "compress": null,
         "session": null,
+        "router": null,
         "query": null,
         "csrf": null,
         "auth": null,
@@ -20,7 +21,7 @@
             "logLevel": "debug"
         },
         "dispatcher": {
-            "routes": {
+            "plans": {
                 "/": {
                     "get": ["header", "leftMenu", "index", "footer"]
                 },
@@ -28,7 +29,7 @@
                     "get": ["header", "leftMenu", "about", "footer"]
                 }
             },
-            "plans": {
+            "details": {
                 "index": {
                     "pageTitle": "pageTitle",
                     "home": "home",
@@ -36,6 +37,14 @@
                 },
                 "about": {
                     "pageTitle": "pageTitle"
+                }
+            },
+            "headers": {
+                "/": {
+                    "Content-Type": "text/html"
+                },
+                "/about": {
+                    "Content-Type": "text/html"
                 }
             }
         },
@@ -103,7 +112,8 @@
     },
     "lib": {
         "hb-adapter": {
-            "minifyHtml": true
+            "minifyHtml": true,
+            "gzip": true
         }
     }
 }

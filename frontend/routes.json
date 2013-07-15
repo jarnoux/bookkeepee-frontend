@@ -1,6 +1,6 @@
 {
     "": [
-        "middleware.contextualizer", "middleware.static", "middleware.logger",
+        "middleware.compress", "middleware.contextualizer", "middleware.static", "middleware.logger",
         "middleware.logwriter", "middleware.query", "middleware.bodyParser", "middleware.cookieParser",
         "middleware.session", "middleware.csrf", "middleware.router", "middleware.errorHandler"
     ],
