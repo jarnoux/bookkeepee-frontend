@@ -4,6 +4,9 @@
         "middleware.query", "middleware.bodyParser", "middleware.jsonrenderer", "middleware.router",
         "middleware.tojson-errorhandler", "middleware.errorHandler"
     ],
+    "/property/view": {
+        "get": ["controllers.property"]
+    },
     "/login": {
         "post": ["controllers.auth.login"]
     },

@@ -25,7 +25,8 @@
         "registry": null
     },
     "controllers": {
-        "auth": null
+        "auth": null,
+        "property": null
     },
     "models": {
         "user": {
