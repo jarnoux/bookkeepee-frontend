@@ -1,3 +1,4 @@
+/*jslint nomen: true */
 var querystring = require('querystring');
 
 module.exports = function () {
