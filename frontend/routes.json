@@ -11,6 +11,9 @@
         "post": ["middleware.validator", "middleware.auth.register"],
         "get": ["middleware.dispatcher"]
     },
+    "/home": {
+        "get": ["middleware.auth.login", "middleware.dispatcher"]
+    },
     "/login": {
         "post": ["middleware.validator", "middleware.auth.login"]
     },

@@ -15,7 +15,7 @@
         "csrf": null,
         "auth": null,
         "contextualizer": {
-            "environment": "dev"
+            "environment": "prod"
         },
         "logwriter": {
             "logLevel": "debug"
@@ -25,6 +25,9 @@
                 "/": {
                     "get": ["header", "leftMenu", "index", "footer"]
                 },
+                "/home": {
+                    "get": ["header", "leftMenu", "home", "footer"]
+                },
                 "/about": {
                     "get": ["header", "leftMenu", "about", "footer"]
                 }
@@ -32,8 +35,10 @@
             "details": {
                 "index": {
                     "pageTitle": "pageTitle",
-                    "home": "home",
                     "registerForm": "registerForm"
+                },
+                "home": {
+                    "pageTitle": "pageTitle"
                 },
                 "about": {
                     "pageTitle": "pageTitle"
@@ -89,6 +94,10 @@
                 "headers": {
                     "Content-Type": "application/x-www-form-urlencoded"
                 }
+            },
+            "get": {
+                "hostname": "localhost",
+                "port": 3030
             }
         }
     },
@@ -106,7 +115,8 @@
         "registerForm": null,
         "pageTitle": {
             "/": "Home",
-            "/about": "About Us"
+            "/about": "About Us",
+            "/home": "Home"
         },
         "home": null
     },
