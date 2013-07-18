@@ -54,16 +54,31 @@ module.exports = {
     edit: function (options) {
 
         return function edit(req, res, next) {
-            var Property = req.registry.get('models.property');
-            res.json({});
+            var Property = req.registry.get('models.property'),
+                id = req.params.id,
+                update = { $set: req.body };
+
+            Property.findByIdAndUpdate(id, update, function (err, property) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(property);
+            });
         };
     },
 
     find: function (options) {
 
         return function find(req, res, next) {
-            var Property = req.registry.get('models.property');
-            res.json({});
+            var Property = req.registry.get('models.property'),
+                query = req.body;
+
+            Property.find(query, function (err, properties) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(properties);
+            });
         };
     },
 
@@ -71,8 +86,7 @@ module.exports = {
 
         return function byId(req, res, next) {
             var Property = req.registry.get('models.property'),
-                // id = req.params.id;
-                id = '51e7ae0b713955b0bc000002';
+                id = req.params.id;
 
             Property.findById(id, function (err, property) {
                 if (err) {
@@ -89,8 +103,15 @@ module.exports = {
     byUser: function (options) {
 
         return function byUser(req, res, next) {
-            var Property = req.registry.get('models.property');
-            res.json({});
+            var Property = req.registry.get('models.property'),
+                userId = req.params.id;
+
+            Property.find({userId: userId}, function (err, properties) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(properties);
+            });
         };
     }
 };
