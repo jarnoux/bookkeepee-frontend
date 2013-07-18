@@ -1,16 +1,17 @@
 /*jslint nomen: true, forin: true */
 
-var http = require('http'),
-    Backend = function (options) {
+var http        = require('http'),
+    querystring = require('querystring'),
+    Backend     = function (options) {
         'use strict';
         this._options = options;
     },
     APIError = function (err) {
         'use strict';
-        this.name = 'APIError';
+        this.name    = 'APIError';
         this.message = err.message;
-        this.type = err.type;
-        this.status = err.status;
+        this.type    = err.type;
+        this.status  = err.status;
     };
 
 APIError.prototype = new Error();
@@ -21,6 +22,11 @@ Backend.prototype.request = function (moreOptions, body, callback) {
     var reqOptions,
         nextOptionKey,
         backendRequest;
+
+    if (!callback) {
+        callback = body;
+        body = null;
+    }
     reqOptions = this._options[moreOptions.method || 'get'] || {};
     // merge options with precedence to given arguments
     for (nextOptionKey in moreOptions) {
@@ -46,7 +52,7 @@ Backend.prototype.request = function (moreOptions, body, callback) {
             callback(err, result);
         });
     });
-    backendRequest.end(body);
+    backendRequest.end(querystring.stringify(body));
 
     return backendRequest;
 };
