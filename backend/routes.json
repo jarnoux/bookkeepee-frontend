@@ -10,9 +10,7 @@
         "middleware.tojson-errorhandler",
         "middleware.errorHandler"
     ],
-    "/property/view": {
-        "get": ["controllers.property"]
-    },
+
     "/login": {
         "post": ["controllers.auth.login"]
     },
@@ -28,7 +26,7 @@
         "post": [ "controllers.property.create"]
     },
 
-    "/properties/:pid": {
+    "/properties/:id": {
         "get":    [ "controllers.property.byId" ],
         "patch":  [ "controllers.property.edit" ],
         "delete": [ "controllers.property.remove" ]
