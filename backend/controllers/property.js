@@ -6,15 +6,27 @@ module.exports = {
 
         return function all(req, res, next) {
             var Property = req.registry.get('models.property');
-            res.json({});
+            Property.all(function (err, properties) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(properties);
+            });
         };
     },
 
     create: function (options) {
 
         return function create(req, res, next) {
-            var Property = req.registry.get('models.property');
-            res.json({});
+            var Property = req.registry.get('models.property'),
+                postData = req.body;
+
+            Property.create(postData, function (err, property) {
+                if (err) {
+                    next(err);
+                }
+                res.json(property);
+            });
         };
     },
 

@@ -1,8 +1,14 @@
 {
     "": [
-        "middleware.contextualizer", "middleware.logger", "middleware.logwriter",
-        "middleware.query", "middleware.bodyParser", "middleware.jsonrenderer", "middleware.router",
-        "middleware.tojson-errorhandler", "middleware.errorHandler"
+        "middleware.contextualizer",
+        "middleware.logger",
+        "middleware.logwriter",
+        "middleware.query",
+        "middleware.bodyParser",
+        "middleware.jsonrenderer",
+        "middleware.router",
+        "middleware.tojson-errorhandler",
+        "middleware.errorHandler"
     ],
     "/login": {
         "post": ["controllers.auth.login"]
