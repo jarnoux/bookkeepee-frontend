@@ -25,10 +25,14 @@
         "registry": null
     },
     "controllers": {
-        "auth": null
+        "auth": null,
+        "property": null
     },
     "models": {
         "user": {
+            "dbUrl": "mongodb://localhost/bookkeepee"
+        },
+        "property": {
             "dbUrl": "mongodb://localhost/bookkeepee"
         }
     }
