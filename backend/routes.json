@@ -1,12 +1,16 @@
 {
     "": [
-        "middleware.contextualizer", "middleware.logger", "middleware.logwriter",
-        "middleware.query", "middleware.bodyParser", "middleware.jsonrenderer", "middleware.router",
-        "middleware.tojson-errorhandler", "middleware.errorHandler"
+        "middleware.contextualizer",
+        "middleware.logger",
+        "middleware.logwriter",
+        "middleware.query",
+        "middleware.bodyParser",
+        "middleware.jsonrenderer",
+        "middleware.router",
+        "middleware.tojson-errorhandler",
+        "middleware.errorHandler"
     ],
-    "/property/view": {
-        "get": ["controllers.property"]
-    },
+
     "/login": {
         "post": ["controllers.auth.login"]
     },
@@ -15,5 +19,24 @@
     },
     "/register": {
         "post": ["controllers.auth.register"]
+    },
+
+    "/properties": {
+        "get":  [ "controllers.property.all" ],
+        "post": [ "controllers.property.create"]
+    },
+
+    "/properties/:id": {
+        "get":    [ "controllers.property.byId" ],
+        "patch":  [ "controllers.property.edit" ],
+        "delete": [ "controllers.property.remove" ]
+    },
+
+    "/properties/find": {
+        "post": [ "controllers.property.find" ]
+    },
+
+    "/user/:id/properties": {
+        "get":  [ "controllers.property.byUser" ]
     }
 }

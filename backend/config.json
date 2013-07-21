@@ -31,6 +31,9 @@
     "models": {
         "user": {
             "dbUrl": "mongodb://localhost/bookkeepee"
+        },
+        "property": {
+            "dbUrl": "mongodb://localhost/bookkeepee"
         }
     }
 }
