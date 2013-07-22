@@ -1,0 +1,25 @@
+CREATE PROPERTY
+
+{
+    "name": "219 Bay",
+    "address": "219 Bay St",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94123",
+    "country": "USA",
+    "loc": [55.5, 42.3],
+    "description": "Victorian building.",
+    "units": 10,
+    "userId": "51e4cf3fecb1966052000001"
+}
+
+CREATE UNIT
+
+{
+    "number": "202",
+    "description": "One bedroom",
+    "size": "80 sqft",
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "propertyId":  "51ecd98ffc528049d2000003"
+}

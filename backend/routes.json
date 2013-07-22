@@ -23,7 +23,7 @@
 
     "/properties": {
         "get":  [ "controllers.property.all" ],
-        "post": [ "controllers.property.create"]
+        "post": [ "controllers.property.create" ]
     },
 
     "/properties/:id": {
@@ -34,6 +34,21 @@
 
     "/properties/find": {
         "post": [ "controllers.property.find" ]
+    },
+
+    "/properties/:pid/units": {
+        "get":  [ "controllers.unit.byProperty" ],
+        "post": [ "controllers.unit.create" ]
+    },
+
+    "/properties/:pid/units/:uid": {
+        "get":    [ "controllers.unit.byId" ],
+        "patch":  [ "controllers.unit.edit" ],
+        "delete": [ "controllers.unit.remove" ]
+    },
+
+    "/units/find": {
+        "post": [ "controllers.unit.find" ]
     },
 
     "/user/:id/properties": {
