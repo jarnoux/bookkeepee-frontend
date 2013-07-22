@@ -1,10 +1,7 @@
 
 "use strict";
 
-var HTTPStatus = {
-    NO_CONTENT: 204,
-    NOT_FOUND:  400
-};
+var HTTPStatus = require('../lib/http-status');
 
 module.exports = {
 

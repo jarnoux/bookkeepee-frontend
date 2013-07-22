@@ -5,6 +5,7 @@
     "dependencies": {
         "rig": "git+ssh://git@github.com:jarnoux/rig.js.git",
         "mongoose": "3.x",
-        "bcrypt": "0.7.x"
+        "bcrypt": "0.7.x",
+        "underscore": "~1.5.1"
     }
 }

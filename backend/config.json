@@ -26,13 +26,17 @@
     },
     "controllers": {
         "auth": null,
-        "property": null
+        "property": null,
+        "unit": null
     },
     "models": {
         "user": {
             "dbUrl": "mongodb://localhost/bookkeepee"
         },
         "property": {
+            "dbUrl": "mongodb://localhost/bookkeepee"
+        },
+        "unit": {
             "dbUrl": "mongodb://localhost/bookkeepee"
         }
     }
