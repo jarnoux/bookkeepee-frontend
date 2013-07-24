@@ -45,7 +45,6 @@ module.exports = {
         return function remove(req, res, next) {
             var registry = req.registry,
                 Unit = registry.get('models.unit'),
-                Property = registry.get('models.property'),
 
                 propertyId = req.params.pid,
                 unitId = req.params.uid;
@@ -54,12 +53,7 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                Property.findByIdAndUpdate(propertyId,  { $inc: { units: -1 } }, function (err, property) {
-                    if (err) {
-                        return next(err);
-                    }
-                    res.send(HTTPStatus.NO_CONTENT);
-                });
+                res.send(HTTPStatus.NO_CONTENT);
             });
         };
     },
