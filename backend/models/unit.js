@@ -10,6 +10,8 @@ var mongoose = require('mongoose'),
         size:        { type: String },
         bedrooms:    { type: Number },
         bathrooms:   { type: Number },
+        price:       { type: Number },
+        available:   { type: Boolean },
         propertyId:  { type: Types.ObjectId, required: true }
     });
 
