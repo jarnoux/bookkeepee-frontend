@@ -23,3 +23,18 @@ CREATE UNIT
     "bathrooms": 1,
     "propertyId":  "51ecd98ffc528049d2000003"
 }
+
+CREATE TENANT
+{
+    "firstname": "John",
+    "lastname": "Smith",
+    "dateOfBirth": "1980-12-01",
+    "email": "john.smith@whatever.com",
+    "phone": "5558782222",
+    "references":  [ {"name": "Mike Tyson", "phone": "5551230982"} ],
+    "unitId": "51ece376b8b6c343e2000001",
+    "current":  "true",
+    "startDate": "2013-02-01",
+    "endDate": "2014-02-01",
+    "leaseTerm: "1 year"
+}

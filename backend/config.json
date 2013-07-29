@@ -27,7 +27,8 @@
     "controllers": {
         "auth": null,
         "property": null,
-        "unit": null
+        "unit": null,
+        "tenant": null
     },
     "models": {
         "user": {
@@ -37,6 +38,9 @@
             "dbUrl": "mongodb://localhost/bookkeepee"
         },
         "unit": {
+            "dbUrl": "mongodb://localhost/bookkeepee"
+        },
+        "tenant": {
             "dbUrl": "mongodb://localhost/bookkeepee"
         }
     }

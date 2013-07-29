@@ -11,13 +11,19 @@ module.exports = {
 
         return function byProperty(req, res, next) {
             var Unit = req.registry.get('models.unit'),
+                Tenant = req.registry.get('models.tenant'),
                 propertyId = req.params.pid;
 
-            Unit.byProperty(propertyId, function (err, units) {
+            Unit.find({propertyId: propertyId}, {id: 1}, function (err, units) {
                 if (err) {
                     return next(err);
                 }
-                res.json(units);
+                Tenant.find({unitId: {$in: units}}, function (err, tenants) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(tenants);
+                });
             });
         };
     },
@@ -25,12 +31,12 @@ module.exports = {
     create: function (options) {
 
         return function create(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Tenant = req.registry.get('models.tenant'),
                 postData = _.clone(req.body);
 
             postData.propertyId = req.params.pid;
 
-            Unit.create(postData, function (err, unit) {
+            Tenant.create(postData, function (err, unit) {
                 if (err) {
                     console.log(err);
                     return next(err);
@@ -44,12 +50,10 @@ module.exports = {
 
         return function remove(req, res, next) {
             var registry = req.registry,
-                Unit = registry.get('models.unit'),
+                Tenant = registry.get('models.tenant'),
+                id = req.params.tid;
 
-                propertyId = req.params.pid,
-                unitId = req.params.uid;
-
-            Unit.findByIdAndRemove(unitId, function (err, unit) {
+            Tenant.findByIdAndRemove(id, function (err, tenant) {
                 if (err) {
                     return next(err);
                 }
@@ -61,11 +65,11 @@ module.exports = {
     edit: function (options) {
 
         return function edit(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
-                id = req.params.uid,
+            var Tenant = req.registry.get('models.tenant'),
+                id = req.params.tid,
                 update = { $set: req.body };
 
-            Unit.findByIdAndUpdate(id, update, function (err, unit) {
+            Tenant.findByIdAndUpdate(id, update, function (err, unit) {
                 if (err) {
                     return next(err);
                 }
@@ -77,10 +81,10 @@ module.exports = {
     find: function (options) {
 
         return function find(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Tenant = req.registry.get('models.tenant'),
                 query = req.body;
 
-            Unit.find(query, function (err, units) {
+            Tenant.find(query, function (err, units) {
                 if (err) {
                     return next(err);
                 }
@@ -92,10 +96,10 @@ module.exports = {
     byId: function (options) {
 
         return function byId(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
-                id = req.params.uid;
+            var Tenant = req.registry.get('models.tenant'),
+                id = req.params.tid;
 
-            Unit.findById(id, function (err, unit) {
+            Tenant.findById(id, function (err, unit) {
                 if (err) {
                     return next(err);
                 }
