@@ -12,7 +12,6 @@ var mongoose = require('mongoose'),
         state:    { type: String, required: true },
         zip:      { type: String, required: true },
         country:  { type: String, required: true },
-        units:    { type: Number },
         loc:      { type: Array },
         userId: { type: Types.ObjectId }
     });

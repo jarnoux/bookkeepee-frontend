@@ -10,6 +10,8 @@ var mongoose = require('mongoose'),
         size:        { type: String },
         bedrooms:    { type: Number },
         bathrooms:   { type: Number },
+        price:       { type: Number },
+        available:   { type: Boolean },
         propertyId:  { type: Types.ObjectId, required: true }
     });
 
@@ -18,6 +20,9 @@ schema.index({
     propertyId: 1
 }, { unique: true });
 
+schema.statics.byProperty = function (propertyId, callback) {
+    this.find({propertyId: propertyId}, callback);
+};
 
 module.exports = function (options) {
     var conn = mongoose.createConnection(options.dbUrl);
