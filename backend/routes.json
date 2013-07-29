@@ -51,6 +51,21 @@
         "post": [ "controllers.unit.find" ]
     },
 
+    "/properties/:pid/tenants": {
+        "get":  [ "controllers.tenant.byProperty" ],
+        "post": [ "controllers.tenant.create" ]
+    },
+
+    "/properties/:pid/tenants/:tid": {
+        "get":  [ "controllers.tenant.byId" ],
+        "patch":  [ "controllers.tenant.edit" ],
+        "delete":  [ "controllers.tenant.remove" ]
+    },
+
+    "/tenants/find": {
+        "post": [ "controllers.tenant.find" ]
+    },
+
     "/user/:id/properties": {
         "get":  [ "controllers.property.byUser" ]
     }

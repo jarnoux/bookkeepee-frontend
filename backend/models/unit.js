@@ -20,6 +20,9 @@ schema.index({
     propertyId: 1
 }, { unique: true });
 
+schema.statics.byProperty = function (propertyId, callback) {
+    this.find({propertyId: propertyId}, callback);
+};
 
 module.exports = function (options) {
     var conn = mongoose.createConnection(options.dbUrl);
