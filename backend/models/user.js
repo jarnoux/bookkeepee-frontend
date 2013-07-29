@@ -143,10 +143,12 @@ userSchema.index({
 
 module.exports = function (options) {
     'use strict';
-    mongoose = mongoose.connect(options.dbUrl, function (err) {
+    var conn = mongoose.createConnection(options.dbUrl);
+
+    conn.on('error', function (err) {
         if (err) {
             throw new Error('When connecting to the database: ' + err);
         }
     });
-    return mongoose.model('User', userSchema);
+    return conn.model('User', userSchema);
 };

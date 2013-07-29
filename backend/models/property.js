@@ -6,11 +6,13 @@ var mongoose = require('mongoose'),
 
     schema = new mongoose.Schema({
         name:     { type: String },
+        description: { type: String },
         address:  { type: String, required: true },
         city:     { type: String, required: true },
         state:    { type: String, required: true },
         zip:      { type: String, required: true },
         country:  { type: String, required: true },
+        units:    { type: Number },
         loc:      { type: Array },
         userId: { type: Types.ObjectId }
     });
