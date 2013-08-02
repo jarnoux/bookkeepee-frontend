@@ -5,7 +5,7 @@
         "middleware.session", "middleware.csrf", "middleware.router", "middleware.errorHandler"
     ],
     "/": {
-        "get": ["middleware.dispatcher"]
+        "get": ["middleware.redirect", "middleware.dispatcher"]
     },
     "/register": {
         "post": ["middleware.validator", "middleware.auth.register"],
