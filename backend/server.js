@@ -1,9 +1,11 @@
 /*jslint nomen: true*/
 
-var Rig  = require('rig'),
+var path = require('path'),
+
+	Rig  = require('rig'),
     rig  = new Rig({
-        config: 'config.json',
-        routes: 'routes.json'
+        config: path.join(__dirname, 'config.json'),
+        routes: path.join(__dirname, 'routes.yaml')
     });
 
 rig.register('controllers');
