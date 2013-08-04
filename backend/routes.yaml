@@ -32,26 +32,27 @@
     patch:  [ controllers.property.edit ]
     delete: [ controllers.property.remove ]
 
-"/properties/:pid/units":
+"/properties/:id/units":
     get:  [ controllers.unit.byProperty ]
-    put: [ controllers.unit.create ]
+    put:  [ controllers.unit.create ]
 
-"/properties/:pid/units/:uid":
+"/units":
+    post: [ controllers.unit.find ]
+    put:  [ controllers.unit.create ]
+
+"/units/:id":
     get:    [ controllers.unit.byId ]
     patch:  [ controllers.unit.edit ]
     delete: [ controllers.unit.remove ]
 
-"/units":
-    post: [ controllers.unit.find ]
+# "/properties/:pid/tenants":
+#     get:  [ controllers.tenant.byProperty ]
+#     put: [ controllers.tenant.create ]
 
-"/properties/:pid/tenants":
-    get:  [ controllers.tenant.byProperty ]
-    put: [ controllers.tenant.create ]
-
-"/properties/:pid/tenants/:tid":
-    get:  [ controllers.tenant.byId ]
-    patch:  [ controllers.tenant.edit ]
-    delete:  [ controllers.tenant.remove ]
+# "/properties/:pid/tenants/:tid":
+#     get:  [ controllers.tenant.byId ]
+#     patch:  [ controllers.tenant.edit ]
+#     delete:  [ controllers.tenant.remove ]
 
 # "/lease":
 #     post: [ controllers.lease.find ]

@@ -5,15 +5,15 @@ var mongoose = require('mongoose'),
     Types = mongoose.Schema.Types,
 
     schema = new mongoose.Schema({
-        number:      { type: String, required: true },
+        number:      { type: String },
         description: { type: String },
         size:        { type: String },
         bedrooms:    { type: Number },
         bathrooms:   { type: Number },
-        rent:        { type: Number },
+        price:       { type: Number },
         available:   { type: Boolean },
         propertyId:  { type: Types.ObjectId, required: true },
-        ownerId:      { type: Types.ObjectId }
+        ownerId:     { type: Types.ObjectId }
     });
 
 schema.index({

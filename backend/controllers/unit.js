@@ -11,7 +11,7 @@ module.exports = {
 
         return function byProperty(req, res, next) {
             var Unit = req.registry.get('models.unit'),
-                propertyId = req.params.pid;
+                propertyId = req.params.id;
 
             Unit.byProperty(propertyId, function (err, units) {
                 if (err) {
@@ -47,7 +47,7 @@ module.exports = {
                 Unit = registry.get('models.unit'),
 
                 propertyId = req.params.pid,
-                unitId = req.params.uid;
+                unitId = req.params.id;
 
             Unit.findByIdAndRemove(unitId, function (err, unit) {
                 if (err) {
@@ -62,7 +62,7 @@ module.exports = {
 
         return function edit(req, res, next) {
             var Unit = req.registry.get('models.unit'),
-                id = req.params.uid,
+                id = req.params.id,
                 update = { $set: req.body };
 
             Unit.findByIdAndUpdate(id, update, function (err, unit) {
@@ -93,7 +93,7 @@ module.exports = {
 
         return function byId(req, res, next) {
             var Unit = req.registry.get('models.unit'),
-                id = req.params.uid;
+                id = req.params.id;
 
             Unit.findById(id, function (err, unit) {
                 if (err) {
