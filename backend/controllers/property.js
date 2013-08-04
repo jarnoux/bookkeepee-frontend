@@ -5,19 +5,6 @@ var HTTPStatus = require('../lib/http-status');
 
 module.exports = {
 
-    all: function (options) {
-
-        return function all(req, res, next) {
-            var Property = req.registry.get('models.property');
-            Property.all(function (err, properties) {
-                if (err) {
-                    return next(err);
-                }
-                res.json(properties);
-            });
-        };
-    },
-
     create: function (options) {
 
         return function create(req, res, next) {

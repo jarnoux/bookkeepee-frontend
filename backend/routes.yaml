@@ -5,56 +5,56 @@
         middleware.logwriter,
         middleware.query,
         middleware.bodyParser,
-        middleware.jsonrenderer,
         middleware.router,
         middleware.tojson-errorhandler,
         middleware.errorHandler
     ]
 
 "/login":
-    post: [controllers.auth.login]
+    post: [ controllers.user.login ]
 
 "/logout":
-    post: [controllers.auth.logout]
+    post: [ controllers.user.logout ]
 
 "/register":
-    post: [controllers.auth.register]
+    post: [ controllers.user.register ]
+
+"/user/:id":
+    get:   [ controllers.user.byId ]
+    patch: [ controllers.user.edit ]
 
 "/properties":
-    get:  [ controllers.property.all ]
-    post: [ controllers.property.create ]
+    post: [ controllers.property.find ]
+    put: [ controllers.property.create ]
 
 "/properties/:id":
     get:    [ controllers.property.byId ]
     patch:  [ controllers.property.edit ]
     delete: [ controllers.property.remove ]
 
-"/properties/find":
-    post: [ controllers.property.find ]
-
 "/properties/:pid/units":
     get:  [ controllers.unit.byProperty ]
-    post: [ controllers.unit.create ]
+    put: [ controllers.unit.create ]
 
 "/properties/:pid/units/:uid":
     get:    [ controllers.unit.byId ]
     patch:  [ controllers.unit.edit ]
     delete: [ controllers.unit.remove ]
 
-"/units/find":
+"/units":
     post: [ controllers.unit.find ]
 
 "/properties/:pid/tenants":
     get:  [ controllers.tenant.byProperty ]
-    post: [ controllers.tenant.create ]
+    put: [ controllers.tenant.create ]
 
 "/properties/:pid/tenants/:tid":
     get:  [ controllers.tenant.byId ]
     patch:  [ controllers.tenant.edit ]
     delete:  [ controllers.tenant.remove ]
 
-"/tenants/find":
-    post: [ controllers.tenant.find ]
+# "/lease":
+#     post: [ controllers.lease.find ]
 
 "/user/:id/properties":
     get:  [ controllers.property.byUser ]
