@@ -4,8 +4,8 @@ var path = require('path'),
 
 	Rig  = require('rig'),
     rig  = new Rig({
-        config: path.join(__dirname, 'config.yaml'),
-        routes: path.join(__dirname, 'routes.yaml')
+        config: 'config.json',
+        routes: 'routes.yaml'
     });
 
 rig.register('controllers');
