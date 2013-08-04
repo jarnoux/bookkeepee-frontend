@@ -10,10 +10,10 @@ var mongoose = require('mongoose'),
         size:        { type: String },
         bedrooms:    { type: Number },
         bathrooms:   { type: Number },
-        rent:       { type: Number },
+        rent:        { type: Number },
         available:   { type: Boolean },
         propertyId:  { type: Types.ObjectId, required: true },
-        ownerId:       { type: Types.ObjectId }
+        ownerId:      { type: Types.ObjectId }
     });
 
 schema.index({
