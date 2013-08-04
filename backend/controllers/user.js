@@ -1,6 +1,12 @@
-var User,
+/*jslint nomen:true*/
+
+"use strict";
+
+var _ = require('underscore'),
+    HTTPStatus = require('../lib/http-status'),
+    User,
+
     InvalidCredentialsError = function (message) {
-        'use strict';
         this.name    = 'InvalidCredentialsError';
         this.message = message;
     };
@@ -9,8 +15,9 @@ InvalidCredentialsError.prototype = new Error();
 InvalidCredentialsError.prototype.constructor = InvalidCredentialsError;
 
 module.exports = {
+
     register: function (options) {
-        'use strict';
+
         return function register(req, res, next) {
             User = User || req.registry.get('models.user');
             var newUser = new User({
@@ -33,16 +40,18 @@ module.exports = {
             });
         };
     },
+
     logout: function (options) {
-        'use strict';
+
         return function logout(req, res, next) {
             // TODO: maybe here do usage stats, last conn time, durations, etc.
             res.end();
             next();
         };
     },
+
     login: function (options) {
-        'use strict';
+
         return function login(req, res, next) {
             User = User || req.registry.get('models.user');
             User.getAuthenticated(
@@ -64,6 +73,46 @@ module.exports = {
                     });
                 }
             );
+        };
+    },
+
+    edit: function (options) {
+
+        return function edit(req, res, next) {
+            User = User || req.registry.get('models.user');
+            var id = req.params.id,
+                update = req.body;
+
+            User.findById(id, function (err, user) {
+                if (err) {
+                    return next(err);
+                }
+                _.extend(user, update);
+                user.save(function (err) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(user);
+                });
+            });
+        };
+    },
+
+    byId: function (options) {
+
+        return function byId(req, res, next) {
+            var User = req.registry.get('models.user'),
+                id = req.params.id;
+
+            User.findById(id, function (err, user) {
+                if (err) {
+                    return next(err);
+                }
+                if (!user) {
+                    return res.send(HTTPStatus.NOT_FOUND);
+                }
+                res.json(user);
+            });
         };
     }
 };

@@ -4,25 +4,36 @@ var mongoose             = require('mongoose'),
     SALT_WORK_FACTOR     = 10,
     MAX_LOGIN_ATTEMPTS   = 5,
     LOCK_TIME            = 2 * 60 * 60 * 1000,
-    userSchema           = new Schema({
-        firstName    : { type: String, required: true },
-        lastName     : { type: String, required: true },
-        email        : { type: String, unique: true, required: true},
-        password     : { type: String, required: true },
-        loginAttempts: { type: Number, required: true, 'default': 0 },
-        lockUntil    : { type: Number }
+
+    ContactSchema = new Schema({
+        name:  {type: String, required: true },
+        phone: {type: String, required: true },
+        email: {type: String}
     }),
-    reasons = userSchema.statics.failedLogin = {
+
+    UserSchema = new Schema({
+        firstName:      { type: String, required: true },
+        lastName:       { type: String, required: true },
+        dateOfBirth:    { type: Date },
+        email:          { type: String, unique: true, required: true},
+        phone:          { type: String, index: true },
+        password:       { type: String, required: true },
+        loginAttempts:  { type: Number, required: true, 'default': 0 },
+        lockUntil:      { type: Number },
+        references:     [ ContactSchema ]
+    }),
+
+    reasons = UserSchema.statics.failedLogin = {
         NOT_FOUND: 0,
         PASSWORD_INCORRECT: 1,
         MAX_ATTEMPTS: 2
     };
 
-userSchema.methods.comparePassword = function (candidatePassword, callback) {
+UserSchema.methods.comparePassword = function (candidatePassword, callback) {
     'use strict';
     bcrypt.compare(candidatePassword, this.password, callback);
 };
-userSchema.methods.incLoginAttempts = function (callback) {
+UserSchema.methods.incLoginAttempts = function (callback) {
     'use strict';
     var updates;
     // if we have a previous lock that has expired, restart at 1
@@ -42,7 +53,7 @@ userSchema.methods.incLoginAttempts = function (callback) {
     return this.update(updates, callback);
 };
 
-userSchema.statics.getAuthenticated = function (email, password, callback) {
+UserSchema.statics.getAuthenticated = function (email, password, callback) {
     'use strict';
     this.findOne({ email: email }, function (err, user) {
         if (err) {
@@ -103,12 +114,12 @@ userSchema.statics.getAuthenticated = function (email, password, callback) {
     });
 };
 
-userSchema.virtual('isLocked').get(function () {
+UserSchema.virtual('isLocked').get(function () {
     'use strict';
     return !!(this.lockUntil && this.lockUntil > Date.now());
 });
 
-userSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
     'use strict';
     var user = this;
 
@@ -136,7 +147,7 @@ userSchema.pre('save', function (next) {
     });
 });
 
-userSchema.index({
+UserSchema.index({
     lastName : 1,
     firstName: 1
 }, { unique: true });
@@ -150,5 +161,5 @@ module.exports = function (options) {
             throw new Error('When connecting to the database: ' + err);
         }
     });
-    return conn.model('User', userSchema);
+    return conn.model('User', UserSchema);
 };
