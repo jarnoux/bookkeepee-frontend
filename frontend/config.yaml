@@ -6,15 +6,16 @@ middleware:
         format: dev
     static: static/
     cookieParser: secret
-    errorHandler: ~
-    bodyParser: ~
-    redirect: ~
-    compress: ~
-    session: ~
-    router: ~
-    query: ~
-    csrf: ~
-    auth: ~
+    errorHandler:
+    bodyParser:
+    redirect:
+    compress:
+    session:
+    router:
+    query:
+    units:
+    csrf:
+    auth:
     contextualizer:
         environment: prod
     logwriter:
@@ -81,24 +82,24 @@ models:
         post:
             headers:
                 Content-Type: application/x-www-form-urlencoded
-    unit: []
-    user: []
+    unit: {}
+    user: {}
 controllers:
     body:
-        top: ~
-        middle: ~
-        bottom: ~
-    composedBody: ~
-    footer: ~
-    header: ~
-    index: ~
-    leftMenu: ~
-    registerForm: ~
+        top:
+        middle:
+        bottom:
+    composedBody:
+    footer:
+    header:
+    index:
+    leftMenu:
+    registerForm:
     pageTitle:
         /: Home
         /about: About Us
         /home: Home
-    home: ~
+    home:
 lib:
     hb-adapter:
         minifyHtml: true

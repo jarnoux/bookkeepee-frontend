@@ -37,7 +37,7 @@
   - middleware.auth.login
   - middleware.dispatcher
 /units/create:
-  get:
+  post:
   - middleware.auth.login
   - middleware.units.create
 ...
