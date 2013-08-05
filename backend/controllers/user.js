@@ -30,7 +30,7 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                req.json(newUser);
+                res.json(newUser);
             });
         };
     },
@@ -61,7 +61,7 @@ module.exports = {
                         return next(new InvalidCredentialsError('Invalid Credentials, please try again.'));
                     }
                     // TODO: log the fail reason
-                    req.json(user);
+                    res.json(user);
                 }
             );
         };
