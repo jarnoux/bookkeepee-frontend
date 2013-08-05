@@ -20,6 +20,7 @@ APIError.prototype.constructor = APIError;
 Backend.prototype.request = function (moreOptions, body, callback) {
     'use strict';
     var reqOptions,
+        methodOptions = this._options[moreOptions.method || 'get'] || {},
         nextOptionKey,
         backendRequest;
 
@@ -27,7 +28,11 @@ Backend.prototype.request = function (moreOptions, body, callback) {
         callback = body;
         body = null;
     }
-    reqOptions = this._options[moreOptions.method || 'get'] || {};
+    reqOptions = this._options['*'] || {};
+    // merge options with method defaults
+    for (nextOptionKey in methodOptions) {
+        reqOptions[nextOptionKey] = methodOptions[nextOptionKey];
+    }
     // merge options with precedence to given arguments
     for (nextOptionKey in moreOptions) {
         reqOptions[nextOptionKey] = moreOptions[nextOptionKey];
@@ -59,8 +64,5 @@ Backend.prototype.request = function (moreOptions, body, callback) {
 
 Backend.prototype.APIError = APIError;
 
-module.exports = function (options) {
-    'use strict';
-    return new Backend(options);
-};
+module.exports = Backend;
 
