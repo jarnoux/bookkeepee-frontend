@@ -14,7 +14,7 @@ middleware:
     hb-adapter:
     logger:
         format: dev
-        format-prod: "{\"date\":\":date\",\"msec\":\":response-time\",\"addr\":\":remote-addr\",\"usag\":\":user-agent\",\"refr\":\":referrer\",\"req\":\":method :url\",\"resp\":\":status :res[content-length]\"}"
+        format-prod: '{"date":":date","msec":":response-time","addr":":remote-addr","usag":":user-agent","refr":":referrer","req":":method :url","resp":":status :res[content-length]"}'
     logwriter:
         logLevel: debug
     query:
@@ -26,14 +26,9 @@ middleware:
             MongoError: 409
 
 models:
-    property:
-       dbUrl: "mongodb://localhost/bookkeepee"
-
-    tenant:
-        dbUrl: "mongodb://localhost/bookkeepee"
-
-    unit:
-        dbUrl: "mongodb://localhost/bookkeepee"
-
-    user:
-        dbUrl: "mongodb://localhost/bookkeepee"
+    '*':
+        dbUrl: 'mongodb://localhost/bookkeepee'
+    property: {}
+    tenant: {}
+    unit: {}
+    user: {}

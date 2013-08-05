@@ -1,7 +1,6 @@
 /*jslint nomen: true*/
 
 var path = require('path'),
-
 	Rig  = require('rig'),
     rig  = new Rig({
         config: 'config.yaml',
