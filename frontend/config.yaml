@@ -15,7 +15,7 @@ middleware:
     query:
     units:
     csrf:
-    auth:
+    user:
     contextualizer:
         environment: prod
     logwriter:

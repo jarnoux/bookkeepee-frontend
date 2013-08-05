@@ -19,25 +19,25 @@
 /register:
   post:
   - middleware.validator
-  - middleware.auth.register
+  - middleware.user.register
   get:
   - middleware.dispatcher
 /login:
   post:
   - middleware.validator
-  - middleware.auth.login
+  - middleware.user.login
 /logout:
   all:
-  - middleware.auth.logout
+  - middleware.user.logout
 /about:
   get:
   - middleware.dispatcher
 /home:
   get:
-  - middleware.auth.login
+  - middleware.user.login
   - middleware.dispatcher
 /units/create:
   post:
-  - middleware.auth.login
-  - middleware.units.create
+  - middleware.user.login
+  - middleware.unit.create
 ...
