@@ -38,7 +38,6 @@
 
 "/units":
     post: [ controllers.unit.find ]
-    put:  [ controllers.unit.create ]
 
 "/units/:id":
     get:    [ controllers.unit.byId ]
