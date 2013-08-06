@@ -83,6 +83,7 @@ models:
         post:
             headers:
                 Content-Type: application/x-www-form-urlencoded
+    property: {}
     unit: {}
     user: {}
 controllers:

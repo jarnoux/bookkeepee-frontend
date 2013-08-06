@@ -6,6 +6,7 @@ module.exports = {
             var propertyModel = req.registry.get('models.property'),
                 unitModel     = req.registry.get('models.unit'),
                 createNewUnit = function (property) {
+                    req.body.ownerId = req.session.user._id;
                     unitModel.create(property._id, req.body, function (err, result) {
                         if (err) {
                             return next(err);
@@ -32,7 +33,7 @@ module.exports = {
                         createNewUnit(newProperty);
                     });
                 } else {
-                    createNewUnit(property._id);
+                    createNewUnit(property[0]);
                 }
             });
         };

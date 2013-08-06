@@ -1,10 +1,8 @@
 'use strict';
 /*jslint node: true */
 
-var querystring = require('querystring'),
-	Backend     = require('./backend.js'),
-	Unit        = function (options) {
-
+var Backend = require('./backend.js'),
+	Unit    = function (options) {
 		this.backend = new Backend(options);
 	};
 
@@ -16,30 +14,30 @@ Unit.prototype.byProperty = function (propertyId, callback) {
 };
 Unit.prototype.create = function (propertyId, body, callback) {
 	this.backend.request({
-		path: '/properties/' + propertyId + '/create',
+		path: '/properties/' + propertyId + '/units',
 		method: 'put'
 	}, body, callback);
 };
 Unit.prototype.byId = function (propertyId, unitId, callback) {
 	this.backend.request({
-		path: '/properties/' + propertyId + '/units/' + unitId
+		path: '/units/' + unitId
 	}, callback);
 };
 Unit.prototype.edit = function (propertyId, unitId, body, callback) {
 	this.backend.request({
-		path: '/properties/' + propertyId + '/units/' + unitId,
+		path: '/units/' + unitId,
 		method: 'patch'
 	}, body, callback);
 };
 Unit.prototype.remove = function (propertyId, unitId, callback) {
 	this.backend.request({
-		path: '/properties/' + propertyId + '/units/' + unitId,
+		path: '/units/' + unitId,
 		method: 'delete'
 	}, callback);
 };
 Unit.prototype.find = function (body, callback) {
 	this.backend.request({
-		path: '/units/find',
+		path: '/units',
 		method: 'post'
 	}, body, callback);
 };

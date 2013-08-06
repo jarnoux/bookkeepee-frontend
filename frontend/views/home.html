@@ -3,7 +3,7 @@
 				<div id="home">
 				    <ul>
 				        {{#each units}}<li>
-				            {{this.title}}
+				            Unit#: {{this.number}}
 				            {{this.description}}
 				        </li>{{/each}}
 				    </ul>
@@ -20,7 +20,7 @@
 						</fieldset>
 						<fieldset class="pure-form-stacked">
 						    <input type="text" name="number" placeholder="unit #">
-						    <input type="text" name="description" placeholder="description">
+						    <input type="text" name="description" placeholder="description" required>
 						    <input type="number" name="size" placeholder="size (sqft.)">
 						    <input type="number" name="bedrooms" placeholder="# of bedrooms">
 						    <input type="number" name="bathrooms" placeholder="# of bathrooms">
