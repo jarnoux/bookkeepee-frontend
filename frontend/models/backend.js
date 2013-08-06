@@ -50,7 +50,7 @@ Backend.prototype.request = function (moreOptions, body, callback) {
                     err = new APIError(result);
                 }
             } catch (e) {
-                err = e;
+                err.message = buffer;
             }
             callback(err, result);
         });
