@@ -12,17 +12,17 @@ var mongoose = require('mongoose'),
         bathrooms:   { type: Number },
         price:       { type: Number },
         available:   { type: Boolean },
-        propertyId:  { type: Types.ObjectId, required: true },
+        property:    { type: Types.ObjectId, required: true, ref: 'Property' },
         ownerId:     { type: Types.ObjectId, required: true }
     });
 
 schema.index({
     number : 1,
-    propertyId: 1
+    property: 1
 }, { unique: true });
 
-schema.statics.byProperty = function (propertyId, callback) {
-    this.find({propertyId: propertyId}, callback);
+schema.statics.byProperty = function (property, callback) {
+    this.find({property: property}, callback);
 };
 
 module.exports = function (options) {
@@ -34,5 +34,5 @@ module.exports = function (options) {
         }
     });
 
-    return conn.model('Unit', schema);
+    return mongoose.model('Unit', schema);
 };

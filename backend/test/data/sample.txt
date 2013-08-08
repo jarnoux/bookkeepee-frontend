@@ -21,7 +21,7 @@ CREATE UNIT
     "size": "80 sqft",
     "bedrooms": 1,
     "bathrooms": 1,
-    "propertyId":  "51ecd98ffc528049d2000003"
+    "property":  "51ecd98ffc528049d2000003"
 }
 
 CREATE TENANT

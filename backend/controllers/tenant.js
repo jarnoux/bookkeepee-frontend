@@ -1,4 +1,4 @@
-/*jslint nomen:true*/
+/*jslint nomen:true, node: true*/
 
 "use strict";
 
@@ -12,9 +12,9 @@ module.exports = {
         return function byProperty(req, res, next) {
             var Unit = req.registry.get('models.unit'),
                 Tenant = req.registry.get('models.tenant'),
-                propertyId = req.params.pid;
+                property = req.params.pid;
 
-            Unit.find({propertyId: propertyId}, {id: 1}, function (err, units) {
+            Unit.find({property: property}, {id: 1}, function (err, units) {
                 if (err) {
                     return next(err);
                 }
@@ -34,7 +34,7 @@ module.exports = {
             var Tenant = req.registry.get('models.tenant'),
                 postData = _.clone(req.body);
 
-            postData.propertyId = req.params.pid;
+            postData.property = req.params.pid;
 
             Tenant.create(postData, function (err, unit) {
                 if (err) {

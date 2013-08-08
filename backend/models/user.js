@@ -161,5 +161,5 @@ module.exports = function (options) {
             throw new Error('When connecting to the database: ' + err);
         }
     });
-    return conn.model('User', UserSchema);
+    return mongoose.model('User', UserSchema);
 };
