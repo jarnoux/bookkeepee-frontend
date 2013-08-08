@@ -18,7 +18,7 @@ Unit.prototype.create = function (propertyId, body, callback) {
 		method: 'put'
 	}, body, callback);
 };
-Unit.prototype.byId = function (propertyId, unitId, callback) {
+Unit.prototype.byId = function (unitId, callback) {
 	this.backend.request({
 		path: '/units/' + unitId
 	}, callback);

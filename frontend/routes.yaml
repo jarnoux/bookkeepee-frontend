@@ -1,5 +1,5 @@
 ---
-"":
+'':
 - middleware.compress
 - middleware.contextualizer
 - middleware.static
@@ -40,4 +40,10 @@
   post:
   - middleware.user.login
   - middleware.unit.create
+"/units/:id":
+  get:
+  - middleware.dispatcher
+/units:
+  get:
+  - middleware.dispatcher
 ...

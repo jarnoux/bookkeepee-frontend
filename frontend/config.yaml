@@ -16,6 +16,13 @@ middleware:
     units:
     csrf:
     user:
+        '*':
+            cookie:
+                ttl: 2592000000
+                name: eml
+        register: {}
+        login: {}
+        logout:
     unit:
     contextualizer:
         environment: prod
@@ -40,6 +47,12 @@ middleware:
                 - header
                 - leftMenu
                 - about
+                - footer
+            "/units/:id":
+                get:
+                - header
+                - leftMenu
+                - unit
                 - footer
         details:
             index:
@@ -102,8 +115,9 @@ controllers:
         /about: About Us
         /home: Home
     home:
+    unit:
 lib:
     hb-adapter:
-        minifyHtml: true
+        minifyHtml: false
         gzip: true
 ...

@@ -3,7 +3,7 @@
 				<div id="home">
 				    <ul>
 				        {{#each units}}<li>
-				            Unit#: {{this.number}}
+				            <a href="/units/{{this._id}}">Unit#: {{this.number}}</a>
 				            {{this.description}}
 				        </li>{{/each}}
 				    </ul>

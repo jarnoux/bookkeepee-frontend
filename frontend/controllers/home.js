@@ -6,7 +6,7 @@ module.exports = function () {
     return function (req, res, done) {
         var unitModel = req.registry.get('models.unit');
         unitModel.find({
-            ownerId: req.session.user._id
+            owner: req.session.user._id
         }, function (err, result) {
             done(err, {
                 units: result
