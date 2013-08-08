@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
         price:       { type: Number },
         available:   { type: Boolean },
         property:    { type: Types.ObjectId, required: true, ref: 'Property' },
-        ownerId:     { type: Types.ObjectId, required: true }
+        owner:       { type: Types.ObjectId, required: true, ref: 'User' }
     });
 
 schema.index({
@@ -26,17 +26,9 @@ schema.statics.byProperty = function (property, callback) {
 };
 
 schema.statics.byId = function (id, callback) {
-    this.findById(id).populate('property').exec(callback);
+    this.findById(id).populate('property owner').exec(callback);
 };
 
 module.exports = function (options) {
-    var conn = mongoose.createConnection(options.dbUrl);
-
-    conn.on('error', function (err) {
-        if (err) {
-            throw new Error('When connecting to the database: ' + err);
-        }
-    });
-
     return mongoose.model('Unit', schema);
 };

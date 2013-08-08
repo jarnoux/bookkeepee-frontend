@@ -1,4 +1,4 @@
-
+/*jslint node: true */
 'use strict';
 
 var mongoose = require('mongoose'),
@@ -21,10 +21,5 @@ schema.index({
 }, { unique: true });
 
 module.exports = function (options) {
-    mongoose = mongoose.connect(options.dbUrl, function (err) {
-        if (err) {
-            throw new Error('When connecting to the database: ' + err);
-        }
-    });
     return mongoose.model('Property', schema);
 };

@@ -1,3 +1,6 @@
+/*jslint node: true */
+'use strict';
+
 var mongoose             = require('mongoose'),
     Schema               = mongoose.Schema,
     bcrypt               = require('bcrypt'),
@@ -30,11 +33,9 @@ var mongoose             = require('mongoose'),
     };
 
 UserSchema.methods.comparePassword = function (candidatePassword, callback) {
-    'use strict';
     bcrypt.compare(candidatePassword, this.password, callback);
 };
 UserSchema.methods.incLoginAttempts = function (callback) {
-    'use strict';
     var updates;
     // if we have a previous lock that has expired, restart at 1
     if (this.lockUntil && this.lockUntil < Date.now()) {
@@ -54,7 +55,6 @@ UserSchema.methods.incLoginAttempts = function (callback) {
 };
 
 UserSchema.statics.getAuthenticated = function (email, password, callback) {
-    'use strict';
     this.findOne({ email: email }, function (err, user) {
         if (err) {
             return callback(err);
@@ -115,12 +115,10 @@ UserSchema.statics.getAuthenticated = function (email, password, callback) {
 };
 
 UserSchema.virtual('isLocked').get(function () {
-    'use strict';
     return !!(this.lockUntil && this.lockUntil > Date.now());
 });
 
 UserSchema.pre('save', function (next) {
-    'use strict';
     var user = this;
 
     // only hash the password if it has been modified (or is new)
@@ -153,13 +151,5 @@ UserSchema.index({
 }, { unique: true });
 
 module.exports = function (options) {
-    'use strict';
-    var conn = mongoose.createConnection(options.dbUrl);
-
-    conn.on('error', function (err) {
-        if (err) {
-            throw new Error('When connecting to the database: ' + err);
-        }
-    });
     return mongoose.model('User', UserSchema);
 };

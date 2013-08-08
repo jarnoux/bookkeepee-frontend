@@ -26,9 +26,6 @@ middleware:
             MongoError: 409
 
 models:
-    '*':
-        dbUrl: 'mongodb://localhost/bookkeepee'
     property: {}
-    tenant: {}
     unit: {}
     user: {}
