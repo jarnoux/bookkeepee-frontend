@@ -25,6 +25,10 @@ schema.statics.byProperty = function (property, callback) {
     this.find({property: property}, callback);
 };
 
+schema.statics.byId = function (id, callback) {
+    this.findById(id).populate('property').exec(callback);
+};
+
 module.exports = function (options) {
     var conn = mongoose.createConnection(options.dbUrl);
 

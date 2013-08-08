@@ -93,7 +93,7 @@ module.exports = {
             var Unit = req.registry.get('models.unit'),
                 id = req.params.id;
 
-            Unit.findById(id, function (err, unit) {
+            Unit.byId(id, function (err, unit) {
                 if (err) {
                     return next(err);
                 }
