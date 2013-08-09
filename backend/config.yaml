@@ -4,7 +4,7 @@ controllers:
     tenant:
     unit:
     user:
-    # lease:
+    lease:
 
 middleware:
     bodyParser:
@@ -36,4 +36,7 @@ models:
         dbUrl: "mongodb://localhost/bookkeepee"
 
     user:
+        dbUrl: "mongodb://localhost/bookkeepee"
+
+    lease:
         dbUrl: "mongodb://localhost/bookkeepee"

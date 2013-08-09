@@ -4,7 +4,7 @@ var path = require('path'),
 
 	Rig  = require('rig'),
     rig  = new Rig({
-        config: 'config.json',
+        config: 'config.yaml',
         routes: 'routes.yaml'
     });
 

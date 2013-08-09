@@ -45,9 +45,9 @@
     patch:  [ controllers.unit.edit ]
     delete: [ controllers.unit.remove ]
 
-# "/properties/:pid/tenants":
-#     get:  [ controllers.tenant.byProperty ]
-#     put: [ controllers.tenant.create ]
+"/units/:id/leases":
+    # get:  [ controllers.lease.byUnit ]
+    put:  [ controllers.lease.create ]
 
 # "/properties/:pid/tenants/:tid":
 #     get:  [ controllers.tenant.byId ]
