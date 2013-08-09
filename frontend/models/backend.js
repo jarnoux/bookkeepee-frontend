@@ -17,7 +17,7 @@ APIError.prototype = new Error();
 APIError.prototype.constructor = APIError;
 
 Backend.prototype.request = function (moreOptions, body, callback) {
-    var reqOptions,
+    var reqOptions = {},
         methodOptions = this._options[moreOptions.method || 'get'] || {},
         nextOptionKey,
         backendRequest;
@@ -26,7 +26,9 @@ Backend.prototype.request = function (moreOptions, body, callback) {
         callback = body;
         body = null;
     }
-    reqOptions = this._options['*'] || {};
+    for (nextOptionKey in this._options['*']) {
+        reqOptions[nextOptionKey] = this._options['*'][nextOptionKey];
+    }
     // merge options with method defaults
     for (nextOptionKey in methodOptions) {
         reqOptions[nextOptionKey] = methodOptions[nextOptionKey];
