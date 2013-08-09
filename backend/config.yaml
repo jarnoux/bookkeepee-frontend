@@ -4,7 +4,7 @@ controllers:
     tenant:
     unit:
     user:
-    # lease:
+    lease:
 
 middleware:
     bodyParser:
@@ -26,6 +26,7 @@ middleware:
             MongoError: 409
 
 models:
-    property: {}
-    unit: {}
-    user: {}
+    property:
+    unit:
+    user:
+    lease:

@@ -1,4 +1,4 @@
-/*jslint node: true, nomen:true*/
+/*jslint nomen:true*/
 
 "use strict";
 
@@ -7,17 +7,17 @@ var _ = require('underscore'),
 
 module.exports = {
 
-    byProperty: function (options) {
+    byUnit: function (options) {
 
-        return function byProperty(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
-                property = req.params.id;
+        return function byUnit(req, res, next) {
+            var Lease = req.registry.get('models.lease'),
+                unit = req.params.id;
 
-            Unit.byProperty(property, function (err, units) {
+            Lease.byUnit(unit, function (err, leases) {
                 if (err) {
                     return next(err);
                 }
-                res.json(units);
+                res.json(leases);
             });
         };
     },
@@ -25,16 +25,16 @@ module.exports = {
     create: function (options) {
 
         return function create(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Lease = req.registry.get('models.lease'),
                 postData = _.clone(req.body);
 
-            postData.property = req.params.id;
+            postData.unit = req.params.id;
 
-            Unit.create(postData, function (err, unit) {
+            Lease.create(postData, function (err, lease) {
                 if (err) {
                     return next(err);
                 }
-                res.json(unit);
+                res.json(lease);
             });
         };
     },
@@ -43,15 +43,14 @@ module.exports = {
 
         return function remove(req, res, next) {
             var registry = req.registry,
-                Unit = registry.get('models.unit'),
+                Lease = registry.get('models.lease'),
+                id = req.params.id;
 
-                unitId = req.params.id;
-
-            Unit.findByIdAndRemove(unitId, function (err, unit) {
+            Lease.findByIdAndRemove(id, function (err, lease) {
                 if (err) {
                     return next(err);
                 }
-                if (!unit) {
+                if (!lease) {
                     return res.send(HTTPStatus.NOT_FOUND);
                 }
                 res.send(HTTPStatus.NO_CONTENT);
@@ -62,18 +61,18 @@ module.exports = {
     edit: function (options) {
 
         return function edit(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Lease = req.registry.get('models.lease'),
                 id = req.params.id,
                 update = { $set: req.body };
 
-            Unit.findByIdAndUpdate(id, update, function (err, unit) {
+            Lease.findByIdAndUpdate(id, update, function (err, lease) {
                 if (err) {
                     return next(err);
                 }
-                if (!unit) {
+                if (!lease) {
                     return res.send(HTTPStatus.NOT_FOUND);
                 }
-                res.json(unit);
+                res.json(lease);
             });
         };
     },
@@ -81,14 +80,14 @@ module.exports = {
     find: function (options) {
 
         return function find(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Lease = req.registry.get('models.lease'),
                 query = req.body;
 
-            Unit.find(query, function (err, units) {
+            Lease.find(query, function (err, leases) {
                 if (err) {
                     return next(err);
                 }
-                res.json(units);
+                res.json(leases);
             });
         };
     },
@@ -96,32 +95,32 @@ module.exports = {
     byId: function (options) {
 
         return function byId(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Lease = req.registry.get('models.lease'),
                 id = req.params.id;
 
-            Unit.byId(id, function (err, unit) {
+            Lease.byId(id, function (err, lease) {
                 if (err) {
                     return next(err);
                 }
-                if (!unit) {
+                if (!lease) {
                     return res.send(HTTPStatus.NOT_FOUND);
                 }
-                res.json(unit);
+                res.json(lease);
             });
         };
     },
 
-    byOwner: function (options) {
+    byTenant: function (options) {
 
-        return function byOwner(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
-                owner = req.params.id;
+        return function byTenant(req, res, next) {
+            var Lease = req.registry.get('models.lease'),
+                tenant = req.params.id;
 
-            Unit.find({owner: owner}, function (err, units) {
+            Lease.find({tenants: { $in: [ tenant] }}, function (err, leases) {
                 if (err) {
                     return next(err);
                 }
-                res.json(units);
+                res.json(leases);
             });
         };
     }

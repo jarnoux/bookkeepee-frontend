@@ -1,8 +1,7 @@
 /*jslint nomen: true*/
 
-var path     = require('path'),
-	mongoose = require('mongoose'),
-	Rig      = require('rig'),
+var mongoose = require('mongoose'),
+    Rig      = require('rig'),
     rig      = new Rig({
         config: 'config.yaml',
         routes: 'routes.yaml'
