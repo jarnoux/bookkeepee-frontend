@@ -2,8 +2,8 @@
 
 var Rig  = require('rig'),
     rig  = new Rig({
-        config: 'config.json',
-        routes: 'routes.json'
+        config: 'config.yaml',
+        routes: 'routes.yaml'
     });
 
 rig.register('controllers');

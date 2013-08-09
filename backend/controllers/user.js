@@ -1,12 +1,10 @@
 /*jslint nomen:true*/
-
-"use strict";
-
 var _ = require('underscore'),
     HTTPStatus = require('../lib/http-status'),
     User,
 
     InvalidCredentialsError = function (message) {
+        'use strict';
         this.name    = 'InvalidCredentialsError';
         this.message = message;
     };
@@ -17,6 +15,7 @@ InvalidCredentialsError.prototype.constructor = InvalidCredentialsError;
 module.exports = {
 
     register: function (options) {
+        'use strict';
 
         return function register(req, res, next) {
             User = User || req.registry.get('models.user');
@@ -31,17 +30,13 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                req.renderJSON(newUser, function (err, result) {
-                    if (err) {
-                        return next(err);
-                    }
-                    res.end(result);
-                });
+                res.json(newUser);
             });
         };
     },
 
     logout: function (options) {
+        'use strict';
 
         return function logout(req, res, next) {
             // TODO: maybe here do usage stats, last conn time, durations, etc.
@@ -51,6 +46,7 @@ module.exports = {
     },
 
     login: function (options) {
+        'use strict';
 
         return function login(req, res, next) {
             User = User || req.registry.get('models.user');
@@ -65,18 +61,14 @@ module.exports = {
                         return next(new InvalidCredentialsError('Invalid Credentials, please try again.'));
                     }
                     // TODO: log the fail reason
-                    req.renderJSON(user, function (err, string) {
-                        if (err) {
-                            next(err);
-                        }
-                        res.end(string);
-                    });
+                    res.json(user);
                 }
             );
         };
     },
 
     edit: function (options) {
+        'use strict';
 
         return function edit(req, res, next) {
             User = User || req.registry.get('models.user');
@@ -99,6 +91,7 @@ module.exports = {
     },
 
     byId: function (options) {
+        'use strict';
 
         return function byId(req, res, next) {
             var User = req.registry.get('models.user'),

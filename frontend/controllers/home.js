@@ -4,16 +4,12 @@ var querystring = require('querystring');
 module.exports = function () {
     'use strict';
     return function (req, res, done) {
-        var backend = req.registry.get('models.backend'),
-            parameters = {
-                viewerid: req.session.user._id,
-                ownerid: req.session.user._id
-            };
-        backend.request({
-            path: '/property/view?' + querystring.stringify(parameters)
+        var unitModel = req.registry.get('models.unit');
+        unitModel.find({
+            owner: req.session.user._id
         }, function (err, result) {
             done(err, {
-                properties: result
+                units: result
             });
         });
     };

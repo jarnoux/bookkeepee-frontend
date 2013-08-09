@@ -1,13 +1,12 @@
-/*jslint nomen: true, forin: true */
+'use strict';
+/*jslint node: true,nomen: true, forin: true */
 
 var http        = require('http'),
     querystring = require('querystring'),
     Backend     = function (options) {
-        'use strict';
         this._options = options;
     },
     APIError = function (err) {
-        'use strict';
         this.name    = 'APIError';
         this.message = err.message;
         this.type    = err.type;
@@ -18,8 +17,8 @@ APIError.prototype = new Error();
 APIError.prototype.constructor = APIError;
 
 Backend.prototype.request = function (moreOptions, body, callback) {
-    'use strict';
-    var reqOptions,
+    var reqOptions = {},
+        methodOptions = this._options[moreOptions.method || 'get'] || {},
         nextOptionKey,
         backendRequest;
 
@@ -27,7 +26,13 @@ Backend.prototype.request = function (moreOptions, body, callback) {
         callback = body;
         body = null;
     }
-    reqOptions = this._options[moreOptions.method || 'get'] || {};
+    for (nextOptionKey in this._options['*']) {
+        reqOptions[nextOptionKey] = this._options['*'][nextOptionKey];
+    }
+    // merge options with method defaults
+    for (nextOptionKey in methodOptions) {
+        reqOptions[nextOptionKey] = methodOptions[nextOptionKey];
+    }
     // merge options with precedence to given arguments
     for (nextOptionKey in moreOptions) {
         reqOptions[nextOptionKey] = moreOptions[nextOptionKey];
@@ -47,7 +52,7 @@ Backend.prototype.request = function (moreOptions, body, callback) {
                     err = new APIError(result);
                 }
             } catch (e) {
-                err = e;
+                e.message = buffer;
             }
             callback(err, result);
         });
@@ -59,8 +64,5 @@ Backend.prototype.request = function (moreOptions, body, callback) {
 
 Backend.prototype.APIError = APIError;
 
-module.exports = function (options) {
-    'use strict';
-    return new Backend(options);
-};
+module.exports = Backend;
 

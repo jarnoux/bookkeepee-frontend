@@ -1,0 +1,123 @@
+---
+middleware:
+    logger:
+        format-prod: '{"date":":date","msec":":response-time","addr":":remote-addr","usag":":user-agent","refr":":referrer","req":":method
+            :url","resp":":status :res[content-length]"}'
+        format: dev
+    static: static/
+    cookieParser: secret
+    errorHandler:
+    bodyParser:
+    redirect:
+    compress:
+    session:
+    router:
+    query:
+    units:
+    csrf:
+    user:
+        '*':
+            cookie:
+                ttl: 2592000000
+                name: eml
+        register: {}
+        login: {}
+        logout:
+    unit:
+    contextualizer:
+        environment: prod
+    logwriter:
+        logLevel: debug
+    dispatcher:
+        plans:
+            /:
+                get:
+                - header
+                - leftMenu
+                - index
+                - footer
+            /home:
+                get:
+                - header
+                - leftMenu
+                - home
+                - footer
+            /about:
+                get:
+                - header
+                - leftMenu
+                - about
+                - footer
+            "/units/:id":
+                get:
+                - header
+                - leftMenu
+                - unit
+                - footer
+        details:
+            index:
+                pageTitle: pageTitle
+                registerForm: registerForm
+            home:
+                pageTitle: pageTitle
+            about:
+                pageTitle: pageTitle
+        headers:
+            /:
+                Content-Type: text/html
+            /about:
+                Content-Type: text/html
+    validator:
+        /register:
+            email:
+                assert:
+                    isEmail: []
+                errorMessage: Invalid Email
+            firstName:
+                assert:
+                    notEmpty: []
+                sanitize:
+                    trim: []
+            lastName:
+                assert:
+                    notEmpty: []
+                sanitize:
+                    trim: []
+            password:
+                assert:
+                    len:
+                    - 8
+        /login: []
+models:
+    '*':
+        '*':
+            hostname: localhost
+            port: 3030
+        post:
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+    property: {}
+    unit: {}
+    user: {}
+controllers:
+    body:
+        top:
+        middle:
+        bottom:
+    composedBody:
+    footer:
+    header:
+    index:
+    leftMenu:
+    registerForm:
+    pageTitle:
+        /: Home
+        /about: About Us
+        /home: Home
+    home:
+    unit:
+lib:
+    hb-adapter:
+        minifyHtml: false
+        gzip: true
+...

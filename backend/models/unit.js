@@ -1,4 +1,4 @@
-
+/*jslint node: true */
 'use strict';
 
 var mongoose = require('mongoose'),
@@ -6,33 +6,29 @@ var mongoose = require('mongoose'),
 
     schema = new mongoose.Schema({
         number:      { type: String },
-        description: { type: String },
+        description: { type: String, required: true },
         size:        { type: String },
         bedrooms:    { type: Number },
         bathrooms:   { type: Number },
         price:       { type: Number },
         available:   { type: Boolean },
-        propertyId:  { type: Types.ObjectId, required: true },
-        ownerId:     { type: Types.ObjectId }
+        property:    { type: Types.ObjectId, required: true, ref: 'Property' },
+        owner:       { type: Types.ObjectId, required: true, ref: 'User' }
     });
 
 schema.index({
     number : 1,
-    propertyId: 1
+    property: 1
 }, { unique: true });
 
-schema.statics.byProperty = function (propertyId, callback) {
-    this.find({propertyId: propertyId}, callback);
+schema.statics.byProperty = function (property, callback) {
+    this.find({property: property}, callback);
+};
+
+schema.statics.byId = function (id, callback) {
+    this.findById(id).populate('property owner').exec(callback);
 };
 
 module.exports = function (options) {
-    var conn = mongoose.createConnection(options.dbUrl);
-
-    conn.on('error', function (err) {
-        if (err) {
-            throw new Error('When connecting to the database: ' + err);
-        }
-    });
-
-    return conn.model('Unit', schema);
+    return mongoose.model('Unit', schema);
 };

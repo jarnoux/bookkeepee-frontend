@@ -1,4 +1,4 @@
-/*jslint nomen:true*/
+/*jslint node: true, nomen:true*/
 
 "use strict";
 
@@ -11,9 +11,9 @@ module.exports = {
 
         return function byProperty(req, res, next) {
             var Unit = req.registry.get('models.unit'),
-                propertyId = req.params.id;
+                property = req.params.id;
 
-            Unit.byProperty(propertyId, function (err, units) {
+            Unit.byProperty(property, function (err, units) {
                 if (err) {
                     return next(err);
                 }
@@ -28,11 +28,10 @@ module.exports = {
             var Unit = req.registry.get('models.unit'),
                 postData = _.clone(req.body);
 
-            postData.propertyId = req.params.pid;
+            postData.property = req.params.id;
 
             Unit.create(postData, function (err, unit) {
                 if (err) {
-                    console.log(err);
                     return next(err);
                 }
                 res.json(unit);
@@ -46,7 +45,6 @@ module.exports = {
             var registry = req.registry,
                 Unit = registry.get('models.unit'),
 
-                propertyId = req.params.pid,
                 unitId = req.params.id;
 
             Unit.findByIdAndRemove(unitId, function (err, unit) {
@@ -95,7 +93,7 @@ module.exports = {
             var Unit = req.registry.get('models.unit'),
                 id = req.params.id;
 
-            Unit.findById(id, function (err, unit) {
+            Unit.byId(id, function (err, unit) {
                 if (err) {
                     return next(err);
                 }

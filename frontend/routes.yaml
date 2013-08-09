@@ -1,0 +1,49 @@
+---
+'':
+- middleware.compress
+- middleware.contextualizer
+- middleware.static
+- middleware.logger
+- middleware.logwriter
+- middleware.query
+- middleware.bodyParser
+- middleware.cookieParser
+- middleware.session
+- middleware.csrf
+- middleware.router
+- middleware.errorHandler
+/:
+  get:
+  - middleware.redirect
+  - middleware.dispatcher
+/register:
+  post:
+  - middleware.validator
+  - middleware.user.register
+  get:
+  - middleware.dispatcher
+/login:
+  post:
+  - middleware.validator
+  - middleware.user.login
+/logout:
+  all:
+  - middleware.user.logout
+/about:
+  get:
+  - middleware.dispatcher
+/home:
+  get:
+  - middleware.user.login
+  - middleware.dispatcher
+/units/create:
+  post:
+  - middleware.user.login
+  - middleware.unit.create
+"/units/:id":
+  get:
+  - middleware.dispatcher
+/units:
+  get:
+  - middleware.dispatcher
+...

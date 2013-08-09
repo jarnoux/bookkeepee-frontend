@@ -1,16 +1,17 @@
-var retrieveUser = function (path, req, res, next) {
+var retrieveUser = function (action, options, req, res, next) {
         'use strict';
-        var backend = req.registry.get('models.backend');
+        var userModel = req.registry.get('models.user');
 
         if (!req.session.user) {
-            backend.request({
-                path: path,
-                method: 'post'
-            }, req.body, function (err, result) {
+            userModel[action].call(userModel, req.body, function (err, result) {
                 if (err) {
                     return next(err);
                 }
                 req.session.user = result;
+                res.cookie(options.cookie.name, result.email, {
+                    maxAge: options.cookie.ttl,
+                    signed: true
+                });
                 return res.redirect('/home');
             }).on('error', next);
         } else {
@@ -18,13 +19,13 @@ var retrieveUser = function (path, req, res, next) {
         }
     };
 module.exports = {
-    register: function () {
+    register: function (options) {
         'use strict';
-        return retrieveUser.bind(null, '/register');
+        return retrieveUser.bind(null, 'register', options);
     },
-    login: function () {
+    login: function (options) {
         'use strict';
-        return retrieveUser.bind(null, '/login');
+        return retrieveUser.bind(null, 'login', options);
     },
     logout: function () {
         'use strict';

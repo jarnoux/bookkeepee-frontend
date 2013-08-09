@@ -2,10 +2,33 @@
                 {{{pageTitle}}}
 				<div id="home">
 				    <ul>
-				        {{#each properties}}<li>
-				            {{this.title}}
+				        {{#each units}}<li>
+				            <a href="/units/{{this._id}}">Unit#: {{this.number}}</a>
 				            {{this.description}}
 				        </li>{{/each}}
 				    </ul>
+				    <form action="/units/create" method="post" class="pure-form">
+					    <input type="hidden" name="_csrf" value="{{_csrf}}">
+				    	<fieldset class="pure-form-stacked">
+						    <input type="text" name="address" placeholder="address" required>
+						    <input type="text" name="city" placeholder="city" required>
+						    <input type="text" name="state" placeholder="state">
+						    <input type="text" name="zip" placeholder="zip" required>
+						    <select name="country" required>
+						    	<option>United States</option>
+						    </select>
+						</fieldset>
+						<fieldset class="pure-form-stacked">
+						    <input type="text" name="number" placeholder="unit #">
+						    <input type="text" name="description" placeholder="description" required>
+						    <input type="number" name="size" placeholder="size (sqft.)">
+						    <input type="number" name="bedrooms" placeholder="# of bedrooms">
+						    <input type="number" name="bathrooms" placeholder="# of bathrooms">
+						    <input type="number" name="price" placeholder="rent price ($)">
+						    <label for="available">Available?</label>
+						    <input id="available" type="checkbox" name="available">
+						</fieldset>
+						<input type="submit" value="New Unit" class="pure-button pure-button-primary">
+				    </form>
 				</div>
 			</div>
