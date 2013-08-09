@@ -84,20 +84,5 @@ module.exports = {
                 res.json(property);
             });
         };
-    },
-
-    byUser: function (options) {
-
-        return function byUser(req, res, next) {
-            var Property = req.registry.get('models.property'),
-                userId = req.params.id;
-
-            Property.find({userId: userId}, function (err, properties) {
-                if (err) {
-                    return next(err);
-                }
-                res.json(properties);
-            });
-        };
     }
 };

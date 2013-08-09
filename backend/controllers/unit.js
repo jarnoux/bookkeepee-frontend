@@ -70,6 +70,9 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
+                if (!unit) {
+                    return res.send(HTTPStatus.NOT_FOUND);
+                }
                 res.json(unit);
             });
         };
@@ -104,6 +107,21 @@ module.exports = {
                     return res.send(HTTPStatus.NOT_FOUND);
                 }
                 res.json(unit);
+            });
+        };
+    },
+
+    byOwner: function (options) {
+
+        return function byOwner(req, res, next) {
+            var Unit = req.registry.get('models.unit'),
+                owner = req.params.id;
+
+            Unit.find({owner: owner}, function (err, units) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(units);
             });
         };
     }

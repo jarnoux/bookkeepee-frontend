@@ -56,6 +56,6 @@
     patch:  [ controllers.lease.edit ]
     delete: [ controllers.lease.remove ]
 
-"/user/:id/properties":
-    get:  [ controllers.property.byUser ]
+"/user/:id/units":
+    get:  [ controllers.unit.byOwner ]
 
