@@ -13,20 +13,21 @@ module.exports = {
                         }
                         res.redirect('/home');
                     });
+                },
+                propertyValues = {
+                    address: req.body.address,
+                    city   : req.body.city,
+                    state  : req.body.state,
+                    zip    : req.body.zip,
+                    country: req.body.country
                 };
 
-            propertyModel.find({
-                address: req.body.address,
-                city   : req.body.city,
-                state  : req.body.state,
-                zip    : req.body.zip,
-                country: req.body.country
-            }, function (err, property) {
+            propertyModel.find(propertyValues, function (err, property) {
                 if (err) {
                     return next(err);
                 }
                 if (!property.length) {
-                    propertyModel.create(req.body, function (err, newProperty) {
+                    propertyModel.create(propertyValues, function (err, newProperty) {
                         if (err) {
                             return next(err);
                         }

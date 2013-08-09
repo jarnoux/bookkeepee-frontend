@@ -11,9 +11,9 @@ module.exports = {
 
         return function byProperty(req, res, next) {
             var Unit = req.registry.get('models.unit'),
-                propertyId = req.params.id;
+                property = req.params.id;
 
-            Unit.byProperty(propertyId, function (err, units) {
+            Unit.byProperty(property, function (err, units) {
                 if (err) {
                     return next(err);
                 }
@@ -28,7 +28,7 @@ module.exports = {
             var Unit = req.registry.get('models.unit'),
                 postData = _.clone(req.body);
 
-            postData.propertyId = req.params.id;
+            postData.property = req.params.id;
 
             Unit.create(postData, function (err, unit) {
                 if (err) {

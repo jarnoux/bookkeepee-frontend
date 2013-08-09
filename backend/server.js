@@ -15,5 +15,6 @@ rig.register('models');
 rig.route();
 
 mongoose = mongoose.connect('mongodb://localhost/bookkeepee');
+
 rig.listen(3030);
 console.log('back end app listening on port', 3030);

@@ -1,4 +1,4 @@
-
+/*jslint node: true */
 "use strict";
 
 var HTTPStatus = require('../lib/http-status');
@@ -8,10 +8,9 @@ module.exports = {
     create: function (options) {
 
         return function create(req, res, next) {
-            var Property = req.registry.get('models.property'),
-                postData = req.body;
+            var Property = req.registry.get('models.property');
 
-            Property.create(postData, function (err, property) {
+            Property.create(req.body, function (err, property) {
                 if (err) {
                     return next(err);
                 }
