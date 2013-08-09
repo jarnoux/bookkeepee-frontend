@@ -108,5 +108,20 @@ module.exports = {
                 res.json(lease);
             });
         };
+    },
+
+    byTenant: function (options) {
+
+        return function byTenant(req, res, next) {
+            var Lease = req.registry.get('models.lease'),
+                tenant = req.params.id;
+
+            Lease.find({tenants: { $in: [ tenant] }}, function (err, leases) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(leases);
+            });
+        };
     }
 };

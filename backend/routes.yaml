@@ -59,3 +59,5 @@
 "/user/:id/units":
     get:  [ controllers.unit.byOwner ]
 
+"/user/:id/leases":
+    get:  [ controllers.lease.byTenant ]
