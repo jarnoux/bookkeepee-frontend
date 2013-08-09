@@ -69,6 +69,9 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
+                if (!lease) {
+                    return res.send(HTTPStatus.NOT_FOUND);
+                }
                 res.json(lease);
             });
         };
