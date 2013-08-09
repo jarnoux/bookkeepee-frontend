@@ -7,26 +7,20 @@ var _ = require('underscore'),
 
 module.exports = {
 
-    // byProperty: function (options) {
+    byUnit: function (options) {
 
-    //     return function byProperty(req, res, next) {
-    //         var Unit = req.registry.get('models.unit'),
-    //             Tenant = req.registry.get('models.tenant'),
-    //             propertyId = req.params.pid;
+        return function byUnit(req, res, next) {
+            var Lease = req.registry.get('models.lease'),
+                unit = req.params.id;
 
-    //         Unit.find({propertyId: propertyId}, {id: 1}, function (err, units) {
-    //             if (err) {
-    //                 return next(err);
-    //             }
-    //             Tenant.find({unitId: {$in: units}}, function (err, tenants) {
-    //                 if (err) {
-    //                     return next(err);
-    //                 }
-    //                 res.json(tenants);
-    //             });
-    //         });
-    //     };
-    // },
+            Lease.byUnit(unit, function (err, leases) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(leases);
+            });
+        };
+    },
 
     create: function (options) {
 
@@ -34,80 +28,82 @@ module.exports = {
             var Lease = req.registry.get('models.lease'),
                 postData = _.clone(req.body);
 
-            postData.unitId = req.params.id;
+            postData.unit = req.params.id;
 
-            Lease.create(postData, function (err, unit) {
+            Lease.create(postData, function (err, lease) {
                 if (err) {
-                    console.log(err);
                     return next(err);
                 }
-                res.json(unit);
+                res.json(lease);
+            });
+        };
+    },
+
+    remove: function (options) {
+
+        return function remove(req, res, next) {
+            var registry = req.registry,
+                Lease = registry.get('models.lease'),
+                id = req.params.id;
+
+            Lease.findByIdAndRemove(id, function (err, lease) {
+                if (err) {
+                    return next(err);
+                }
+                if (!lease) {
+                    return res.send(HTTPStatus.NOT_FOUND);
+                }
+                res.send(HTTPStatus.NO_CONTENT);
+            });
+        };
+    },
+
+    edit: function (options) {
+
+        return function edit(req, res, next) {
+            var Lease = req.registry.get('models.lease'),
+                id = req.params.id,
+                update = { $set: req.body };
+
+            Lease.findByIdAndUpdate(id, update, function (err, lease) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(lease);
+            });
+        };
+    },
+
+    find: function (options) {
+
+        return function find(req, res, next) {
+            var Lease = req.registry.get('models.lease'),
+                query = req.body;
+
+            Lease.find(query, function (err, leases) {
+                if (err) {
+                    return next(err);
+                }
+                res.json(leases);
+            });
+        };
+    },
+
+    byId: function (options) {
+
+        return function byId(req, res, next) {
+            var Lease = req.registry.get('models.lease'),
+                id = req.params.id;
+
+            Lease.byId(id, function (err, lease) {
+                if (err) {
+                    return next(err);
+                }
+                if (!lease) {
+                    return res.send(HTTPStatus.NOT_FOUND);
+                }
+                res.json(lease);
             });
         };
     }
-
-    // remove: function (options) {
-
-    //     return function remove(req, res, next) {
-    //         var registry = req.registry,
-    //             Tenant = registry.get('models.tenant'),
-    //             id = req.params.tid;
-
-    //         Tenant.findByIdAndRemove(id, function (err, tenant) {
-    //             if (err) {
-    //                 return next(err);
-    //             }
-    //             res.send(HTTPStatus.NO_CONTENT);
-    //         });
-    //     };
-    // },
-
-    // edit: function (options) {
-
-    //     return function edit(req, res, next) {
-    //         var Tenant = req.registry.get('models.tenant'),
-    //             id = req.params.tid,
-    //             update = { $set: req.body };
-
-    //         Tenant.findByIdAndUpdate(id, update, function (err, unit) {
-    //             if (err) {
-    //                 return next(err);
-    //             }
-    //             res.json(unit);
-    //         });
-    //     };
-    // },
-
-    // find: function (options) {
-
-    //     return function find(req, res, next) {
-    //         var Tenant = req.registry.get('models.tenant'),
-    //             query = req.body;
-
-    //         Tenant.find(query, function (err, units) {
-    //             if (err) {
-    //                 return next(err);
-    //             }
-    //             res.json(units);
-    //         });
-    //     };
-    // },
-
-    // byId: function (options) {
-
-    //     return function byId(req, res, next) {
-    //         var Tenant = req.registry.get('models.tenant'),
-    //             id = req.params.tid;
-
-    //         Tenant.findById(id, function (err, unit) {
-    //             if (err) {
-    //                 return next(err);
-    //             }
-    //             if (!unit) {
-    //                 return res.send(HTTPStatus.NOT_FOUND);
-    //             }
-    //             res.json(unit);
-    //         });
-    //     };
-    // }
 };

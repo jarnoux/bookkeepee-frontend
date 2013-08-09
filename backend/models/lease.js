@@ -5,27 +5,29 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     Types = Schema.Types,
 
-    LeaseSchema = new Schema({
-        unitId:      { type: Types.ObjectId, required: true },
+    schema = new Schema({
+        unit:        { type: Types.ObjectId, required: true, ref: 'Unit' },
         startDate:   { type: Date, required: true },
-        endDate:     { type: Date },
-        term:        { type: String, required: true },
+        endDate:     { type: Date, required: true },
+        term:        { type: String },
         rent:        { type: Number },
-        tenants:     [ Types.ObjectId ]
+        tenants:     [{ type: Types.ObjectId, required: true, ref: 'User' }]
     });
 
-LeaseSchema.index({
-    unitId : 1
-});
+schema.index({
+    unitId : 1,
+    startDate: 1,
+    endDate: 1
+}, { unique: true });
+
+schema.statics.byUnit = function (unit, callback) {
+    this.find({unit: unit}, callback);
+};
+
+schema.statics.byId = function (id, callback) {
+    this.findById(id).populate('unit tenants').exec(callback);
+};
 
 module.exports = function (options) {
-    var conn = mongoose.createConnection(options.dbUrl);
-
-    conn.on('error', function (err) {
-        if (err) {
-            throw new Error('When connecting to the database: ' + err);
-        }
-    });
-
-    return conn.model('Lease', LeaseSchema);
+    return mongoose.model('Lease', schema);
 };

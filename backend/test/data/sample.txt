@@ -38,3 +38,13 @@ CREATE TENANT
     "endDate": "2014-02-01",
     "leaseTerm: "1 year"
 }
+
+CREATE LEASE
+{
+  "unitId": "51ece376b8b6c343e2000001",
+  "startDate": "2013/06/10",
+  "endDate": "2014/06/10",
+  "term": "1 year",
+  "rent": "2000",
+  "tenants": ["51e4cf3fecb1966052000001"]
+}

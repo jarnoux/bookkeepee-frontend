@@ -45,16 +45,16 @@
     delete: [ controllers.unit.remove ]
 
 "/units/:id/leases":
-    # get:  [ controllers.lease.byUnit ]
+    get:  [ controllers.lease.byUnit ]
     put:  [ controllers.lease.create ]
 
-# "/properties/:pid/tenants/:tid":
-#     get:  [ controllers.tenant.byId ]
-#     patch:  [ controllers.tenant.edit ]
-#     delete:  [ controllers.tenant.remove ]
+"/leases":
+    post: [ controllers.lease.find ]
 
-# "/lease":
-#     post: [ controllers.lease.find ]
+"/leases/:id":
+    get:    [ controllers.lease.byId ]
+    patch:  [ controllers.lease.edit ]
+    delete: [ controllers.lease.remove ]
 
 "/user/:id/properties":
     get:  [ controllers.property.byUser ]

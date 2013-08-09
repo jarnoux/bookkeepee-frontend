@@ -29,3 +29,4 @@ models:
     property:
     unit:
     user:
+    lease:
