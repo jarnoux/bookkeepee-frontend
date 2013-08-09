@@ -51,6 +51,9 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
+                if (!unit) {
+                    return res.send(HTTPStatus.NOT_FOUND);
+                }
                 res.send(HTTPStatus.NO_CONTENT);
             });
         };

@@ -29,6 +29,9 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
+                if (!property) {
+                    return res.send(HTTPStatus.NOT_FOUND);
+                }
                 res.send(HTTPStatus.NO_CONTENT);
             });
         };
