@@ -15,7 +15,7 @@ var mongoose = require('mongoose'),
     });
 
 schema.index({
-    unitId : 1,
+    unit : 1,
     startDate: 1,
     endDate: 1
 }, { unique: true });
