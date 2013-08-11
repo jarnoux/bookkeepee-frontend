@@ -3,7 +3,12 @@ var retrieveUser = function (action, options, req, res, next) {
         var userModel = req.registry.get('models.user');
 
         if (!req.session.user) {
-            userModel[action].call(userModel, req.body, function (err, result) {
+            userModel[action].call(userModel, {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: req.body.password
+            }, function (err, result) {
                 if (err) {
                     return next(err);
                 }

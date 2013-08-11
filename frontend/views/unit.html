@@ -1,3 +1,13 @@
             <div class="pure-u" id="index">
-                {{unit}}
-            </div>
+            	{{json}}
+            	{{#unit}}
+            	<h2>{{property.address}}{{#if number}}, #{{number}}{{/if}}
+            		<small>{{property.city}}{{#if property.state}}, {{property.state}}{{/if}} {{property.zip}} {{property.country}}</small>
+            	</h2>
+	        	<p>
+	        		{{#if bedrooms}}<span class="spec">beds: {{bedrooms}}</span>{{/if}}
+	        		{{#if bathrooms}}<span class="spec">baths: {{bathrooms}}</span>{{/if}}
+	        		{{#if size}}<span class="spec">size: {{size}} sqft.</span>{{/if}}
+	        	</p>
+	            <p>{{#if description}}<blockquote>{{description}}</blockquote>{{/if}}</p>
+            {{/unit}}</div>
