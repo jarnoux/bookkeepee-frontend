@@ -48,6 +48,10 @@
     get:  [ controllers.lease.byUnit ]
     put:  [ controllers.lease.create ]
 
+"/units/:id/visits":
+    get:  [ controllers.lease.byUnit ]
+    put:  [ controllers.visit.create ]
+
 "/leases":
     post: [ controllers.lease.find ]
 
@@ -55,6 +59,14 @@
     get:    [ controllers.lease.byId ]
     patch:  [ controllers.lease.edit ]
     delete: [ controllers.lease.remove ]
+
+"/visits":
+    post: [ controllers.visit.find ]
+
+"/visits/:id":
+    get:    [ controllers.visit.byId ]
+    patch:  [ controllers.visit.edit ]
+    delete: [ controllers.visit.remove ]
 
 "/user/:id/units":
     get:  [ controllers.unit.byOwner ]

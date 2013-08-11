@@ -5,6 +5,7 @@ controllers:
     unit:
     user:
     lease:
+    visit:
 
 middleware:
     bodyParser:
@@ -30,3 +31,4 @@ models:
     unit:
     user:
     lease:
+    visit:
