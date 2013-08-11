@@ -3,6 +3,20 @@ controllers:
     property:
     tenant:
     unit:
+        remove:
+        byProperty:
+            populate: owner
+        create:
+            populate: property
+        edit:
+            populate: property
+        find:
+            populate: property owner
+        byId:
+            populate: property owner
+        byOwner:
+            populate:
+                path: property owner
     user:
     lease:
     visit:
@@ -32,3 +46,6 @@ models:
     user:
     lease:
     visit:
+
+lib:
+    populateModel:
