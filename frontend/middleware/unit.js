@@ -1,7 +1,7 @@
-/*jslint nomen: true */
+/*jslint nomen: true, node: true */
+'use strict';
 module.exports = {
     create: function () {
-        'use strict';
         return function (req, res, next) {
             var propertyModel = req.registry.get('models.property'),
                 unitModel     = req.registry.get('models.unit'),
@@ -37,6 +37,30 @@ module.exports = {
                     createNewUnit(property[0]);
                 }
             });
+        };
+    },
+    edit: function () {
+        return function (req, res, next) {
+            var propertyModel = req.registry.get('models.property'),
+                unitModel     = req.registry.get('models.unit');
+
+            unitModel.byId(req.params.id, function (err, result) {
+                if (result.owner._id === req.session.user._id) {
+                    unitModel.edit(req.params.id, {
+                        description: req.body.description,
+                        size: req.body.size,
+                        bedrooms: req.body.bedrooms,
+                        bathrooms: req.body.bathrooms,
+                        price: req.body.price,
+                        available: req.body.available
+                    }, function (err, result) {
+                        res.redirect('/units/' + result._id);
+                    });
+                } else {
+                    next(new Error('Authentication Error: You must be the owner of this unit.'));
+                }
+            });
+
         };
     }
 };

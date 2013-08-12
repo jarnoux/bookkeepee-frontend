@@ -1,4 +1,20 @@
-            <div class="pure-u" id="index">
+            <div class="pure-u">
                 {{{pageTitle}}}
                 {{{registerForm}}}
+            </div>
+            <div class="pure-u">
+				<form action="/login" method="post" class="pure-form pure-form-aligned login">
+				    <div class="pure-control-group">
+				        <label for="email">Email</label>
+				        <input type="text" name="email" id="email" placeholder="me@example.com" value="{{email}}">
+				    </div>
+				    <div class="pure-control-group">
+				        <label for="password">Password</label>
+				        <input type="password" name="password" placeholder="••••••••">
+				    </div>
+				    <input type="hidden" name="_csrf" value="{{_csrf}}">
+				    <div class="pure-controls">
+				        <input type="submit" value="Login" class="pure-button">
+				    </div>
+				</form>
             </div>

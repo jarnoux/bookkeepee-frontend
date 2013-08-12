@@ -31,8 +31,22 @@ a {
     color: #555;
 }
 
+textarea {
+    width: 100%;
+    max-width: 100%;
+}
 .spec {
-    margin: 0 10px;
+    margin: 5px;
+    display: inline-block;
+}
+.spec>input, .spec>q {
+    display: inline-block;
+    width: 100px;
+}
+.spec>input, textarea {
+    background: #FDFDFD;
+    border: 1px solid #EAEAEA;
+    color: #444;
 }
 
 .pure-form input, .pure-form select {
@@ -41,7 +55,6 @@ a {
 
 .unitList {
     list-style: none;
-    border-top: 1px solid silver;
     padding-left: 0;
 }
 .unitCard {
@@ -50,7 +63,6 @@ a {
     padding: 5px;
 }
 .newUnitCard {
-    border-bottom: 1px solid silver;
     padding: 5px;
 }
 
@@ -72,6 +84,5 @@ a {
 }
 
 #index {
-    /*width: 100%;*/
-    padding: 0 20px;
+    width: 100%;
 }

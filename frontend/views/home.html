@@ -5,9 +5,9 @@
 				        {{#each units}}{{#with this}}<li class="unitCard">
 				            <a href="/units/{{_id}}" class="staticColor">{{property.address}}{{#if number}}, #{{number}}{{/if}}</a>
 		            		<span>{{property.city}}{{#if property.state}}, {{property.state}}{{/if}}</span>
-			        		{{#if bedrooms}}|<span class="spec">beds: {{bedrooms}}</span>{{/if}}
-			        		{{#if bathrooms}}|<span class="spec">baths: {{bathrooms}}</span>{{/if}}
-			        		{{#if size}}|<span class="spec">size: {{size}} sqft.</span>{{/if}}
+			        		{{#if bedrooms}}<span class="spec">beds: <q>{{bedrooms}}</q></span>{{/if}}
+			        		{{#if bathrooms}}<span class="spec">baths: <q>{{bathrooms}}</q></span>{{/if}}
+			        		{{#if size}}<span class="spec">size (sqft.): <q>{{size}}</q></span>{{/if}}
 				        {{/with}}</li>{{/each}}
 				        <li class="newUnitCard">
 						    <form action="/units/create" method="post" class="pure-form">

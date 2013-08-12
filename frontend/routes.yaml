@@ -41,10 +41,15 @@
   - middleware.validator
   - middleware.user.login
   - middleware.unit.create
-"/units/:id":
+/units/:id:
   get:
   - middleware.dispatcher
 /units:
   get:
   - middleware.dispatcher
+/units/:id/edit:
+  post:
+  - middleware.validator
+  - middleware.user.login
+  - middleware.unit.edit
 ...
