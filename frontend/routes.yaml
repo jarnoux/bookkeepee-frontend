@@ -38,6 +38,7 @@
   - middleware.dispatcher
 /units/create:
   post:
+  - middleware.validator
   - middleware.user.login
   - middleware.unit.create
 "/units/:id":

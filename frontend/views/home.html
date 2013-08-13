@@ -1,34 +1,30 @@
             <div class="pure-u" id="index">
                 {{{pageTitle}}}
 				<div id="home">
-				    <ul>
-				        {{#each units}}<li>
-				            <a href="/units/{{this._id}}">Unit#: {{this.number}}</a>
-				            {{this.description}}
-				        </li>{{/each}}
+				    <ul class="unitList">
+				        {{#each units}}{{#with this}}<li class="unitCard">
+				            <a href="/units/{{_id}}" class="staticColor">{{property.address}}{{#if number}}, #{{number}}{{/if}}</a>
+		            		<span>{{property.city}}{{#if property.state}}, {{property.state}}{{/if}}</span>
+			        		{{#if bedrooms}}|<span class="spec">beds: {{bedrooms}}</span>{{/if}}
+			        		{{#if bathrooms}}|<span class="spec">baths: {{bathrooms}}</span>{{/if}}
+			        		{{#if size}}|<span class="spec">size: {{size}} sqft.</span>{{/if}}
+				        {{/with}}</li>{{/each}}
+				        <li class="newUnitCard">
+						    <form action="/units/create" method="post" class="pure-form">
+							    <input type="hidden" name="_csrf" value="{{_csrf}}">
+						    	<fieldset>
+								    <input type="text" name="address" placeholder="address" required>
+							    	<input type="text" name="number" placeholder="unit #">
+								    <input type="text" name="city" placeholder="city" required>
+								    <input type="text" name="state" placeholder="state">
+								    <input type="text" name="zip" placeholder="zip" required>
+								    <select name="country" required>
+								    	<option>United States</option>
+								    </select>
+								</fieldset>
+								<input type="submit" value="New Unit" class="pure-button pure-button-primary">
+						    </form>
+						</li>
 				    </ul>
-				    <form action="/units/create" method="post" class="pure-form">
-					    <input type="hidden" name="_csrf" value="{{_csrf}}">
-				    	<fieldset class="pure-form-stacked">
-						    <input type="text" name="address" placeholder="address" required>
-						    <input type="text" name="city" placeholder="city" required>
-						    <input type="text" name="state" placeholder="state">
-						    <input type="text" name="zip" placeholder="zip" required>
-						    <select name="country" required>
-						    	<option>United States</option>
-						    </select>
-						</fieldset>
-						<fieldset class="pure-form-stacked">
-						    <input type="text" name="number" placeholder="unit #">
-						    <input type="text" name="description" placeholder="description" required>
-						    <input type="number" name="size" placeholder="size (sqft.)">
-						    <input type="number" name="bedrooms" placeholder="# of bedrooms">
-						    <input type="number" name="bathrooms" placeholder="# of bathrooms">
-						    <input type="number" name="price" placeholder="rent price ($)">
-						    <label for="available">Available?</label>
-						    <input id="available" type="checkbox" name="available">
-						</fieldset>
-						<input type="submit" value="New Unit" class="pure-button pure-button-primary">
-				    </form>
 				</div>
 			</div>

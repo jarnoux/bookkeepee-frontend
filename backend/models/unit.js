@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
     schema = new mongoose.Schema({
         number:      { type: String },
-        description: { type: String, required: true },
+        description: { type: String },
         size:        { type: String },
         bedrooms:    { type: Number },
         bathrooms:   { type: Number },

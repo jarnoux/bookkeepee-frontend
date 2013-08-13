@@ -17,7 +17,12 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                res.json(units);
+                Unit.populate(units, options.populate, function (err, result) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(result);
+                });
             });
         };
     },
@@ -34,7 +39,12 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                res.json(unit);
+                Unit.populate(unit, options.populate, function (err, result) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(result);
+                });
             });
         };
     },
@@ -73,7 +83,12 @@ module.exports = {
                 if (!unit) {
                     return res.send(HTTPStatus.NOT_FOUND);
                 }
-                res.json(unit);
+                Unit.populate(unit, options.populate, function (err, result) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(result);
+                });
             });
         };
     },
@@ -88,7 +103,12 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                res.json(units);
+                Unit.populate(units, options.populate, function (err, result) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(result);
+                });
             });
         };
     },
@@ -106,7 +126,12 @@ module.exports = {
                 if (!unit) {
                     return res.send(HTTPStatus.NOT_FOUND);
                 }
-                res.json(unit);
+                Unit.populate(unit, options.populate, function (err, result) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(result);
+                });
             });
         };
     },
@@ -121,7 +146,12 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                res.json(units);
+                Unit.populate(units, options.populate, function (err, result) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(result);
+                });
             });
         };
     }

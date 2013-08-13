@@ -23,7 +23,7 @@ Unit.prototype.byId = function (unitId, callback) {
 		path: '/units/' + unitId
 	}, callback);
 };
-Unit.prototype.edit = function (propertyId, unitId, body, callback) {
+Unit.prototype.edit = function (unitId, body, callback) {
 	this.backend.request({
 		path: '/units/' + unitId,
 		method: 'patch'
@@ -40,6 +40,11 @@ Unit.prototype.find = function (body, callback) {
 		path: '/units',
 		method: 'post'
 	}, body, callback);
+};
+Unit.prototype.byOwner = function (ownerId, callback) {
+	this.backend.request({
+		path: '/user/' + ownerId + '/units'
+	}, callback);
 };
 
 module.exports = function (options) {
