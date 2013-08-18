@@ -1,10 +1,13 @@
 /*jslint nomen: true, node: true */
 'use strict';
+var Rig = require('rig'),
+    registry = Rig.registry;
+
 module.exports = {
     create: function () {
         return function (req, res, next) {
-            var propertyModel = req.registry.get('models.property'),
-                unitModel     = req.registry.get('models.unit'),
+            var propertyModel = registry.get('models.property'),
+                unitModel     = registry.get('models.unit'),
                 createNewUnit = function (property) {
                     req.body.owner = req.session.user._id;
                     unitModel.create(property._id, req.body, function (err, result) {
@@ -41,8 +44,8 @@ module.exports = {
     },
     edit: function () {
         return function (req, res, next) {
-            var propertyModel = req.registry.get('models.property'),
-                unitModel     = req.registry.get('models.unit');
+            var propertyModel = registry.get('models.property'),
+                unitModel     = registry.get('models.unit');
 
             unitModel.byId(req.params.id, function (err, result) {
                 if (result.owner._id === req.session.user._id) {

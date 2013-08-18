@@ -20,7 +20,6 @@ controllers:
     user:
     lease:
     visit:
-
 middleware:
     bodyParser:
     contextualizer:

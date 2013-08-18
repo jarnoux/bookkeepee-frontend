@@ -1,8 +1,9 @@
-/*jslint nomen:true*/
+/*jslint nomen:true, node: true*/
 
 "use strict";
 
 var _ = require('underscore'),
+    registry = require('rig').registry,
     HTTPStatus = require('../lib/http-status');
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
     byUnit: function (options) {
 
         return function byUnit(req, res, next) {
-            var Visit = req.registry.get('models.visit'),
+            var Visit = registry.get('models.visit'),
                 unit = req.params.id;
 
             Visit.byUnit(unit, function (err, visits) {
@@ -25,7 +26,7 @@ module.exports = {
     create: function (options) {
 
         return function create(req, res, next) {
-            var Visit = req.registry.get('models.visit'),
+            var Visit = registry.get('models.visit'),
                 postData = _.clone(req.body);
 
             postData.unit = req.params.id;
@@ -42,7 +43,7 @@ module.exports = {
     remove: function (options) {
 
         return function remove(req, res, next) {
-            var Visit = req.registry.get('models.visit'),
+            var Visit = registry.get('models.visit'),
                 id = req.params.id;
 
             Visit.findByIdAndRemove(id, function (err, visit) {
@@ -60,7 +61,7 @@ module.exports = {
     edit: function (options) {
 
         return function edit(req, res, next) {
-            var Visit = req.registry.get('models.visit'),
+            var Visit = registry.get('models.visit'),
                 id = req.params.id,
                 update = { $set: req.body };
 
@@ -79,7 +80,7 @@ module.exports = {
     find: function (options) {
 
         return function find(req, res, next) {
-            var Visit = req.registry.get('models.visit'),
+            var Visit = registry.get('models.visit'),
                 query = req.body;
 
             Visit.find(query, function (err, visits) {
@@ -94,7 +95,7 @@ module.exports = {
     byId: function (options) {
 
         return function byId(req, res, next) {
-            var Visit = req.registry.get('models.visit'),
+            var Visit = registry.get('models.visit'),
                 id = req.params.id;
 
             Visit.byId(id, function (err, visit) {

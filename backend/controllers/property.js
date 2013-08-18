@@ -1,14 +1,15 @@
 /*jslint node: true */
 "use strict";
 
-var HTTPStatus = require('../lib/http-status');
+var registry = require('rig').registry,
+    HTTPStatus = require('../lib/http-status');
 
 module.exports = {
 
     create: function (options) {
 
         return function create(req, res, next) {
-            var Property = req.registry.get('models.property');
+            var Property = registry.get('models.property');
 
             Property.create(req.body, function (err, property) {
                 if (err) {
@@ -22,7 +23,7 @@ module.exports = {
     remove: function (options) {
 
         return function remove(req, res, next) {
-            var Property = req.registry.get('models.property'),
+            var Property = registry.get('models.property'),
                 id = req.params.id;
 
             Property.findByIdAndRemove(id, function (err, property) {
@@ -40,7 +41,7 @@ module.exports = {
     edit: function (options) {
 
         return function edit(req, res, next) {
-            var Property = req.registry.get('models.property'),
+            var Property = registry.get('models.property'),
                 id = req.params.id,
                 update = { $set: req.body };
 
@@ -59,7 +60,7 @@ module.exports = {
     find: function (options) {
 
         return function find(req, res, next) {
-            var Property = req.registry.get('models.property'),
+            var Property = registry.get('models.property'),
                 query = req.body;
 
             Property.find(query, function (err, properties) {
@@ -74,7 +75,7 @@ module.exports = {
     byId: function (options) {
 
         return function byId(req, res, next) {
-            var Property = req.registry.get('models.property'),
+            var Property = registry.get('models.property'),
                 id = req.params.id;
 
             Property.findById(id, function (err, property) {

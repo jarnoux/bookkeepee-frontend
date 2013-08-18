@@ -26,7 +26,7 @@ schema.statics.byProperty = function (property, callback) {
 };
 
 schema.statics.byId = function (id, callback) {
-    this.findById(id).populate('property owner').exec(callback);
+    this.findById(id).exec(callback);
 };
 
 module.exports = function (options) {

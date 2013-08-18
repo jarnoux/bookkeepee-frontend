@@ -1,6 +1,8 @@
+var Rig = require('rig');
+
 var retrieveUser = function (action, options, req, res, next) {
         'use strict';
-        var userModel = req.registry.get('models.user');
+        var userModel = Rig.registry.get('models.user');
 
         if (!req.session.user) {
             userModel[action].call(userModel, {

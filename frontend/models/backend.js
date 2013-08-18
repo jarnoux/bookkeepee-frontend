@@ -1,5 +1,5 @@
-'use strict';
 /*jslint node: true,nomen: true, forin: true */
+'use strict';
 
 var http        = require('http'),
     querystring = require('querystring'),

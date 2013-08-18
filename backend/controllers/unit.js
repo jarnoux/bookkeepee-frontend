@@ -3,14 +3,17 @@
 "use strict";
 
 var _ = require('underscore'),
+    registry = require('rig').registry,
     HTTPStatus = require('../lib/http-status');
+
+
 
 module.exports = {
 
     byProperty: function (options) {
 
         return function byProperty(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Unit = registry.get('models.unit'),
                 property = req.params.id;
 
             Unit.byProperty(property, function (err, units) {
@@ -30,7 +33,7 @@ module.exports = {
     create: function (options) {
 
         return function create(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Unit = registry.get('models.unit'),
                 postData = _.clone(req.body);
 
             postData.property = req.params.id;
@@ -52,8 +55,7 @@ module.exports = {
     remove: function (options) {
 
         return function remove(req, res, next) {
-            var registry = req.registry,
-                Unit = registry.get('models.unit'),
+            var Unit = registry.get('models.unit'),
 
                 unitId = req.params.id;
 
@@ -71,8 +73,10 @@ module.exports = {
 
     edit: function (options) {
 
+
+
         return function edit(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Unit = registry.get('models.unit'),
                 id = req.params.id,
                 update = { $set: req.body };
 
@@ -96,7 +100,7 @@ module.exports = {
     find: function (options) {
 
         return function find(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Unit = registry.get('models.unit'),
                 query = req.body;
 
             Unit.find(query, function (err, units) {
@@ -116,7 +120,7 @@ module.exports = {
     byId: function (options) {
 
         return function byId(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Unit = registry.get('models.unit'),
                 id = req.params.id;
 
             Unit.byId(id, function (err, unit) {
@@ -139,7 +143,7 @@ module.exports = {
     byOwner: function (options) {
 
         return function byOwner(req, res, next) {
-            var Unit = req.registry.get('models.unit'),
+            var Unit = registry.get('models.unit'),
                 owner = req.params.id;
 
             Unit.find({owner: owner}, function (err, units) {
