@@ -2,7 +2,7 @@
 var _ = require('underscore'),
     registry = require('rig').registry,
     HTTPStatus = require('../lib/http-status'),
-    User,
+    User = registry.get('models.user'),
 
     InvalidCredentialsError = function (message) {
         'use strict';
@@ -19,7 +19,6 @@ module.exports = {
         'use strict';
 
         return function register(req, res, next) {
-            User = User || registry.get('models.user');
             var newUser = new User({
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -50,7 +49,6 @@ module.exports = {
         'use strict';
 
         return function login(req, res, next) {
-            User = User || registry.get('models.user');
             User.getAuthenticated(
                 req.body.email,
                 req.body.password,
@@ -72,7 +70,6 @@ module.exports = {
         'use strict';
 
         return function edit(req, res, next) {
-            User = User || registry.get('models.user');
             var id = req.params.id,
                 update = req.body;
 
@@ -95,8 +92,7 @@ module.exports = {
         'use strict';
 
         return function byId(req, res, next) {
-            var User = registry.get('models.user'),
-                id = req.params.id;
+            var id = req.params.id;
 
             User.findById(id, function (err, user) {
                 if (err) {

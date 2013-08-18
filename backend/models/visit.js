@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
         unit:         { type: Types.ObjectId, required: true, ref: 'Unit' },
         startDate:    { type: Date, required: true },
         endDate:      { type: Date, required: true },
+        type:         { type: String },
         spots:        { type: Number },
         visitors:     [{ type: Types.ObjectId, ref: 'User' }]
     });

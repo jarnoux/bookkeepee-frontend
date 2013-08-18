@@ -2,15 +2,15 @@
 "use strict";
 
 var registry = require('rig').registry,
-    HTTPStatus = require('../lib/http-status');
+    HTTPStatus = require('../lib/http-status'),
+
+    Property = registry.get('models.property');
 
 module.exports = {
 
     create: function (options) {
 
         return function create(req, res, next) {
-            var Property = registry.get('models.property');
-
             Property.create(req.body, function (err, property) {
                 if (err) {
                     return next(err);
@@ -23,8 +23,7 @@ module.exports = {
     remove: function (options) {
 
         return function remove(req, res, next) {
-            var Property = registry.get('models.property'),
-                id = req.params.id;
+            var id = req.params.id;
 
             Property.findByIdAndRemove(id, function (err, property) {
                 if (err) {
@@ -41,8 +40,7 @@ module.exports = {
     edit: function (options) {
 
         return function edit(req, res, next) {
-            var Property = registry.get('models.property'),
-                id = req.params.id,
+            var id = req.params.id,
                 update = { $set: req.body };
 
             Property.findByIdAndUpdate(id, update, function (err, property) {
@@ -60,8 +58,7 @@ module.exports = {
     find: function (options) {
 
         return function find(req, res, next) {
-            var Property = registry.get('models.property'),
-                query = req.body;
+            var query = req.body;
 
             Property.find(query, function (err, properties) {
                 if (err) {
@@ -75,8 +72,7 @@ module.exports = {
     byId: function (options) {
 
         return function byId(req, res, next) {
-            var Property = registry.get('models.property'),
-                id = req.params.id;
+            var id = req.params.id;
 
             Property.findById(id, function (err, property) {
                 if (err) {

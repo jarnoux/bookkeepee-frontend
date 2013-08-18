@@ -4,15 +4,16 @@
 
 var _ = require('underscore'),
     registry = require('rig').registry,
-    HTTPStatus = require('../lib/http-status');
+    HTTPStatus = require('../lib/http-status'),
+
+    Lease = registry.get('models.lease');
 
 module.exports = {
 
     byUnit: function (options) {
 
         return function byUnit(req, res, next) {
-            var Lease = registry.get('models.lease'),
-                unit = req.params.id;
+            var unit = req.params.id;
 
             Lease.byUnit(unit, function (err, leases) {
                 if (err) {
@@ -26,8 +27,7 @@ module.exports = {
     create: function (options) {
 
         return function create(req, res, next) {
-            var Lease = registry.get('models.lease'),
-                postData = _.clone(req.body);
+            var postData = _.clone(req.body);
 
             postData.unit = req.params.id;
 
@@ -43,8 +43,7 @@ module.exports = {
     remove: function (options) {
 
         return function remove(req, res, next) {
-            var Lease = registry.get('models.lease'),
-                id = req.params.id;
+            var id = req.params.id;
 
             Lease.findByIdAndRemove(id, function (err, lease) {
                 if (err) {
@@ -61,8 +60,7 @@ module.exports = {
     edit: function (options) {
 
         return function edit(req, res, next) {
-            var Lease = registry.get('models.lease'),
-                id = req.params.id,
+            var id = req.params.id,
                 update = { $set: req.body };
 
             Lease.findByIdAndUpdate(id, update, function (err, lease) {
@@ -80,8 +78,7 @@ module.exports = {
     find: function (options) {
 
         return function find(req, res, next) {
-            var Lease = registry.get('models.lease'),
-                query = req.body;
+            var query = req.body;
 
             Lease.find(query, function (err, leases) {
                 if (err) {
@@ -95,8 +92,7 @@ module.exports = {
     byId: function (options) {
 
         return function byId(req, res, next) {
-            var Lease = registry.get('models.lease'),
-                id = req.params.id;
+            var id = req.params.id;
 
             Lease.byId(id, function (err, lease) {
                 if (err) {
@@ -113,8 +109,7 @@ module.exports = {
     byTenant: function (options) {
 
         return function byTenant(req, res, next) {
-            var Lease = registry.get('models.lease'),
-                tenant = req.params.id;
+            var tenant = req.params.id;
 
             Lease.find({tenants: { $in: [ tenant] }}, function (err, leases) {
                 if (err) {

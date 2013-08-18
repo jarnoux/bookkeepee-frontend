@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
         routes: 'routes.yaml'
     });
 
-rig.register('controllers');
 rig.register('middleware');
 rig.register('models');
+rig.register('controllers');
 
 rig.route();
 
