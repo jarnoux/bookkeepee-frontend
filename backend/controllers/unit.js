@@ -73,8 +73,6 @@ module.exports = {
 
     edit: function (options) {
 
-
-
         return function edit(req, res, next) {
             var Unit = registry.get('models.unit'),
                 id = req.params.id,

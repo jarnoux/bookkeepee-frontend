@@ -27,14 +27,15 @@ a {
     color: #555;
 }
 
-.staticColor:visited {
-    color: #555;
-}
-
 textarea {
     width: 100%;
     max-width: 100%;
 }
+
+.staticColor:visited {
+    color: #555;
+}
+
 .spec {
     margin: 5px;
     display: inline-block;
@@ -48,6 +49,14 @@ textarea {
     border: 1px solid #EAEAEA;
     color: #444;
 }
+
+input.highlight, textarea.highlight {
+    background-color: #ffff99;
+}
+input.error, textarea.error  {
+    background-color: #ff9999;
+}
+
 
 .pure-form input, .pure-form select {
     margin-top: 5px;

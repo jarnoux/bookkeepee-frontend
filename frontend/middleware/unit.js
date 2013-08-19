@@ -57,10 +57,14 @@ module.exports = {
                         price: req.body.price,
                         available: req.body.available
                     }, function (err, result) {
-                        res.redirect('/units/' + result._id);
+                        if (err) {
+                            res.statusCode = 400;
+                        }
+                        // res.redirect('/units/' + result._id);
+                        res.end();
                     });
                 } else {
-                    next(new Error('Authentication Error: You must be the owner of this unit.'));
+                    next(new Error('Error: You must be the owner of this unit.'));
                 }
             });
 

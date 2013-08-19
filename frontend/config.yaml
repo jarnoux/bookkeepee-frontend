@@ -48,7 +48,7 @@ middleware:
                 - leftMenu
                 - about
                 - footer
-            "/units/:id":
+            /units/:id:
                 get:
                 - header
                 - leftMenu
@@ -71,23 +71,39 @@ middleware:
         /register:
             email:
                 assert:
-                    isEmail: []
+                    isEmail:
                 errorMessage: Invalid Email
             firstName:
                 assert:
-                    notEmpty: []
+                    notEmpty:
                 sanitize:
-                    trim: []
+                    trim:
             lastName:
                 assert:
-                    notEmpty: []
+                    notEmpty:
                 sanitize:
-                    trim: []
+                    trim:
             password:
                 assert:
                     len:
                     - 8
-        /login: []
+        /login:
+        /units/:id/edit:
+            description:
+                assert:
+                    notEmpty:
+            size:
+                assert:
+                    notEmpty:
+                    isDecimal:
+            bedrooms:
+                assert:
+                    notEmpty:
+                    isNumeric:
+            bathrooms:
+                assert:
+                    notEmpty:
+                    isDecimal:
 models:
     '*':
         '*':

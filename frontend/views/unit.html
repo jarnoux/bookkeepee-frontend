@@ -1,25 +1,27 @@
             <div class="pure-u" id="index">
+                  {{log this}}
             	{{#with unit}}
             	<h2>{{property.address}}{{#if number}}, #{{number}}{{/if}}
             		<small>{{property.city}}{{#if property.state}}, {{property.state}}{{/if}} {{property.zip}} {{property.country}}</small>
-            	</h2>
-{{#if editable}}
-                  <form action="/units/{{_id}}/edit" method="post">
-                        <input type="hidden" name="_csrf" value="{{../_csrf}}">
+            	</h2>{{/with}}
+{{#if unit.editable}}
+                  <form ajaxAction="/units/{{unit._id}}/edit">
+                        <input type="hidden" name="_csrf" value="{{_csrf}}">
+                        {{#with unit}}
                         <p>
                               <span class="spec">beds: <input type="text" name="bedrooms" value="{{bedrooms}}"></span>
                               <span class="spec">baths: <input type="text" name="bathrooms" value="{{bathrooms}}"></span>
                               <span class="spec">size (sqft.): <input type="text" name="size" value="{{size}}"> sqft.</span>
                         </p>
-                        <p><blockquote><textarea>{{description}}</textarea></blockquote></p>
+                        <p><blockquote><textarea name="description">{{description}}</textarea></blockquote></p>
                         <input type="file" name="images" multiple>
-                  </form>
-{{else}}
+                  </form>{{/with}}
+{{else}}{{#with unit}}
 	        	<p>
 	        		{{#if bedrooms}}<span class="spec">beds: <q>{{bedrooms}}</q></span>{{/if}}
 	        		{{#if bathrooms}}<span class="spec">baths: <q>{{bathrooms}}</q></span>{{/if}}
 	        		{{#if size}}<span class="spec">size (sqft.): <q>{{size}}</q></span>{{/if}}
 	        	</p>
 	            <p>{{#if description}}<blockquote>{{description}}</blockquote>{{/if}}</p>
-{{/if}}
-            {{/with}}</div>
+{{/with}}{{/if}}
+            </div>
