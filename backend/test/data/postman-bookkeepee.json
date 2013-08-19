@@ -22,7 +22,11 @@
         "8edb5922-33bf-a18e-bc2b-33e6d27cc101",
         "f2ff68a7-d85a-419d-f8bf-0ec2f86ddc20",
         "d5eb58b2-8a09-597a-f147-5857d8f262f3",
-        "b5dfbfd8-756a-b4f8-6bf5-08ff2de18463"
+        "b5dfbfd8-756a-b4f8-6bf5-08ff2de18463",
+        "db10d3dc-df75-2e55-29fc-4aa7d73cb06b",
+        "96078aad-6c17-e329-52c4-0527edb3d394",
+        "30ee31e2-7e95-3b0f-41ea-56e8067398ad",
+        "3c6d8715-c857-166a-57bd-e11dd953d08e"
     ],
     "requests": [
         {
@@ -83,6 +87,20 @@
         },
         {
             "collectionId": "c8c8e65c-a43e-7b47-d7c8-8b5026b9c8b9",
+            "id": "30ee31e2-7e95-3b0f-41ea-56e8067398ad",
+            "name": "visit delete",
+            "description": "",
+            "url": "localhost:3030/visits/5207199a21d3be2419000003",
+            "method": "DELETE",
+            "headers": "Content-Type: application/json\n",
+            "data": "{\n  \"endDate\": \"2013/09/01 13:00:00\"\n}",
+            "dataMode": "raw",
+            "timestamp": 0,
+            "version": 2,
+            "time": 1376197045337
+        },
+        {
+            "collectionId": "c8c8e65c-a43e-7b47-d7c8-8b5026b9c8b9",
             "id": "37bc6aa4-1316-8b18-52a8-89108b0e092a",
             "name": "login",
             "description": "",
@@ -105,6 +123,20 @@
             "timestamp": 0,
             "version": 2,
             "time": 1373952091089
+        },
+        {
+            "collectionId": "c8c8e65c-a43e-7b47-d7c8-8b5026b9c8b9",
+            "id": "3c6d8715-c857-166a-57bd-e11dd953d08e",
+            "name": "visit by id",
+            "description": "",
+            "url": "localhost:3030/visits/5207199a21d3be2419000003",
+            "method": "GET",
+            "headers": "Content-Type: application/json\n",
+            "data": "{\n  \"endDate\": \"2013/09/01 13:00:00\"\n}",
+            "dataMode": "raw",
+            "timestamp": 0,
+            "version": 2,
+            "time": 1376197049779
         },
         {
             "collectionId": "c8c8e65c-a43e-7b47-d7c8-8b5026b9c8b9",
@@ -178,6 +210,20 @@
         },
         {
             "collectionId": "c8c8e65c-a43e-7b47-d7c8-8b5026b9c8b9",
+            "id": "96078aad-6c17-e329-52c4-0527edb3d394",
+            "name": "visit edit",
+            "description": "",
+            "url": "localhost:3030/visits/5207199a21d3be2419000003",
+            "method": "PATCH",
+            "headers": "Content-Type: application/json\n",
+            "data": "{\n  \"endDate\": \"2013/09/01 13:00:00\"\n}",
+            "dataMode": "raw",
+            "timestamp": 0,
+            "version": 2,
+            "time": 1376197033734
+        },
+        {
+            "collectionId": "c8c8e65c-a43e-7b47-d7c8-8b5026b9c8b9",
             "id": "a2f0a380-5ca4-2a81-c62f-ba381c078e0a",
             "name": "property delete",
             "description": "",
@@ -195,14 +241,14 @@
             "id": "aca82959-900c-9def-c8b9-5e120c08880a",
             "name": "unit edit",
             "description": "",
-            "url": "localhost:3030/units/51fda7b109854f7f32000003",
+            "url": "localhost:3030/units/51ece376b8b6c343e2000001",
             "method": "PATCH",
             "headers": "Content-Type: application/json\n",
             "data": "{\n    \"size\": \"90 sqft\"\n}",
             "dataMode": "raw",
             "timestamp": 0,
             "version": 2,
-            "time": 1375579336134
+            "time": 1376029282690
         },
         {
             "collectionId": "c8c8e65c-a43e-7b47-d7c8-8b5026b9c8b9",
@@ -255,6 +301,20 @@
             "method": "GET",
             "headers": "Content-Type: application/json\n",
             "data": "{\n  \"unitId\": \"51ece376b8b6c343e2000001\",\n  \"startDate\": \"2013/06/10\",\n  \"endDate\": \"2014/06/10\",\n  \"term\": \"1 year\",\n  \"rent\": \"2000\",\n  \"tenants\": [\"51e4cf3fecb1966052000001\"]\n}",
+            "dataMode": "raw",
+            "timestamp": 0,
+            "responses": [],
+            "version": 2
+        },
+        {
+            "collectionId": "c8c8e65c-a43e-7b47-d7c8-8b5026b9c8b9",
+            "id": "db10d3dc-df75-2e55-29fc-4aa7d73cb06b",
+            "name": "visit create",
+            "description": "",
+            "url": "localhost:3030/units/51ece376b8b6c343e2000001/visits",
+            "method": "PUT",
+            "headers": "Content-Type: application/json\n",
+            "data": "{\n  \"unit\": \"51ece376b8b6c343e2000001\",\n  \"startDate\": \"2013/09/01 10:00:00\",\n  \"endDate\": \"2013/09/01 12:00:00\",  \n  \"places\": \"10\"\n}",
             "dataMode": "raw",
             "timestamp": 0,
             "responses": [],
