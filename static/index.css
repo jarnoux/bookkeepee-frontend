@@ -75,6 +75,15 @@ input.error, textarea.error  {
     padding: 5px;
 }
 
+.gallery {
+    margin: 20px;
+    list-style: none;
+}
+.gallery>li {
+    display: inline;
+    padding: 10px;
+}
+
 #layout {
     padding-left: 180px;
 }

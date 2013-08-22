@@ -1,29 +1,26 @@
             <div class="pure-u" id="index">
-                  {{log this}}
             	{{#with unit}}
             	<h2>{{property.address}}{{#if number}}, #{{number}}{{/if}}
             		<small>{{property.city}}{{#if property.state}}, {{property.state}}{{/if}} {{property.zip}} {{property.country}}</small>
             	</h2>{{/with}}
-{{#if unit.editable}}
+
                   <form action="/units/{{unit._id}}/edit" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_csrf" value="{{_csrf}}">
                         {{#with unit}}
                         <p>
-                              <span class="spec">beds: <input type="text" name="bedrooms" value="{{bedrooms}}"></span>
-                              <span class="spec">baths: <input type="text" name="bathrooms" value="{{bathrooms}}"></span>
-                              <span class="spec">size (sqft.): <input type="text" name="size" value="{{size}}"> sqft.</span>
+                              <span class="spec">beds: {{#if editable}}<input type="text" name="bedrooms" value="{{bedrooms}}">{{else}}<q>{{bedrooms}}</q>{{/if}}</span>
+
+                              <span class="spec">baths: {{#if editable}}<input type="text" name="bathrooms" value="{{bathrooms}}">{{else}}<q>{{bathrooms}}</q>{{/if}}</span>
+                              <span class="spec">size (sqft.): {{#if editable}}<input type="text" name="size" value="{{size}}">{{else}}<q>{{bathrooms}}</q>{{/if}}</span>
                         </p>
-                        <p><blockquote><textarea name="description">{{description}}</textarea></blockquote></p>
-                        <input type="file" name="images" multiple>
-                        <input type="file" name="thumbs" multiple>
-                        <input type="submit" value="submit" class="pure-button pure-button-primary">
-                  </form>{{/with}}
-{{else}}{{#with unit}}
-	        	<p>
-	        		{{#if bedrooms}}<span class="spec">beds: <q>{{bedrooms}}</q></span>{{/if}}
-	        		{{#if bathrooms}}<span class="spec">baths: <q>{{bathrooms}}</q></span>{{/if}}
-	        		{{#if size}}<span class="spec">size (sqft.): <q>{{size}}</q></span>{{/if}}
-	        	</p>
-	            <p>{{#if description}}<blockquote>{{description}}</blockquote>{{/if}}</p>
-{{/with}}{{/if}}
+                        <p>
+                              <blockquote>{{#if editable}}<textarea name="description">{{description}}</textarea>{{else}}{{description}}{{/if}}</blockquote>
+                        </p>
+                        {{#if editable}}<input type="file" name="images" multiple>
+                        <input type="submit" value="update" class="pure-button pure-button-primary">{{/if}}
+                  </form>
+                  <ul class="gallery">{{#each fullres}}
+                        <li><img src="http://{{this}}"></li>
+                  {{/each}}</ul>
+                  {{/with}}
             </div>
