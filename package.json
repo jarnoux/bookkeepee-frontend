@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "rig": "git+ssh://git@github.com:jarnoux/rig.js.git"
+    "rig": "git+ssh://git@github.com:jarnoux/rig.js.git",
+    "aws-sdk": "1.x",
+    "async": "0.x",
+    "underscore": "~1.5.1"
   }
 }

@@ -51,5 +51,6 @@
   post:
   - middleware.validator
   - middleware.user.login
+  - middleware.amazon-s3
   - middleware.unit.edit
 ...

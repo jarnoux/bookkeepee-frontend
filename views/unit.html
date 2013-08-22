@@ -5,7 +5,7 @@
             		<small>{{property.city}}{{#if property.state}}, {{property.state}}{{/if}} {{property.zip}} {{property.country}}</small>
             	</h2>{{/with}}
 {{#if unit.editable}}
-                  <form ajaxAction="/units/{{unit._id}}/edit">
+                  <form action="/units/{{unit._id}}/edit" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_csrf" value="{{_csrf}}">
                         {{#with unit}}
                         <p>
@@ -15,6 +15,8 @@
                         </p>
                         <p><blockquote><textarea name="description">{{description}}</textarea></blockquote></p>
                         <input type="file" name="images" multiple>
+                        <input type="file" name="thumbs" multiple>
+                        <input type="submit" value="submit" class="pure-button pure-button-primary">
                   </form>{{/with}}
 {{else}}{{#with unit}}
 	        	<p>

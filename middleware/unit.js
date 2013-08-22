@@ -48,20 +48,19 @@ module.exports = {
                 unitModel     = registry.get('models.unit');
 
             unitModel.byId(req.params.id, function (err, result) {
+                var nextFile;
                 if (result.owner._id === req.session.user._id) {
-                    unitModel.edit(req.params.id, {
-                        description: req.body.description,
-                        size: req.body.size,
-                        bedrooms: req.body.bedrooms,
-                        bathrooms: req.body.bathrooms,
-                        price: req.body.price,
-                        available: req.body.available
-                    }, function (err, result) {
-                        if (err) {
-                            res.statusCode = 400;
+                    req.body.fullres = [];
+                    for (nextFile in req.s3.files) {
+                        if (req.s3.files[nextFile] && req.s3.files[nextFile].url) {
+                            req.body.fullres.push(req.s3.files[nextFile].url);
                         }
-                        // res.redirect('/units/' + result._id);
-                        res.end();
+                    }
+                    unitModel.edit(req.params.id, req.body, function (err, result) {
+                        if (err) {
+                            next(err);
+                        }
+                        res.redirect('/units/' + req.params.id);
                     });
                 } else {
                     next(new Error('Error: You must be the owner of this unit.'));

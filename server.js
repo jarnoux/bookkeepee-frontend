@@ -6,6 +6,8 @@ var Rig  = require('rig'),
         routes: 'routes.yaml'
     });
 
+require('aws-sdk').config.loadFromPath('./aws-credentials.json');
+
 rig.register('controllers');
 rig.register('middleware');
 rig.register('models');
