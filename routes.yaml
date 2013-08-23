@@ -36,7 +36,10 @@
   get:
   - middleware.user.login
   - middleware.dispatcher
-/units/create:
+/units:
+  get:
+  # find
+  - middleware.dispatcher
   post:
   - middleware.validator
   - middleware.user.login
@@ -44,13 +47,26 @@
 /units/:id:
   get:
   - middleware.dispatcher
-/units:
-  get:
-  - middleware.dispatcher
-/units/:id/edit:
   post:
   - middleware.validator
   - middleware.user.login
   - middleware.amazon-s3
   - middleware.unit.edit
+/photos:
+  get:
+  # find
+  - middleware.dispatcher
+  post:
+  - middleware.validator
+  - middleware.user.login
+  - middleware.photo.create
+/photos/:id:
+  get:
+  - middleware.dispatcher
+/photos/:id/remove:
+  post:
+  - middleware.validator
+  - middleware.user.login
+  - middleware.photo.edit
+
 ...

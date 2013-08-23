@@ -80,8 +80,18 @@ input.error, textarea.error  {
     list-style: none;
 }
 .gallery>li {
-    display: inline;
+    position: relative;
+    display: inline-block;
     padding: 10px;
+}
+.icon-remove-sign {
+    font-size: 150%;
+    text-shadow: 0 0 20px white;
+    color: #222;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
 }
 
 #layout {

@@ -4,7 +4,7 @@
             		<small>{{property.city}}{{#if property.state}}, {{property.state}}{{/if}} {{property.zip}} {{property.country}}</small>
             	</h2>{{/with}}
 
-                  <form action="/units/{{unit._id}}/edit" method="post" enctype="multipart/form-data">
+                  <form action="/units/{{unit._id}}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_csrf" value="{{_csrf}}">
                         {{#with unit}}
                         <p>
@@ -17,10 +17,10 @@
                               <blockquote>{{#if editable}}<textarea name="description">{{description}}</textarea>{{else}}{{description}}{{/if}}</blockquote>
                         </p>
                         {{#if editable}}<input type="file" name="images" multiple>
-                        <input type="submit" value="update" class="pure-button pure-button-primary">{{/if}}
+                        <input type="submit" value="Upload Photos" class="pure-button pure-button-primary" disabled title="Choose a few photos first...">{{/if}}
                   </form>
                   <ul class="gallery">{{#each fullres}}
-                        <li><img src="http://{{this}}"></li>
+                        <li><a href="/units/{{_id}}/"><i class="icon-remove-sign"></i></a><img src="http://{{this}}"></li>
                   {{/each}}</ul>
                   {{/with}}
             </div>

@@ -17,6 +17,7 @@ middleware:
     router:
     query:
     units:
+    photo:
     csrf:
     user:
         '*':
@@ -117,6 +118,7 @@ models:
     property: {}
     unit: {}
     user: {}
+    photo: {}
 controllers:
     body:
         top:
@@ -134,6 +136,7 @@ controllers:
         /home: Home
     home:
     unit:
+    photo:
 lib:
     hb-adapter:
         minifyHtml: false
