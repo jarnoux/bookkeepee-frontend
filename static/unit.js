@@ -2,9 +2,9 @@
 /*global $: true */
 'use strict';
 
-var form = $('form'),
+var form = $('#unit form'),
     inputs = $('input, textarea, select', form),
-    fileInput = $('input[type=file]'),
+    fileInput = $('input[type=file]', form),
     toast = $('.toast');
 inputs.change(function (e) {
  var target = $(e.target),
