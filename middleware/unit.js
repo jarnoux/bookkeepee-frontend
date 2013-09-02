@@ -58,7 +58,7 @@ module.exports = {
                     }
                     unitModel.edit(req.params.id, req.body, function (err, result) {
                         if (err) {
-                            next(err);
+                            return next(err);
                         }
                         res.redirect('/units/' + req.params.id);
                     });
