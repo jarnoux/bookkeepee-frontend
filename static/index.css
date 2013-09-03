@@ -109,6 +109,15 @@ input.error, textarea.error  {
     margin-left: -180px;
     overflow: auto;
 }
+@media (max-width: 640px) {
+    #layout {
+        padding-left: 20px;
+    }
+    #leftMenu {
+        left: 0;
+    }
+}
+
 #leftMenu .pure-menu-open {
     background: transparent;;
     border: 0;
