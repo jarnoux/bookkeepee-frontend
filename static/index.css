@@ -87,14 +87,15 @@ input.error, textarea.error  {
     display: inline-block;
     padding: 10px;
 }
-.icon-remove-sign {
+button.icon-remove-sign {
     font-size: 150%;
-    text-shadow: 0 0 20px white;
+    text-shadow: 0 0 10px white;
     color: #222;
     position: absolute;
     top: 20px;
     right: 20px;
-    text-decoration: none;
+    background: none;
+    border: none;
 }
 
 #layout {

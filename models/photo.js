@@ -20,18 +20,19 @@ Photo.prototype.create = function (body, callback) {
 };
 Photo.prototype.byId = function (id, callback) {
 	this.backend.request({
-		path: '/photo/' + id
+		path: '/photos/' + id
 	}, callback);
 };
 Photo.prototype.edit = function (id, body, callback) {
 	this.backend.request({
-		path: '/photo/' + id,
+		path: '/photos/' + id,
 		method: 'patch'
 	}, body, callback);
 };
-Photo.prototype.remove = function (id, callback) {
+Photo.prototype.delete = function (id, callback) {
+	// debugger;
 	this.backend.request({
-		path: '/photo/' + id,
+		path: '/photos/' + id,
 		method: 'delete'
 	}, callback);
 };

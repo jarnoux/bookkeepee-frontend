@@ -44,29 +44,27 @@ module.exports = {
     },
     edit: function () {
         return function (req, res, next) {
-            var propertyModel = registry.get('models.property'),
-                unitModel     = registry.get('models.unit');
-
-            unitModel.byId(req.params.id, function (err, result) {
-                var nextFile;
-                if (result.owner._id === req.session.user._id) {
-                    req.body.fullres = [];
-                    for (nextFile in req.s3.files) {
-                        if (req.s3.files[nextFile] && req.s3.files[nextFile].url) {
-                            req.body.fullres.push(req.s3.files[nextFile].url);
-                        }
-                    }
-                    unitModel.edit(req.params.id, req.body, function (err, result) {
-                        if (err) {
-                            return next(err);
-                        }
-                        res.redirect('/units/' + req.params.id);
-                    });
+            registry.get('models.unit').edit(req.params.id, req.body, function (err, result) {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/units/' + req.params.id);
+            });
+        };
+    },
+    checkOwner: function () {
+        return function (req, res, next) {
+            debugger;
+            registry.get('models.unit').byId(req.body.unitId, function (err, result) {
+                if (err) {
+                    return next(err);
+                }
+                if (result && result.owner._id === req.session.user._id) {
+                    next();
                 } else {
-                    next(new Error('Error: You must be the owner of this unit.'));
+                    next(new Error('User must be the owner of this unit.'));
                 }
             });
-
         };
     }
 };

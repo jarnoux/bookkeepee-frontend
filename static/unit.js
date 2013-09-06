@@ -2,11 +2,12 @@
 /*global $: true */
 'use strict';
 
-var form = $('#unit form'),
-    inputs = $('input, textarea, select', form),
-    fileInput = $('input[type=file]', form),
+var ajaxForm = $('form.ajaxInputs'),
+    ajaxInputs = $('input, textarea, select', ajaxForm),
+    fileForm = $('form.fileInputs'),
+    fileInput = $('input[type=file]', fileForm),
     toast = $('.toast');
-inputs.change(function (e) {
+ajaxInputs.change(function (e) {
  var target = $(e.target),
      form = target.parents('form');
 
@@ -27,7 +28,7 @@ fileInput.change(function (e) {
 	submit.removeAttr('disabled')
 		.removeAttr('title')
 		.click(function () {
-			submit.attr('value', 'Uploading...');
+			submit.attr('value', 'Uploading...').addClass('pure-button-disabled');
 			return true;
 		});
 
