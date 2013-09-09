@@ -77,7 +77,9 @@ input.error, textarea.error  {
 .newUnitCard {
     padding: 5px;
 }
-
+.unitCard:hover, .newUnitCard:hover {
+    background: #F5F5F5;
+}
 .gallery {
     margin: 20px;
     list-style: none;
