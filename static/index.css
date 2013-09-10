@@ -10,13 +10,15 @@ input[type=submit] {
 
 h2 {
     font-weight: 200;
-    color: #888;
-    border-left: 5px solid silver;
-    padding-left: 50px;
+    padding: 0 50px;
 }
 small {
     display: block;
     font-size: 60%;
+}
+
+h3 {
+    min-height: 35px;
 }
 
 blockquote {
@@ -32,6 +34,13 @@ textarea {
     max-width: 100%;
 }
 
+.actionIcon {
+    color: #999;
+    text-decoration: none;
+}
+.actionIcon:hover {
+    color: #555;
+}
 .staticColor:visited {
     color: #555;
 }
@@ -52,6 +61,9 @@ textarea {
 .index {
     width: 100%;
 }
+.pure-menu.pure-menu-horizontal>ul {
+    height: inherit;
+}
 
 input.highlight, textarea.highlight {
     background-color: #ffff99;
@@ -60,11 +72,12 @@ input.error, textarea.error  {
     background-color: #ff9999;
 }
 
-
+.pure-menu-selected {
+    background: #eee;
+}
 .pure-form input, .pure-form select {
     margin-top: 5px;
 }
-
 .unitList {
     list-style: none;
     padding-left: 0;
@@ -77,8 +90,8 @@ input.error, textarea.error  {
 .newUnitCard {
     padding: 5px;
 }
-.unitCard:hover, .newUnitCard:hover {
-    background: #F5F5F5;
+.unitCard:hover, .newUnitCard:hover, .scrollList>li:hover {
+    background: #eee;
 }
 .gallery {
     margin: 20px;
@@ -89,6 +102,18 @@ input.error, textarea.error  {
     display: inline-block;
     padding: 10px;
 }
+.scrollList {
+    list-style: none;
+    padding: 0;
+    border: 1px solid silver;
+    border-right: none;
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.scrollList>li {
+    padding: 5px;
+}
 button.icon-remove-sign {
     font-size: 150%;
     text-shadow: 0 0 10px white;
@@ -98,6 +123,45 @@ button.icon-remove-sign {
     right: 20px;
     background: none;
     border: none;
+}
+.ui-datepicker {
+    display: none;
+    background: white;
+    box-shadow: 0 0 4px #000;
+    padding: 10px;
+    border-radius: 1px;
+}
+.ui-datepicker-prev, .ui-datepicker-prev, .ui-datepicker-title {
+    display: inline-block;
+}
+.ui-datepicker-prev {
+    cursor: pointer;
+    position: absolute;
+    left: 5px;
+}
+.ui-datepicker-next {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+}
+.ui-datepicker-title {
+    width: 150px;
+    margin: 0 25px;
+}
+.ui-datepicker-calendar {
+    width: 100%;
+}
+.ui-datepicker-calendar a {
+    text-decoration: none;
+}
+
+.ui-state-disabled {
+    cursor: default;
+    color: #999;
+}
+.icon-calendar {
+    position: relative;
+    left: -30px;
 }
 
 #layout {
@@ -122,6 +186,16 @@ button.icon-remove-sign {
 }
 
 #leftMenu .pure-menu-open {
-    background: transparent;;
+    background: transparent;
     border: 0;
+}
+
+#newVisit, #cancelVisit {
+    display: none;
+}
+#visitDate {
+    width: 200px;
+}
+#visitSlots {
+    width: 80px;
 }

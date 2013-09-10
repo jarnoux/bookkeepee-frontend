@@ -1,79 +1,135 @@
             <div class="pure-u index" id="unit">
                 {{#with unit}}
-                <h2>
-                    {{property.address}}{{#if number}}, #{{number}}{{/if}}
-                    <small>
-                        {{property.city}}{{#if property.state}}, {{property.state}}{{/if}} {{property.zip}}
-                        {{property.country}}
-                    </small>
-                </h2>
-                <form class="ajaxInputs" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
-                    {{#if editable}}
-                    <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                    <input type="hidden" name="unitId" value="{{_id}}">
-                    {{/if}}
-                    <p>
-                        <span class="spec">
-                            beds: {{#if editable}}
-                            <input type="text" name="bedrooms" value="{{bedrooms}}">
-                            {{else}}
-                            <q>
-                                {{bedrooms}}
-                            </q>
-                            {{/if}}
-                        </span>
-                        <span class="spec">
-                            baths: {{#if editable}}
-                            <input type="text" name="bathrooms" value="{{bathrooms}}">
-                            {{else}}
-                            <q>
-                                {{bathrooms}}
-                            </q>
-                            {{/if}}
-                        </span>
-                        <span class="spec">
-                            size (sqft.): {{#if editable}}
-                            <input type="text" name="size" value="{{size}}">
-                            {{else}}
-                            <q>
-                                {{size}}
-                            </q>
-                            {{/if}}
-                        </span>
-                    </p>
-                    <p>
-                        <blockquote>
-                            {{#if editable}}
-                            <textarea name="description">
-                                {{description}}
-                            </textarea>
-                            {{else}}{{description}}{{/if}}
-                        </blockquote>
-                    </p>
-                </form>
-                {{#if editable}}
-                <form class="fileInputs" action="/photos" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                    <input type="hidden" name="unitId" value="{{_id}}">
-                    <input type="file" name="images" multiple>
-                    <input type="submit" value="Upload Photos" class="pure-button pure-button-primary"
-                    disabled title="Choose a few photos first...">
-                    <input type="hidden" name="photoId" value="{{_id}}">
-                </form>
-                {{/if}}
-                <ul class="gallery">
-                    {{#each photos}}
-                    <li>
-                        {{#if ../editable}}
-                        <form action="/photos/{{_id}}/delete" method="post" enctype="application/x-www-form-urlencoded">
-                            <input type="hidden" name="_csrf" value="{{../../../_csrf}}">
-                            <input type="hidden" name="unitId" value="{{../../_id}}">
-                            <button type="submit" class="icon-remove-sign"></button>
-                        </form>
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+                    <ul>
+                        <!-- <li {#unless editable}class="pure-menu-selected"{/unless} > -->
+                            <li>
+                            <a href="#">
+                                <h2>
+                                    {{property.address}}{{#if number}}, #{{number}}{{/if}}
+                                    <small>
+                                        {{property.city}}{{#if property.state}}, {{property.state}}{{/if}} {{property.zip}}
+                                        {{property.country}}
+                                    </small>
+                                </h2>
+                            </a>
+                        </li>
+                        <li {{#unless editable}}class="pure-menu-selected"{{/unless}}>
+                            <a href="#">
+                                <h2>
+                                    Unit Management
+                                    <small>
+                                        Lease info and other useful stuff
+                                    </small>
+                                </h2>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="display: none">
+                    <form class="ajaxInputs" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
+                        {{#if editable}}
+                        <input type="hidden" name="_csrf" value="{{../../_csrf}}">
+                        <input type="hidden" name="unitId" value="{{_id}}">
                         {{/if}}
-                        <img src="http://{{url}}">
-                    </li>
-                    {{/each}}
-                </ul>
+                        <p>
+                            <span class="spec">
+                                beds: {{#if editable}}
+                                <input type="text" name="bedrooms" value="{{bedrooms}}">
+                                {{else}}
+                                <q>
+                                    {{bedrooms}}
+                                </q>
+                                {{/if}}
+                            </span>
+                            <span class="spec">
+                                baths: {{#if editable}}
+                                <input type="text" name="bathrooms" value="{{bathrooms}}">
+                                {{else}}
+                                <q>
+                                    {{bathrooms}}
+                                </q>
+                                {{/if}}
+                            </span>
+                            <span class="spec">
+                                size (sqft.): {{#if editable}}
+                                <input type="text" name="size" value="{{size}}">
+                                {{else}}
+                                <q>
+                                    {{size}}
+                                </q>
+                                {{/if}}
+                            </span>
+                        </p>
+                        <p>
+                            <blockquote>
+                                {{#if editable}}
+                                <textarea name="description">
+                                    {{description}}
+                                </textarea>
+                                {{else}}{{description}}{{/if}}
+                            </blockquote>
+                        </p>
+                    </form>
+                    {{#if editable}}
+                    <form class="fileInputs" action="/photos" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="_csrf" value="{{../../_csrf}}">
+                        <input type="hidden" name="unitId" value="{{_id}}">
+                        <input type="file" name="images" multiple>
+                        <input type="submit" value="Upload Photos" class="pure-button pure-button-primary"
+                        disabled title="Choose a few photos first...">
+                        <input type="hidden" name="photoId" value="{{_id}}">
+                    </form>
+                    {{/if}}
+                    <ul class="gallery">
+                        {{#each photos}}
+                        <li>
+                            {{#if ../editable}}
+                            <form action="/photos/{{_id}}/delete" method="post" enctype="application/x-www-form-urlencoded">
+                                <input type="hidden" name="_csrf" value="{{../../../_csrf}}">
+                                <input type="hidden" name="unitId" value="{{../../_id}}">
+                                <button type="submit" class="icon-remove-sign"></button>
+                            </form>
+                            {{/if}}
+                            <img src="http://{{url}}">
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
                 {{/with}}
+                <!-- {#if editable} -->
+                <div class="pure-g-r">
+                    <div class="pure-u-1-2">
+                        <form class="pure-form">
+                            <h3>
+                                <label for="visitDate">Next Visit:</label>
+                                <input type="text" id="visitDate">
+                                <i class="icon-calendar"></i>
+                                <label for="visitSlots">Slots:</label>
+                                <input type="number" min="1" id="visitSlots">
+                                    <a class="actionIcon" href="#" id="newVisit" title="Save">
+                                        <i class="icon-ok"></i>
+                                    </a>
+                                    <a class="actionIcon" href="#" id="cancelVisit" title="Cancel this Visit">
+                                        <i class="icon-remove"></i>
+                                    </a>
+                            </h3>
+                        </form>
+                        <ul class="scrollList">
+                        {{#each visit.visitors}}
+                            <li></li>
+                        {{/each}}
+                        </ul>
+                    </div>
+                    <div class="pure-u-1-2">
+                        <h3 class="pure-g-r">Current Applications</h3>
+                        <ul class="scrollList">
+                            {{#each applications}}
+                                <li></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                <!-- {/if} -->
             </div>
