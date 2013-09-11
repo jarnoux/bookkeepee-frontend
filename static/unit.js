@@ -8,7 +8,8 @@ var ajaxForm = $('form.ajaxInputs'),
     fileInput = $('input[type=file]', fileForm),
     toast = $('.toast'),
     visitForm = $('#visitForm'),
-    newVisitActionIcon = $('#newVisit');
+    saveVisitActionIcon = $('#saveVisit'),
+    cancelVisitActionIcon = $('#cancelVisit');
 
 ajaxInputs.change(function (e) {
 	var target = $(e.target),
@@ -41,8 +42,28 @@ $('#visitDate').datepicker({
 	nextText: '<i class="icon-chevron-right"></i>',
 	minDate: new Date(),
 	onSelect: function (dateText, datePicker) {
-		newVisitActionIcon.show();
+		visitForm.edited = true;
+		saveVisitActionIcon.show();
 	}
 }).click(function () {
 	$('.ui-datepicker-next, .ui-datepicker-prev').attr('title', '');
+});
+
+saveVisitActionIcon.click(function (e) {
+	var target = $(e.target),
+		form = target.parents('form');
+	$.post('/visits', form.serialize(), function (data) {
+		saveVisitActionIcon.hide();
+	}).fail(function () {
+
+	});
+});
+cancelVisitActionIcon.click(function (e) {
+	var target = $(e.target),
+		form = target.parents('form');
+	$.post('/visits/delete', form.serialize(), function (data) {
+
+	}).fail(function () {
+
+	});
 });

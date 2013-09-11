@@ -18,7 +18,7 @@ small {
 }
 
 h3 {
-    min-height: 35px;
+    min-height: 40px;
 }
 
 blockquote {
@@ -53,9 +53,10 @@ textarea {
     display: inline-block;
     width: 100px;
 }
-.spec>input, textarea {
+.pure-form input[type]:not([type=submit]), .pure-form textarea {
     background: #FDFDFD;
-    border: 1px solid #EAEAEA;
+    border: 1px solid #DADADA;
+    border-radius: 1px;
     color: #444;
 }
 .index {
@@ -65,18 +66,21 @@ textarea {
     height: inherit;
 }
 
-input.highlight, textarea.highlight {
-    background-color: #ffff99;
+.ajaxInputs input.highlight, .ajaxInputs textarea.highlight {
+    background-color: #bbffbb;
 }
-input.error, textarea.error  {
+.ajaxInputs input.error, .ajaxInputs textarea.error  {
     background-color: #ff9999;
 }
 
 .pure-menu-selected {
     background: #eee;
 }
-.pure-form input, .pure-form select {
+.pure-form-aligned input, .pure-form-aligned select {
     margin-top: 5px;
+}
+.pure-form input {
+    margin-right: 10px;
 }
 .unitList {
     list-style: none;
@@ -159,10 +163,6 @@ button.icon-remove-sign {
     cursor: default;
     color: #999;
 }
-.icon-calendar {
-    position: relative;
-    left: -30px;
-}
 
 #layout {
     padding-left: 180px;
@@ -190,12 +190,13 @@ button.icon-remove-sign {
     border: 0;
 }
 
-#newVisit, #cancelVisit {
+#saveVisit {
     display: none;
 }
 #visitDate {
     width: 200px;
+    max-width: 100%;
 }
-#visitSlots {
+#visitSpots {
     width: 80px;
 }

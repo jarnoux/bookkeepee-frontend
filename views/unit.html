@@ -28,7 +28,7 @@
                 </div>
 
                 <div style="display: none">
-                    <form class="ajaxInputs" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
+                    <form class="pure-form ajaxInputs" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
                         {{#if editable}}
                         <input type="hidden" name="_csrf" value="{{../../_csrf}}">
                         <input type="hidden" name="unitId" value="{{_id}}">
@@ -77,7 +77,7 @@
                         <input type="hidden" name="_csrf" value="{{../../_csrf}}">
                         <input type="hidden" name="unitId" value="{{_id}}">
                         <input type="file" name="images" multiple>
-                        <input type="submit" value="Upload Photos" class="pure-button pure-button-primary"
+                        <input type="submit" value="Upload Photos" class="pure-button"
                         disabled title="Choose a few photos first...">
                         <input type="hidden" name="photoId" value="{{_id}}">
                     </form>
@@ -102,18 +102,26 @@
                 <div class="pure-g-r">
                     <div class="pure-u-1-2">
                         <form class="pure-form">
-                            <h3>
-                                <label for="visitDate">Next Visit:</label>
-                                <input type="text" id="visitDate">
-                                <i class="icon-calendar"></i>
-                                <label for="visitSlots">Slots:</label>
-                                <input type="number" min="1" id="visitSlots">
-                                    <a class="actionIcon" href="#" id="newVisit" title="Save">
-                                        <i class="icon-ok"></i>
+                            <input type="hidden" name="_csrf" value="{{_csrf}}">
+                            <input type="hidden" name="id" value="{{visit._id}}">
+                            <input type="hidden" name="unitId" value="{{unit._id}}">
+                            <h3 class="pure-g-r">
+                                <span class="pure-u-1-2">
+                                    <label for="visitDate">Next Visit:</label>
+                                    <input type="text" id="visitDate" name="startDate" required>
+                                </span>
+                                <span class="pure-u-1-4">
+                                    <label for="visitSpots">Slots:</label>
+                                    <input type="number" min="1" id="visitSpots" name="spots" required>
+                                </span>
+                                <span class="pure-u-1-4">
+                                    <a class="actionIcon" href="#" id="saveVisit" title="Save">
+                                        <i class="icon-save"></i>
                                     </a>
-                                    <a class="actionIcon" href="#" id="cancelVisit" title="Cancel this Visit">
+                                    <a class="actionIcon" href="#" id="cancelVisit" title="Cancel">
                                         <i class="icon-remove"></i>
                                     </a>
+                                </span>
                             </h3>
                         </form>
                         <ul class="scrollList">
@@ -123,7 +131,7 @@
                         </ul>
                     </div>
                     <div class="pure-u-1-2">
-                        <h3 class="pure-g-r">Current Applications</h3>
+                        <h3>Current Applications</h3>
                         <ul class="scrollList">
                             {{#each applications}}
                                 <li></li>

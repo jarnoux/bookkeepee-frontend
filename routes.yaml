@@ -60,7 +60,7 @@
   - middleware.user.login
   - middleware.unit.checkOwner
   - middleware.amazon-s3
-  - middleware.photo.edit
+  - middleware.photo.create
 /photos/:id:
   get:
   - middleware.dispatcher
@@ -70,5 +70,23 @@
   - middleware.user.login
   - middleware.unit.checkOwner
   - middleware.photo.delete
+/visits:
+  post:
+  - middleware.validator
+  - middleware.user.login
+  - middleware.unit.checkOwner
+  - middleware.visit.create
+/visits/:id:
+  post:
+  - middleware.validator
+  - middleware.user.login
+  - middleware.unit.checkOwner
+  - middleware.visit.edit
+/visits/:id/delete:
+  post:
+  - middleware.validator
+  - middleware.user.login
+  - middleware.unit.checkOwner
+  - middleware.visit.delete
 
 ...

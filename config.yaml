@@ -3,8 +3,7 @@ middleware:
     amazon-s3:
         Bucket: bookkeepee-beta-bucket
     logger:
-        format-prod: '{"date":":date","msec":":response-time","addr":":remote-addr","usag":":user-agent","refr":":referrer","req":":method
-            :url","resp":":status :res[content-length]"}'
+        format-prod: '{"date":":date","msec":":response-time","addr":":remote-addr","usag":":user-agent","refr":":referrer","req":":method :url","resp":":status :res[content-length]"}'
         format: dev
     static: static/
     cookieParser: secret
@@ -29,6 +28,7 @@ middleware:
         logout:
     unit:
     photo:
+    visit:
     contextualizer:
         environment: prod
     logwriter:
@@ -120,6 +120,7 @@ models:
     unit: {}
     user: {}
     photo: {}
+    visit: {}
 controllers:
     body:
         top:

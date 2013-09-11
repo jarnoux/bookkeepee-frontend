@@ -9,30 +9,12 @@
 				<form action="/login" method="post" class="pure-form pure-form-aligned login">
 				    <div class="pure-control-group">
 				        <label for="email"><i class="icon-envelope"></i></label>
-				        <input type="text" name="email" id="email" placeholder="me@example.com" value="{{email}}">
+				        <input type="text" name="email" id="email" placeholder="me@example.com" value="{{email}}" required>
 				    </div>
 				    <div class="pure-control-group">
 				        <label for="password"><i class="icon-key"></i></label>
-				        <input type="password" name="password" placeholder="••••••••">
+				        <input type="password" name="password" placeholder="••••••••" required>
 				    </div>
-				    <!-- <div class="pure-control-group">
-				        <label for="email">Email</label>
-				        <input type="text" name="email" id="email" placeholder="me@example.com" value="{{email}}">
-				    </div>
-				    <div class="pure-control-group">
-				        <label for="password">Password</label>
-				        <input type="password" name="password" placeholder="••••••••">
-				    </div> -->
-<!--
-					<div class="input-prepend">
-						<span class="add-on"><i class="icon-envelope"></i></span>
-				        <input class="span2" type="text" name="email" id="email" placeholder="me@example.com" value="{{email}}">
-					</div>
-					<div class="input-prepend">
-						<span class="add-on"><i class="icon-key"></i></span>
-				        <input  class="span2" type="password" name="password" placeholder="••••••••">
-					</div>
- -->
 				    <input type="hidden" name="_csrf" value="{{_csrf}}">
 				    <div class="pure-controls">
 				        <input type="submit" value="Login" class="pure-button">

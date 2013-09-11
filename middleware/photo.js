@@ -5,7 +5,7 @@ var async = require('async'),
     registry = Rig.registry;
 
 module.exports = {
-    edit: function () {
+    create: function () {
         return function (req, res, next) {
             var nextFile,
                 photoIds = [],

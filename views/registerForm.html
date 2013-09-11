@@ -1,19 +1,19 @@
 <form action="/register" method="post" class="pure-form pure-form-aligned">
     <div class="pure-control-group">
         <label for="firstName">First Name</label>
-        <input type="text" name="firstName" id="firstName" placeholder="Jane">
+        <input type="text" name="firstName" id="firstName" placeholder="Jane" required>
     </div>
     <div class="pure-control-group">
         <label for="lastName">Last Name</label>
-        <input type="text" name="lastName" id="lastName" placeholder="Smith">
+        <input type="text" name="lastName" id="lastName" placeholder="Smith" required>
     </div>
     <div class="pure-control-group">
         <label for="email">Email</label>
-        <input type="text" name="email" placeholder="me@example.com">
+        <input type="text" name="email" placeholder="me@example.com" required>
     </div>
     <div class="pure-control-group">
         <label for="password">Password</label>
-        <input type="password" name="password" placeholder="••••••••">
+        <input type="password" name="password" placeholder="••••••••" required>
     </div>
     <input type="hidden" name="_csrf" value="{{_csrf}}">
     <div class="pure-controls">
