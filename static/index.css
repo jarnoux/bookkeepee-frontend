@@ -34,6 +34,10 @@ textarea {
     max-width: 100%;
 }
 
+form {
+    padding: 5px;
+}
+
 .actionIcon {
     color: #999;
     text-decoration: none;
@@ -94,7 +98,7 @@ textarea {
 .newUnitCard {
     padding: 5px;
 }
-.unitCard:hover, .newUnitCard:hover, .scrollList>li:hover {
+.unitCard:hover, .newUnitCard:hover, .accordion>li:hover {
     background: #eee;
 }
 .gallery {
@@ -106,28 +110,33 @@ textarea {
     display: inline-block;
     padding: 10px;
 }
-.scrollList {
+.accordion {
     list-style: none;
     padding: 0;
     border: 1px solid silver;
     border-right: none;
-    height: 200px;
+    height: 300px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
-.scrollList>li {
+.ui-accordion-header {
     padding: 5px;
+    outline: none;
+    cursor: pointer;
 }
-button.icon-remove-sign {
-    font-size: 150%;
-    text-shadow: 0 0 10px white;
-    color: #222;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
+.ui-accordion-header:hover {
+    background-color: #eee;
 }
+.ui-accordion-header-active, .ui-accordion-header-active:hover {
+    background-color: #ddd;
+}
+.ui-accordion-header i {
+    display: none;
+}
+.ui-accordion-content {
+    display: none;
+}
+
 .ui-datepicker {
     display: none;
     background: white;
@@ -192,11 +201,4 @@ button.icon-remove-sign {
 
 #saveVisit {
     display: none;
-}
-#visitDate {
-    width: 200px;
-    max-width: 100%;
-}
-#visitSpots {
-    width: 80px;
 }

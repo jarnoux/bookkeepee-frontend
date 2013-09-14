@@ -46,6 +46,9 @@ Unit.prototype.byOwner = function (ownerId, callback) {
 		path: '/user/' + ownerId + '/units'
 	}, callback);
 };
+Unit.prototype.isOwner = function (unitId, userId, callback) {
+
+};
 
 module.exports = function (options) {
 	return new Unit(options);

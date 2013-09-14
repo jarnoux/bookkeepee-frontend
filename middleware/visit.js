@@ -13,17 +13,19 @@ var async = require('async'),
 module.exports = {
     create: function () {
         return function (req, res, next) {
-            registry.get('models.visit').create(req.body, simpleResponse.bind(null, res, next));
+            registry.get('models.visit').create(req.body, function (err, result) {
+                res.redirect(req.headers.referer);
+            });
         };
     },
     edit: function () {
         return function (req, res, next) {
-            registry.get('models.visit').edit(req.body.unitId, req.body, simpleResponse.bind(null, res, next));
+            registry.get('models.visit').edit(req.params.id, req.body, simpleResponse.bind(null, res, next));
         };
     },
     delete: function () {
         return function (req, res, next) {
-            registry.get('models.visit').edit(req.body.unitId, simpleResponse.bind(null, res, next));
+            registry.get('models.visit').edit(req.params.id, simpleResponse.bind(null, res, next));
         };
     }
 };

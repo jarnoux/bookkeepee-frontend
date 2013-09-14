@@ -54,7 +54,6 @@ module.exports = {
     },
     checkOwner: function () {
         return function (req, res, next) {
-            debugger;
             registry.get('models.unit').byId(req.body.unitId, function (err, result) {
                 if (err) {
                     return next(err);

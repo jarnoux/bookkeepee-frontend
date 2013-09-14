@@ -8,6 +8,7 @@ var ajaxForm = $('form.ajaxInputs'),
     fileInput = $('input[type=file]', fileForm),
     toast = $('.toast'),
     visitForm = $('#visitForm'),
+    visitsAccordion = $('#visitsAccordion'),
     saveVisitActionIcon = $('#saveVisit'),
     cancelVisitActionIcon = $('#cancelVisit');
 
@@ -66,4 +67,17 @@ cancelVisitActionIcon.click(function (e) {
 	}).fail(function () {
 
 	});
+});
+
+visitsAccordion.accordion({
+	active: false,
+	collapsible: true
+});
+$('.ui-accordion-header', visitsAccordion).on({
+	'mouseover': function (e) {
+		$('i', this).show();
+	},
+	'mouseout': function (e) {
+		$('i', this).hide();
+	}
 });

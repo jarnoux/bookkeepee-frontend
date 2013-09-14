@@ -89,7 +89,7 @@
                             <form action="/photos/{{_id}}/delete" method="post" enctype="application/x-www-form-urlencoded">
                                 <input type="hidden" name="_csrf" value="{{../../../_csrf}}">
                                 <input type="hidden" name="unitId" value="{{../../_id}}">
-                                <button type="submit" class="icon-remove-sign"></button>
+                                <button type="submit" class="actionIcon icon-remove-sign"></button>
                             </form>
                             {{/if}}
                             <img src="http://{{url}}">
@@ -101,38 +101,43 @@
                 <!-- {#if editable} -->
                 <div class="pure-g-r">
                     <div class="pure-u-1-2">
-                        <form class="pure-form">
-                            <input type="hidden" name="_csrf" value="{{_csrf}}">
-                            <input type="hidden" name="id" value="{{visit._id}}">
-                            <input type="hidden" name="unitId" value="{{unit._id}}">
-                            <h3 class="pure-g-r">
-                                <span class="pure-u-1-2">
-                                    <label for="visitDate">Next Visit:</label>
-                                    <input type="text" id="visitDate" name="startDate" required>
+                        <div>Open Visits</div>
+                        <ul class="accordion" id="visitsAccordion">
+                            <div>New Visit</div>
+                            <div>
+                                <form class="pure-form pure-form-aligned" action="/visits" method="post">
+                                    <input type="hidden" name="_csrf" value="{{_csrf}}">
+                                    <input type="hidden" name="unitId" value="{{unit._id}}">
+                                    <div class="pure-control-group">
+                                        <label for="visitDate"><i class="actionIcon icon-calendar"></i></label>
+                                        <input type="text" name="startDate" id="visitDate" placeholder="Date" required>
+                                    </div>
+                                    <div class="pure-control-group">
+                                        <label for="spots">
+                                            <i class="actionIcon icon-group"></i>
+                                        </label>
+                                        <input type="number" min="1" name="spots" id="spots" placeholder="Spots Available" required>
+                                       <button type="submit" class="pure-button">create</button>
+                                    </div>
+                                </form>
+                            </div>
+                        {{#each unit.visits}}
+                            <div>
+                                <span>{{startDate}}</span>
+                                <span>
+                                    <i class="actionIcon icon-ban-circle"></i>
+                                    <i class="actionIcon icon-edit"></i>
                                 </span>
-                                <span class="pure-u-1-4">
-                                    <label for="visitSpots">Slots:</label>
-                                    <input type="number" min="1" id="visitSpots" name="spots" required>
-                                </span>
-                                <span class="pure-u-1-4">
-                                    <a class="actionIcon" href="#" id="saveVisit" title="Save">
-                                        <i class="icon-save"></i>
-                                    </a>
-                                    <a class="actionIcon" href="#" id="cancelVisit" title="Cancel">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </span>
-                            </h3>
-                        </form>
-                        <ul class="scrollList">
-                        {{#each visit.visitors}}
-                            <li></li>
+                            </div>
+                            <div>
+                                {{#each visitors}}<ul>{{this}}</ul>{{/each}}
+                            </div>
                         {{/each}}
                         </ul>
                     </div>
                     <div class="pure-u-1-2">
-                        <h3>Current Applications</h3>
-                        <ul class="scrollList">
+                        <div>Open Applications</div>
+                        <ul class="accordion">
                             {{#each applications}}
                                 <li></li>
                             {{/each}}
