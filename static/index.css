@@ -40,10 +40,16 @@ form {
 
 .actionIcon {
     color: #999;
-    text-decoration: none;
 }
-.actionIcon:hover {
+.actionIcon:hover, .active {
     color: #555;
+}
+.icon-remove-sign {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    background: none;
+    border: none;
 }
 .staticColor:visited {
     color: #555;
@@ -57,12 +63,6 @@ form {
     display: inline-block;
     width: 100px;
 }
-.pure-form input[type]:not([type=submit]), .pure-form textarea {
-    background: #FDFDFD;
-    border: 1px solid #DADADA;
-    border-radius: 1px;
-    color: #444;
-}
 .index {
     width: 100%;
 }
@@ -71,10 +71,16 @@ form {
 }
 
 .ajaxInputs input.highlight, .ajaxInputs textarea.highlight {
-    background-color: #bbffbb;
+    background-color: #ffff99 !important;
 }
 .ajaxInputs input.error, .ajaxInputs textarea.error  {
-    background-color: #ff9999;
+    background-color: #ff9999 !important;
+}
+.pure-form input[type]:not([type=submit]), .pure-form textarea {
+    background: #FDFDFD;
+    border: 1px solid #DADADA;
+    border-radius: 1px;
+    color: #444;
 }
 
 .pure-menu-selected {
@@ -133,8 +139,11 @@ form {
 .ui-accordion-header i {
     display: none;
 }
-.ui-accordion-content {
+.ui-accordion-content, .editVisit  {
     display: none;
+}
+.ui-accordion-header form {
+    display: inline;
 }
 
 .ui-datepicker {
@@ -172,6 +181,34 @@ form {
     cursor: default;
     color: #999;
 }
+.tabs {
+    position: relative;
+}
+.tab {
+    float: left;
+}
+.tab [type=radio] {
+    display: none;
+}
+.tab label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+.tab .tabContent {
+    visibility: hidden;
+    position: absolute;
+    top: 150px;
+    background-color: white;
+    width: 100%;
+    left: 0;
+}
+[type=radio]:checked ~ label ~ .tabContent {
+    visibility: visible;
+}
+[type=radio]:checked ~ label {
+    background-color: #eee;
+}
 
 #layout {
     padding-left: 180px;
@@ -191,6 +228,9 @@ form {
     }
     #leftMenu {
         left: 0;
+    }
+    .tab label h2 {
+        margin: 0;
     }
 }
 

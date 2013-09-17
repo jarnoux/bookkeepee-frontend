@@ -9,7 +9,7 @@ module.exports = function () {
             if (err) {
                 return next(err);
             }
-            unit.editable = req.session.user && (req.session.user._id === result.owner._id);
+            unit.editable = req.session.user && (req.session.user._id === unit.owner._id);
             next(null, {
                 unit: unit
             });

@@ -1,28 +1,37 @@
 /*jslint node: true */
-/*global $: true */
+/*global $: true, confirm: true */
 'use strict';
 
 var ajaxForm = $('form.ajaxInputs'),
-    ajaxInputs = $('input, textarea, select', ajaxForm),
-    fileForm = $('form.fileInputs'),
-    fileInput = $('input[type=file]', fileForm),
-    toast = $('.toast'),
-    visitForm = $('#visitForm'),
-    visitsAccordion = $('#visitsAccordion'),
-    saveVisitActionIcon = $('#saveVisit'),
-    cancelVisitActionIcon = $('#cancelVisit');
+	ajaxInputs = $('input, textarea, select', ajaxForm),
+	fileForm = $('form.fileInputs'),
+	fileInput = $('input[type=file]', fileForm),
+	toast = $('.toast'),
+	visitForm = $('#visitForm'),
+	visitsAccordion = $('#visitsAccordion'),
+	saveVisitActionIcons = $('.saveVisit'),
+	cancelVisitActionIcons = $('.cancelVisit'),
+	makePrettyDatepickers = function (elements) {
+		elements.datepicker({
+			prevText: '<i class="icon-chevron-left"></i>',
+			nextText: '<i class="icon-chevron-right"></i>',
+			minDate: new Date()
+		}).click(function () {
+			$('.ui-datepicker-next, .ui-datepicker-prev').attr('title', '');
+		});
+	};
 
 ajaxInputs.change(function (e) {
 	var target = $(e.target),
 		form = target.parents('form');
 
-	target.switchClass('error', 'highlight', 400);
+	target.switchClass('error', 'highlight', 200);
 
 	$.post(form.attr('action'), form.serialize(), function (data) {
-		target.removeClass('highlight', 400);
+		target.removeClass('highlight', 200);
 	}).fail(function (e) {
 		target.removeClass('highlight');
-		target.toggleClass('error', false, 400).toggleClass('error', 400);
+		target.toggleClass('error', false, 200).toggleClass('error', 200);
 	});
 });
 
@@ -37,36 +46,28 @@ fileInput.change(function (e) {
 			return true;
 		});
 });
+makePrettyDatepickers($('.datepickered'));
 
-$('#visitDate').datepicker({
-	prevText: '<i class="icon-chevron-left"></i>',
-	nextText: '<i class="icon-chevron-right"></i>',
-	minDate: new Date(),
-	onSelect: function (dateText, datePicker) {
-		visitForm.edited = true;
-		saveVisitActionIcon.show();
+$(cancelVisitActionIcons).add('.editVisit button').click(function (e) {
+	var target = $(e.target),
+		form = target.parents('form');
+	if (confirm('This will send a notification to all the respondents.')) {
+		form.submit();
+	} else {
+		e.preventDefault();
 	}
-}).click(function () {
-	$('.ui-datepicker-next, .ui-datepicker-prev').attr('title', '');
 });
-
-saveVisitActionIcon.click(function (e) {
-	var target = $(e.target),
-		form = target.parents('form');
-	$.post('/visits', form.serialize(), function (data) {
-		saveVisitActionIcon.hide();
-	}).fail(function () {
-
-	});
+cancelVisitActionIcons.click(function (e) {
+	e.stopPropagation();
 });
-cancelVisitActionIcon.click(function (e) {
+$('.editVisit').click(function (e) {
 	var target = $(e.target),
-		form = target.parents('form');
-	$.post('/visits/delete', form.serialize(), function (data) {
-
-	}).fail(function () {
-
-	});
+		header = target.parents('.ui-accordion-header');
+	if (header.hasClass('ui-state-active')) {
+		e.stopPropagation();
+	}
+	$(this).toggleClass('active');
+	$('#' + $(e.target).attr('showForm')).toggle();
 });
 
 visitsAccordion.accordion({

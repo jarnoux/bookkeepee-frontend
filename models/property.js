@@ -12,7 +12,7 @@ Property.prototype.find = function (body, callback) {
 		method: 'post'
 	}, body, callback);
 };
-Property.prototype.create = function (body, callback) {
+Property.prototype.findOrCreate = function (body, callback) {
 	this.backend.request({
 		path: '/properties',
 		method: 'put'

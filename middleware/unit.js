@@ -25,20 +25,11 @@ module.exports = {
                     country: req.body.country
                 };
 
-            propertyModel.find(propertyValues, function (err, property) {
+            propertyModel.findOrCreate(propertyValues, function (err, property) {
                 if (err) {
                     return next(err);
                 }
-                if (!property.length) {
-                    propertyModel.create(propertyValues, function (err, newProperty) {
-                        if (err) {
-                            return next(err);
-                        }
-                        createNewUnit(newProperty);
-                    });
-                } else {
-                    createNewUnit(property[0]);
-                }
+                createNewUnit(property);
             });
         };
     },
