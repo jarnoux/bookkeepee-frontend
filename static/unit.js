@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*global $: true, confirm: true */
+/*global $: true, confirm: true, ajaxify: true */
 'use strict';
 
 var ajaxForm = $('form.ajaxInputs'),
@@ -81,4 +81,8 @@ $('.ui-accordion-header', visitsAccordion).on({
 	'mouseout': function (e) {
 		$('i', this).hide();
 	}
+});
+
+ajaxify($('.deletePhoto'), function () {
+	alert('success!!');
 });

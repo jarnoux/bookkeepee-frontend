@@ -46,8 +46,8 @@ form {
 }
 .icon-remove-sign {
     position: absolute;
-    right: 10px;
-    top: 20px;
+    right: 5px;
+    top: 5px;
     background: none;
     border: none;
 }
@@ -114,7 +114,7 @@ form {
 .gallery>li {
     position: relative;
     display: inline-block;
-    padding: 10px;
+    margin: 10px;
 }
 .accordion {
     list-style: none;

@@ -60,10 +60,12 @@ Backend.prototype.request = function (moreOptions, body, callback) {
             callback(err);
         });
     });
-    backendRequest.on('error', callback);
+    backendRequest.on('error', function (err) {
+        callback(err);
+    });
     backendRequest.end(querystring.stringify(body));
 
-    return backendRequest;
+    // return backendRequest;
 };
 
 Backend.prototype.APIError = APIError;

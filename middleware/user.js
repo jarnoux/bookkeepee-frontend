@@ -20,7 +20,7 @@ var retrieveUser = function (action, options, req, res, next) {
                     signed: true
                 });
                 return res.redirect('/home');
-            }).on('error', next);
+            });
         } else {
             next();
         }

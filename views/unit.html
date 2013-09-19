@@ -76,11 +76,7 @@
                                 {{#each photos}}
                                 <li>
                                     {{#if ../editable}}
-                                    <form action="/photos/{{_id}}/delete" method="post">
-                                        <input type="hidden" name="_csrf" value="{{../../../_csrf}}">
-                                        <input type="hidden" name="unitId" value="{{../../_id}}">
-                                        <i class="actionIcon icon-remove-sign deletePhoto"></i>
-                                    </form>
+                                        <i class="actionIcon icon-remove-sign deletePhoto" ajaxify="/photos/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../../_id}}"></i>
                                     {{/if}}
                                     <img src="http://{{url}}">
                                 </li>
@@ -123,11 +119,7 @@
                                     <div>
                                         <span>{{startDate}}</span>
                                         <span>
-                                            <form action="/visits/{{_id}}/delete" method="post">
-                                                <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                                                <input type="hidden" name="unitId" value="{{../_id}}">
-                                                <i class="actionIcon cancelVisit icon-ban-circle" title="Cancel this visit"></i>
-                                            </form>
+                                            <i class="actionIcon cancelVisit icon-ban-circle" title="Cancel this visit" ajaxify="/visits/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../_id}}"></i>
                                             <i class="actionIcon editVisit icon-edit" showForm="editVisit{{_id}}" title="Edit this visit"></i>
                                         </span>
                                     </div>
