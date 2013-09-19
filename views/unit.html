@@ -74,7 +74,7 @@
                             </ul>
                             <ul class="gallery">
                                 {{#each photos}}
-                                <li>
+                                <li id="{{_id}}">
                                     {{#if ../editable}}
                                         <i class="actionIcon icon-remove-sign deletePhoto" ajaxify="/photos/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../../_id}}"></i>
                                     {{/if}}

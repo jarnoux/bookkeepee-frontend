@@ -45,7 +45,7 @@ module.exports = {
     delete: function () {
         return function (req, res, next) {
             registry.get('models.photo').delete(req.params.id, function (err, photo) {
-                res.redirect('/units/' + photo.unit);
+                res.send({ _id: photo._id });
             });
         };
     }
