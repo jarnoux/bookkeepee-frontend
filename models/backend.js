@@ -60,6 +60,7 @@ Backend.prototype.request = function (moreOptions, body, callback) {
             callback(err);
         });
     });
+    backendRequest.on('error', callback);
     backendRequest.end(querystring.stringify(body));
 
     return backendRequest;
