@@ -88,3 +88,5 @@ ajaxify($('.deletePhoto'), {
 		$('#' + photo._id).remove();
 	}
 }, window.confirm.bind(window, 'Are you sure you want to delete this picture? This cannot be undone.'));
+
+

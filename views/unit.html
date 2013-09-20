@@ -12,78 +12,92 @@
                                 </small>
                             </h2>
                         </label>
-                        <div class="tabContent">
-                            <form class="pure-form ajaxInputs" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
-                                {{#if editable}}
-                                <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                                <input type="hidden" name="unitId" value="{{_id}}">
-                                {{/if}}
-                                <p>
-                                    <span class="spec">
-                                        beds: {{#if editable}}
+                        <div class="tabContent pure-g">
+
+                            <div class="pure-u-3-5">
+                                <form class="pure-form ajaxInputs pure-form-aligned" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
+                                    {{#if editable}}
+                                    <input type="hidden" name="_csrf" value="{{../../_csrf}}">
+                                    <input type="hidden" name="unitId" value="{{_id}}">
+                                    {{/if}}
+                                    <div class="pure-control-group">
+                                        <label>beds: </label>
+                                        {{#if editable}}
                                         <input type="text" name="bedrooms" value="{{bedrooms}}">
                                         {{else}}
-                                        <q>
-                                            {{bedrooms}}
-                                        </q>
+                                        <span>{{bedrooms}}</span>
                                         {{/if}}
-                                    </span>
-                                    <span class="spec">
-                                        baths: {{#if editable}}
+                                    </div>
+                                    <div class="pure-control-group">
+                                        <label>baths: </label>
+                                        {{#if editable}}
                                         <input type="text" name="bathrooms" value="{{bathrooms}}">
                                         {{else}}
-                                        <q>
-                                            {{bathrooms}}
-                                        </q>
+                                        <span>{{bathrooms}}</span>
                                         {{/if}}
-                                    </span>
-                                    <span class="spec">
-                                        size (sqft.): {{#if editable}}
+                                    </div>
+                                    <div class="pure-control-group">
+                                        <label>size (sqft.): </label>
+                                        {{#if editable}}
                                         <input type="text" name="size" value="{{size}}">
                                         {{else}}
-                                        <q>
-                                            {{size}}
-                                        </q>
+                                        <span>{{size}}</span>
                                         {{/if}}
-                                    </span>
-                                </p>
-                                <p>
-                                    <blockquote>
+                                    </div>
+                                    <div class="pure-control-group">
+                                        <h3>Description </h3>
                                         {{#if editable}}
                                         <textarea name="description">
                                             {{description}}
                                         </textarea>
-                                        {{else}}{{description}}{{/if}}
-                                    </blockquote>
-                                </p>
-                            </form>
+                                        <div class="textareaHelper">
+                                            {{description}}
+                                        </div>
+                                        {{else}}
+                                        {{description}}
+                                        {{/if}}
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="pure-u-2-5">
+                                <ul>
+                                    {{#each visits}}
+                                    <li>{{startDate}}</li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+
                             {{#if editable}}
-                            <form class="fileInputs" action="/photos" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                                <input type="hidden" name="unitId" value="{{_id}}">
-                                <input type="file" name="images" multiple>
-                                <input type="submit" value="Upload Photos" class="pure-button"
-                                disabled title="Choose a few photos first...">
-                                <input type="hidden" name="photoId" value="{{_id}}">
-                            </form>
+                            <div class="pure-u-1">
+                                <form class="fileInputs" action="/photos" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="_csrf" value="{{../../_csrf}}">
+                                    <input type="hidden" name="unitId" value="{{_id}}">
+                                    <input type="file" name="images" multiple>
+                                    <input type="submit" value="Upload Photos" class="pure-button"
+                                    disabled title="Choose a few photos first...">
+                                    <input type="hidden" name="photoId" value="{{_id}}">
+                                </form>
+                            </div>
                             {{/if}}
-                            <ul>
-                                {{#each visits}}
-                                <li>{{startDate}}</li>
-                                {{/each}}
-                            </ul>
-                            <ul class="gallery">
-                                {{#each photos}}
-                                <li id="{{_id}}">
-                                    {{#if ../editable}}
-                                        <i class="actionIcon icon-remove-sign deletePhoto" ajaxify="/photos/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../../_id}}"></i>
-                                    {{/if}}
-                                    <img src="http://{{url}}">
-                                </li>
-                                {{/each}}
-                            </ul>
+
+                            <div class="pure-u-1">
+                                <ul class="gallery">
+                                    {{#each photos}}
+                                    <li id="{{_id}}">
+                                        {{#if ../editable}}
+                                            <i class="actionIcon icon-remove-sign deletePhoto" ajaxify="/photos/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../../_id}}"></i>
+                                        {{/if}}
+                                        <img src="http://{{url}}">
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
+
+
                     {{#if editable}}
                     <div class="tab">
                         <input type="radio" id="adminTab" name="unitTabGroup" {{#if editable}}checked{{/if}}>
@@ -94,6 +108,7 @@
                             </h2>
                         </label>
                         <div class="tabContent pure-g-r">
+
                             <div class="pure-u-1-2">
                                 <div>Open Visits</div>
                                 <ul class="accordion" id="visitsAccordion">
@@ -144,6 +159,7 @@
                                 {{/each}}
                                 </ul>
                             </div>
+
                             <div class="pure-u-1-2">
                                 <div>Open Applications</div>
                                 <ul class="accordion">
@@ -152,6 +168,7 @@
                                     {{/each}}
                                 </ul>
                             </div>
+
                         </div>
                     </div>
                     {{/if}}

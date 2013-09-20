@@ -30,6 +30,7 @@ a {
 }
 
 textarea {
+    font-size: 100% !important;
     width: 100%;
     max-width: 100%;
 }
@@ -208,6 +209,10 @@ form {
 }
 [type=radio]:checked ~ label {
     background-color: #eee;
+}
+.textareaHelper {
+    visibility: hidden;
+    position: absolute;
 }
 
 #layout {

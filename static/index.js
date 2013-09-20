@@ -21,3 +21,9 @@ function ajaxify(elements, ajaxArgs, confirm) {
 		});
 	});
 }
+
+// resize textareas to fit their content size
+$('.textareaHelper').parent().css('position', 'relative');
+$('textarea').height(function () {
+	return $(this).next().height() * 1.1;
+});
