@@ -70,7 +70,7 @@ $('.editVisit').click(function (e) {
 	$('#' + $(e.target).attr('showForm')).toggle();
 });
 
-visitsAccordion.accordion({
+$('.accordion').accordion({
 	active: false,
 	collapsible: true
 });
@@ -89,4 +89,5 @@ ajaxify($('.deletePhoto'), {
 	}
 }, window.confirm.bind(window, 'Are you sure you want to delete this picture? This cannot be undone.'));
 
+ajaxify($('.rsvp'), {}, window.confirm.bind(window, 'Please confirm'));
 

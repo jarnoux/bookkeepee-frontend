@@ -10,6 +10,12 @@ module.exports = function () {
                 return next(err);
             }
             unit.editable = req.session.user && (req.session.user._id === unit.owner._id);
+            unit.visits.forEach(function (visit) {
+                visit.spotsLeft = visit.spots - visit.visitors.length;
+                visit.rsvped = visit.visitors.some(function (visitorId) {
+                    return visitorId === req.session.user._id;
+                });
+            });
             next(null, {
                 unit: unit
             });

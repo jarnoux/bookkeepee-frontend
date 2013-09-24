@@ -140,6 +140,9 @@ form {
 .ui-accordion-header i {
     display: none;
 }
+.ui-accordion-content {
+    padding: 15px;
+}
 .ui-accordion-content, .editVisit  {
     display: none;
 }

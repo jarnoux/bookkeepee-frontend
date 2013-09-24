@@ -12,39 +12,59 @@
                                 </small>
                             </h2>
                         </label>
-                        <div class="tabContent pure-g">
+                        <div class="tabContent">
 
-                            <div class="pure-u-3-5">
-                                <form class="pure-form ajaxInputs pure-form-aligned" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
-                                    {{#if editable}}
-                                    <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                                    <input type="hidden" name="unitId" value="{{_id}}">
-                                    {{/if}}
-                                    <div class="pure-control-group">
-                                        <label>beds: </label>
-                                        {{#if editable}}
-                                        <input type="text" name="bedrooms" value="{{bedrooms}}">
-                                        {{else}}
-                                        <span>{{bedrooms}}</span>
-                                        {{/if}}
+                            <form class="pure-form ajaxInputs pure-form-aligned" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
+                                {{#if editable}}
+                                <input type="hidden" name="_csrf" value="{{../../_csrf}}">
+                                <input type="hidden" name="unitId" value="{{_id}}">
+                                {{/if}}
+
+                                <div class="pure-r-g">
+                                    <div class="pure-u-3-5">
+                                        <div class="pure-control-group">
+                                            <label>beds: </label>
+                                            {{#if editable}}
+                                            <input type="text" name="bedrooms" value="{{bedrooms}}">
+                                            {{else}}
+                                            <span>{{bedrooms}}</span>
+                                            {{/if}}
+                                        </div>
+                                        <div class="pure-control-group">
+                                            <label>baths: </label>
+                                            {{#if editable}}
+                                            <input type="text" name="bathrooms" value="{{bathrooms}}">
+                                            {{else}}
+                                            <span>{{bathrooms}}</span>
+                                            {{/if}}
+                                        </div>
+                                        <div class="pure-control-group">
+                                            <label>size (sqft.): </label>
+                                            {{#if editable}}
+                                            <input type="text" name="size" value="{{size}}">
+                                            {{else}}
+                                            <span>{{size}}</span>
+                                            {{/if}}
+                                        </div>
                                     </div>
-                                    <div class="pure-control-group">
-                                        <label>baths: </label>
-                                        {{#if editable}}
-                                        <input type="text" name="bathrooms" value="{{bathrooms}}">
-                                        {{else}}
-                                        <span>{{bathrooms}}</span>
-                                        {{/if}}
+
+                                    <div class="pure-u-2-5">
+                                        <ul class="accordion">
+                                            {{#each visits}}
+                                            <div>{{startDate}}</div>
+                                            <div>
+                                                <quote>spots left: {{spotsLeft}}</quote>
+                                                {{#if rsvped}}
+                                                <a class="rsvp" ajaxify="/visits/{{_id}}/unrsvp?_csrf={{../../../_csrf}}">decline appointment</a>
+                                                {{else}}
+                                                <a class="rsvp" ajaxify="/visits/{{_id}}/rsvp?_csrf={{../../../_csrf}}">book appointment</a>
+                                                {{/if}}
+                                            </div>
+                                            {{/each}}
+                                        </ul>
                                     </div>
-                                    <div class="pure-control-group">
-                                        <label>size (sqft.): </label>
-                                        {{#if editable}}
-                                        <input type="text" name="size" value="{{size}}">
-                                        {{else}}
-                                        <span>{{size}}</span>
-                                        {{/if}}
-                                    </div>
-                                    <div class="pure-control-group">
+
+                                    <div class="pure-u-1">
                                         <h3>Description </h3>
                                         {{#if editable}}
                                         <textarea name="description">
@@ -57,42 +77,30 @@
                                         {{description}}
                                         {{/if}}
                                     </div>
-                                </form>
-                            </div>
-
-                            <div class="pure-u-2-5">
-                                <ul>
-                                    {{#each visits}}
-                                    <li>{{startDate}}</li>
-                                    {{/each}}
-                                </ul>
-                            </div>
+                                </div>
+                            </form>
 
                             {{#if editable}}
-                            <div class="pure-u-1">
-                                <form class="fileInputs" action="/photos" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                                    <input type="hidden" name="unitId" value="{{_id}}">
-                                    <input type="file" name="images" multiple>
-                                    <input type="submit" value="Upload Photos" class="pure-button"
-                                    disabled title="Choose a few photos first...">
-                                    <input type="hidden" name="photoId" value="{{_id}}">
-                                </form>
-                            </div>
+                            <form class="fileInputs" action="/photos" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="_csrf" value="{{../../_csrf}}">
+                                <input type="hidden" name="unitId" value="{{_id}}">
+                                <input type="file" name="images" multiple>
+                                <input type="submit" value="Upload Photos" class="pure-button"
+                                disabled title="Choose a few photos first...">
+                                <input type="hidden" name="photoId" value="{{_id}}">
+                            </form>
                             {{/if}}
 
-                            <div class="pure-u-1">
-                                <ul class="gallery">
-                                    {{#each photos}}
-                                    <li id="{{_id}}">
-                                        {{#if ../editable}}
-                                            <i class="actionIcon icon-remove-sign deletePhoto" ajaxify="/photos/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../../_id}}"></i>
-                                        {{/if}}
-                                        <img src="http://{{url}}">
-                                    </li>
-                                    {{/each}}
-                                </ul>
-                            </div>
+                            <ul class="gallery">
+                                {{#each photos}}
+                                <li id="{{_id}}">
+                                    {{#if ../editable}}
+                                        <i class="actionIcon icon-remove-sign deletePhoto" ajaxify="/photos/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../../_id}}"></i>
+                                    {{/if}}
+                                    <img src="http://{{url}}">
+                                </li>
+                                {{/each}}
+                            </ul>
 
                         </div>
                     </div>

@@ -15,14 +15,32 @@ module.exports = {
     edit: function () {
         return function (req, res, next) {
             registry.get('models.visit').edit(req.params.id, req.body, function (err, result) {
-                res.redirect(req.headers.referer);
+                res.end();
+            });
+        };
+    },
+    rsvp: function () {
+        return function (req, res, next) {
+            registry.get('models.visit').rsvp(req.params.id, {
+                userId: req.session.user._id
+            }, function (err, result) {
+                res.end();
+            });
+        };
+    },
+    unrsvp: function () {
+        return function (req, res, next) {
+            registry.get('models.visit').unrsvp(req.params.id, {
+                userId: req.session.user._id
+            }, function (err, result) {
+                res.end();
             });
         };
     },
     delete: function () {
         return function (req, res, next) {
             registry.get('models.visit').delete(req.params.id, function (err, result) {
-                res.redirect(req.headers.referer);
+                res.end();
             });
         };
     }

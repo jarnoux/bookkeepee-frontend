@@ -29,6 +29,18 @@ Visit.prototype.edit = function (id, body, callback) {
 		method: 'patch'
 	}, body, callback);
 };
+Visit.prototype.rsvp = function (id, body, callback) {
+	this.backend.request({
+		path: '/visits/' + id + '/rsvp',
+		method: 'patch'
+	}, body, callback);
+};
+Visit.prototype.unrsvp = function (id, body, callback) {
+	this.backend.request({
+		path: '/visits/' + id + '/unrsvp',
+		method: 'patch'
+	}, body, callback);
+};
 Visit.prototype.delete = function (id, callback) {
 	this.backend.request({
 		path: '/visits/' + id,

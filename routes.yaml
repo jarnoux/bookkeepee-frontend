@@ -82,6 +82,16 @@
   # - middleware.user.login
   # - middleware.unit.checkOwner
   - middleware.visit.edit
+/visits/:id/rsvp:
+  post:
+  - middleware.validator
+  - middleware.user.login
+  - middleware.visit.rsvp
+/visits/:id/unrsvp:
+  post:
+  - middleware.validator
+  - middleware.user.login
+  - middleware.visit.unrsvp
 /visits/:id/delete:
   post:
   - middleware.validator

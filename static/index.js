@@ -4,7 +4,7 @@ function ajaxify(elements, ajaxArgs, confirm) {
 			prop;
 
 		confirm = confirm || function () { return true; };
-		element = $(element);
+		element = $(element).css('cursor', 'pointer');
 
 		for (prop in ajaxArgs) {
 			elementArgs[prop] = ajaxArgs[prop];
