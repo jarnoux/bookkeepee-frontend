@@ -1,7 +1,7 @@
             <div class="pure-u index" id="unit">
                 {{#with unit}}
-                <div class="tabs">
-                    <div class="tab">
+                <div class="tabs pure-g-r">
+                    <div class="tab pure-u-1-2">
                         <input type="radio" id="propertyTab" name="unitTabGroup" {{#unless editable}}checked{{/unless}}>
                         <label for="propertyTab">
                             <h2>
@@ -12,16 +12,16 @@
                                 </small>
                             </h2>
                         </label>
-                        <div class="tabContent">
+                        <div class="tabContent pure-g-r">
 
-                            <form class="pure-form ajaxInputs pure-form-aligned" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
-                                {{#if editable}}
-                                <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                                <input type="hidden" name="unitId" value="{{_id}}">
-                                {{/if}}
+                            <div class="pure-u-1-2">
+                                <form class="pure-form ajaxInputs pure-form-aligned" action="/units/{{_id}}" method="post" enctype="application/x-www-form-urlencoded">
+                                    {{#if editable}}
+                                    <input type="hidden" name="_csrf" value="{{../../_csrf}}">
+                                    <input type="hidden" name="unitId" value="{{_id}}">
+                                    {{/if}}
 
-                                <div class="pure-r-g">
-                                    <div class="pure-u-3-5">
+                                    <div>
                                         <div class="pure-control-group">
                                             <label>beds: </label>
                                             {{#if editable}}
@@ -47,24 +47,7 @@
                                             {{/if}}
                                         </div>
                                     </div>
-
-                                    <div class="pure-u-2-5">
-                                        <ul class="accordion">
-                                            {{#each visits}}
-                                            <div>{{startDate}}</div>
-                                            <div>
-                                                <quote>spots left: {{spotsLeft}}</quote>
-                                                {{#if rsvped}}
-                                                <a class="rsvp" ajaxify="/visits/{{_id}}/unrsvp?_csrf={{../../../_csrf}}">decline appointment</a>
-                                                {{else}}
-                                                <a class="rsvp" ajaxify="/visits/{{_id}}/rsvp?_csrf={{../../../_csrf}}">book appointment</a>
-                                                {{/if}}
-                                            </div>
-                                            {{/each}}
-                                        </ul>
-                                    </div>
-
-                                    <div class="pure-u-1">
+                                    <div>
                                         <h3>Description </h3>
                                         {{#if editable}}
                                         <textarea name="description">
@@ -77,37 +60,55 @@
                                         {{description}}
                                         {{/if}}
                                     </div>
-                                </div>
-                            </form>
 
-                            {{#if editable}}
-                            <form class="fileInputs" action="/photos" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="_csrf" value="{{../../_csrf}}">
-                                <input type="hidden" name="unitId" value="{{_id}}">
-                                <input type="file" name="images" multiple>
-                                <input type="submit" value="Upload Photos" class="pure-button"
-                                disabled title="Choose a few photos first...">
-                                <input type="hidden" name="photoId" value="{{_id}}">
-                            </form>
-                            {{/if}}
+                                </form>
 
-                            <ul class="gallery">
-                                {{#each photos}}
-                                <li id="{{_id}}">
-                                    {{#if ../editable}}
-                                        <i class="actionIcon icon-remove-sign deletePhoto" ajaxify="/photos/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../../_id}}"></i>
-                                    {{/if}}
-                                    <img src="http://{{url}}">
-                                </li>
-                                {{/each}}
-                            </ul>
+                                {{#if editable}}
+                                <form class="fileInputs" action="/photos" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="_csrf" value="{{../../_csrf}}">
+                                    <input type="hidden" name="unitId" value="{{_id}}">
+                                    <input type="file" name="images" multiple>
+                                    <input type="submit" value="Upload Photos" class="pure-button"
+                                    disabled title="Choose a few photos first...">
+                                    <input type="hidden" name="photoId" value="{{_id}}">
+                                </form>
+                                {{/if}}
+                            </div>
+
+                            <div class="pure-u-1-2">
+                                <ul class="accordion">
+                                    {{#each visits}}
+                                    <div>{{startDate}}</div>
+                                    <div id="visit{{_id}}">
+                                        <quote>spots left: {{spotsLeft}}</quote>
+                                        {{#if rsvped}}
+                                        <a class="rsvp" ajaxify="/visits/{{_id}}/unrsvp?_csrf={{../../../_csrf}}">decline appointment</a>
+                                        {{else}}
+                                        <a class="rsvp" ajaxify="/visits/{{_id}}/rsvp?_csrf={{../../../_csrf}}">book appointment</a>
+                                        {{/if}}
+                                    </div>
+                                    {{/each}}
+                                </ul>
+                            </div>
+
+                            <div class="pure-u-1">
+                                <ul class="gallery">
+                                    {{#each photos}}
+                                    <li id="photo{{_id}}">
+                                        {{#if ../editable}}
+                                            <i class="actionIcon icon-remove-sign deletePhoto" ajaxify="/photos/{{_id}}/delete?_csrf={{../../../_csrf}}&unitId={{../../_id}}"></i>
+                                        {{/if}}
+                                        <img src="http://{{url}}">
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </div>
 
                         </div>
                     </div>
 
-
                     {{#if editable}}
-                    <div class="tab">
+                    <div class="tab pure-u-1-2">
                         <input type="radio" id="adminTab" name="unitTabGroup" {{#if editable}}checked{{/if}}>
                         <label for="adminTab">
                             <h2>

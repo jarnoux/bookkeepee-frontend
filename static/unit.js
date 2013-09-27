@@ -85,9 +85,13 @@ $('.ui-accordion-header', visitsAccordion).on({
 
 ajaxify($('.deletePhoto'), {
 	success: function (photo, status) {
-		$('#' + photo._id).remove();
+		$('#photo' + photo._id).remove();
 	}
 }, window.confirm.bind(window, 'Are you sure you want to delete this picture? This cannot be undone.'));
 
-ajaxify($('.rsvp'), {}, window.confirm.bind(window, 'Please confirm'));
+ajaxify($('.rsvp'), {
+	success: function (visit, status) {
+		$('#visit' + visit._id).
+	}
+}, window.confirm.bind(window, 'Please confirm'));
 
