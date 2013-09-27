@@ -15,7 +15,7 @@ module.exports = {
     edit: function () {
         return function (req, res, next) {
             registry.get('models.visit').edit(req.params.id, req.body, function (err, result) {
-                res.end();
+                res.json(result);
             });
         };
     },
@@ -24,7 +24,7 @@ module.exports = {
             registry.get('models.visit').rsvp(req.params.id, {
                 userId: req.session.user._id
             }, function (err, result) {
-                res.end();
+                res.json(result);
             });
         };
     },
@@ -33,14 +33,14 @@ module.exports = {
             registry.get('models.visit').unrsvp(req.params.id, {
                 userId: req.session.user._id
             }, function (err, result) {
-                res.end();
+                res.json(result);
             });
         };
     },
     delete: function () {
         return function (req, res, next) {
             registry.get('models.visit').delete(req.params.id, function (err, result) {
-                res.end();
+                res.json(result.toString);
             });
         };
     }
